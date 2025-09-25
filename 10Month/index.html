@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daby ❤️ Wibe: Our Love Story</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <style>
+        @keyframes heartBeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-heart-beat {
+            animation: heartBeat 1s infinite;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-r from-pink-100 to-rose-200 min-h-screen flex items-center justify-center p-4">
+    <div id="root" class="w-full max-w-2xl"></div>
+
+    <script type="text/babel">
+        const LoveApp = () => {
+            const [currentSection, setCurrentSection] = React.useState('quiz');
+            const [selectedAnswers, setSelectedAnswers] = React.useState([]);
+
+            const questions = [
+                {
+                    text: "What's our favorite way to communicate? 📱",
+                    options: [
+                        "Video calls 📹",
+                        "Text messages 💬",
+                        "Voice calls 🔊",
+                        "Voice notes 🎤"
+                    ]
+                },
+                {
+                    text: "What do we love doing together online? 🌐",
+                    options: [
+                        "Streaming movies 🍿",
+                        "Playing online games 🎮",
+                        "Listening to music 🎵",
+                        "Planning our future 🌈"
+                    ]
+                },
+                {
+                    text: "Our favorite time to connect is... ⏰",
+                    options: [
+                        "Breakfast time 🥐",
+                        "After work 💼",
+                        "Before sleeping 🌙",
+                        "Midday 🌞"
+                    ]
+                },
+                {
+                    text: "What keeps us most connected? 💖",
+                    options: [
+                        "Sharing memes 😂",
+                        "Telling daily stories 📖",
+                        "Planning next meetings 🗺️",
+                        "Surprise gifts 🎁"
+                    ]
+                },
+                {
+                    text: "Our love is like... 💕",
+                    options: [
+                        "A global adventure 🌍",
+                        "An unbreakable bond 🔒",
+                        "A beautiful journey 🚀",
+                        "A magical connection ✨"
+                    ]
+                }
+            ];
+
+            const [currentQuestion, setCurrentQuestion] = React.useState(0);
+            const [score, setScore] = React.useState(0);
+
+            const handleAnswerSelect = (option) => {
+                const newSelectedAnswers = [...selectedAnswers];
+                newSelectedAnswers[currentQuestion] = option;
+                setSelectedAnswers(newSelectedAnswers);
+
+                if (currentQuestion < questions.length - 1) {
+                    setCurrentQuestion(currentQuestion + 1);
+                } else {
+                    const newScore = newSelectedAnswers.filter(answer => answer !== undefined).length;
+                    setScore(newScore);
+                    setCurrentSection('letter');
+                }
+            };
+
+            const renderQuiz = () => (
+                <div className="bg-white/90 p-8 rounded-xl shadow-lg animate-fade-in">
+                    <h1 className="text-3xl font-bold text-pink-600 mb-6 text-center flex justify-center items-center">
+                        Daby & Wibe: Love Quiz
+                        <span className="ml-2 animate-heart-beat">❤️</span>
+                    </h1>
+                    <div className="mb-6">
+                        <p className="text-xl font-semibold text-center mb-4 text-rose-700">
+                            {questions[currentQuestion].text}
+                        </p>
+                        <div className="grid grid-cols-2 gap-4">
+                            {questions[currentQuestion].options.map((option, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => handleAnswerSelect(option)}
+                                    className="bg-pink-100 text-pink-800 p-4 rounded-lg hover:bg-pink-200 transition text-center transform hover:scale-105 active:scale-95"
+                                >
+                                    {option}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="text-center text-gray-500">
+                        Question {currentQuestion + 1} of {questions.length}
+                    </div>
+                </div>
+            );
+
+            const renderLoveLetter = () => (
+                <div className="bg-gradient-to-br from-rose-50 to-pink-100 min-h-screen flex items-center justify-center p-6">
+                    <div className="bg-white/95 max-w-2xl mx-auto p-10 rounded-2xl shadow-2xl border border-rose-100">
+                        <div className="text-center mb-8">
+                            <h1 className="text-4xl font-serif font-bold text-rose-700 mb-2 flex items-center justify-center">
+                                To My Eternal Flame, Wibe 💖
+                            </h1>
+                            <div className="h-1 w-24 bg-rose-300 mx-auto mb-4"></div>
+                        </div>
+
+                        <div className="space-y-6 text-gray-800 leading-relaxed text-lg font-light">
+                            <p className="animate-fade-in delay-100">
+                                In the intricate tapestry of our love, each moment is a delicate thread weaving a story that spans continents and defies distance.
+                            </p>
+
+                            <p className="animate-fade-in delay-200">
+                                From the Chilean sunsets to the whispers of dawn, our connection transcends all boundaries. 🌹🌠
+                            </p>
+                            
+
+                            <p className="animate-fade-in delay-200">
+                                Your voice, a melodic symphony that dances through the miles, carries the essence of our connection.  
+                            </p>
+
+                            <p className="animate-fade-in delay-200">
+                                Every word you share is a brushstroke painting our unique love story, creating a masterpiece of emotion and devotion. 🎶💋
+                            </p>
+
+                            <p className="animate-fade-in delay-300">
+                                Though oceans and continents may separate us physically, our spirits remain intertwined—an unbreakable bond that laughs in the face of distance.
+                            </p>
+
+                            <p className="animate-fade-in delay-400">
+                                Each heartbeat is a promise, each breath a testament to our extraordinary love. ⏳❤️
+                            </p>
+
+                            <p className="animate-fade-in delay-400">
+                                Together, we craft a mosaic of dreams, each memory a precious gem reflecting the brilliant light of our connection.
+                            </p>
+
+                            <p className="animate-fade-in delay-500">
+                                Our love knows no limits, no boundaries—it exists in a realm beyond time and space. 💎✨
+                            </p>
+                            <p className="animate-fade-in delay-500">
+                                Eternally yours, my heart beats with the rhythm of your name, a melody carried across the infinite stars. 🌌💗
+                            </p>
+                        </div>
+
+                        <div className="text-center mt-8">
+                            <p className="text-2xl font-serif text-rose-700 italic">
+                                Forever and Always, Your Daby 🌹🦝
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+            return currentSection === 'quiz' ? renderQuiz() : renderLoveLetter();
+        };
+
+        ReactDOM.render(<LoveApp />, document.getElementById('root'));
+    </script>
+</body>
+
+</html>

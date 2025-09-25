@@ -1,0 +1,680 @@
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #87CEEB 0%, #026502 50%, #F0E68C 100%);
+    overflow: hidden;
+    font-family: 'Georgia', serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Jardín contenedor */
+.garden {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Girasol principal */
+.sunflower {
+    position: relative;
+    width: min(95vmin, 500px);
+    height: min(95vmin, 500px);
+    animation: gentleSwing 6s ease-in-out infinite 8s, buildFlower 8s ease-out forwards;
+    transform-origin: bottom center;
+    z-index: 10;
+    opacity: 0;
+}
+
+/* Capa de pétalos */
+.petals-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+/* Pétalos externos */
+.outer-petals {
+    width: 100%;
+    height: 100%;
+    animation: buildPetalsOuter 3s ease-out forwards 1s;
+}
+
+/* Pétalos internos */
+.inner-petals {
+    width: 85%;
+    height: 85%;
+    animation: buildPetalsInner 2s ease-out forwards 4s;
+}
+
+/* Estilo base de pétalos */
+.petal {
+    position: absolute;
+    width: min(15vmin, 75px);
+    height: min(30vmin, 150px);
+    background: linear-gradient(145deg, 
+        #FFD700 0%, 
+        #FFA500 25%, 
+        #FF8C00 50%, 
+        #FFD700 75%, 
+        #FFFF00 100%);
+    border-radius: 50% 50% 50% 50% / 90% 90% 10% 10%;
+    top: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    box-shadow: 
+        inset 2px 2px 8px rgba(255, 255, 255, 0.6),
+        inset -2px -2px 8px rgba(255, 140, 0, 0.4),
+        0 4px 15px rgba(255, 165, 0, 0.3);
+    animation: petalGlow 3s ease-in-out infinite alternate 8s;
+    opacity: 0;
+    transform: translate(-50%, -100%) scale(0) rotate(var(--rotation, 0deg));
+}
+
+/* Posicionamiento de pétalos externos */
+.outer-petals .petal-1 { --rotation: 0deg; animation: petalAppear 0.3s ease-out forwards 1.1s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-2 { --rotation: 18deg; animation: petalAppear 0.3s ease-out forwards 1.2s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-3 { --rotation: 36deg; animation: petalAppear 0.3s ease-out forwards 1.3s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-4 { --rotation: 54deg; animation: petalAppear 0.3s ease-out forwards 1.4s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-5 { --rotation: 72deg; animation: petalAppear 0.3s ease-out forwards 1.5s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-6 { --rotation: 90deg; animation: petalAppear 0.3s ease-out forwards 1.6s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-7 { --rotation: 108deg; animation: petalAppear 0.3s ease-out forwards 1.7s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-8 { --rotation: 126deg; animation: petalAppear 0.3s ease-out forwards 1.8s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-9 { --rotation: 144deg; animation: petalAppear 0.3s ease-out forwards 1.9s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-10 { --rotation: 162deg; animation: petalAppear 0.3s ease-out forwards 2.0s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-11 { --rotation: 180deg; animation: petalAppear 0.3s ease-out forwards 2.1s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-12 { --rotation: 198deg; animation: petalAppear 0.3s ease-out forwards 2.2s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-13 { --rotation: 216deg; animation: petalAppear 0.3s ease-out forwards 2.3s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-14 { --rotation: 234deg; animation: petalAppear 0.3s ease-out forwards 2.4s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-15 { --rotation: 252deg; animation: petalAppear 0.3s ease-out forwards 2.5s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-16 { --rotation: 270deg; animation: petalAppear 0.3s ease-out forwards 2.6s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-17 { --rotation: 288deg; animation: petalAppear 0.3s ease-out forwards 2.7s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-18 { --rotation: 306deg; animation: petalAppear 0.3s ease-out forwards 2.8s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-19 { --rotation: 324deg; animation: petalAppear 0.3s ease-out forwards 2.9s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.outer-petals .petal-20 { --rotation: 342deg; animation: petalAppear 0.3s ease-out forwards 3.0s, petalGlow 3s ease-in-out infinite alternate 8s; }
+
+/* Posicionamiento de pétalos internos */
+.inner-petals .petal {
+    width: min(12vmin, 60px);
+    height: min(25vmin, 125px);
+    background: linear-gradient(145deg, 
+        #FFFF00 0%, 
+        #FFD700 30%, 
+        #FFA500 70%, 
+        #FFFF00 100%);
+}
+
+.inner-petals .petal-1 { --rotation: 11.25deg; animation: petalAppear 0.25s ease-out forwards 4.1s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-2 { --rotation: 33.75deg; animation: petalAppear 0.25s ease-out forwards 4.2s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-3 { --rotation: 56.25deg; animation: petalAppear 0.25s ease-out forwards 4.3s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-4 { --rotation: 78.75deg; animation: petalAppear 0.25s ease-out forwards 4.4s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-5 { --rotation: 101.25deg; animation: petalAppear 0.25s ease-out forwards 4.5s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-6 { --rotation: 123.75deg; animation: petalAppear 0.25s ease-out forwards 4.6s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-7 { --rotation: 146.25deg; animation: petalAppear 0.25s ease-out forwards 4.7s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-8 { --rotation: 168.75deg; animation: petalAppear 0.25s ease-out forwards 4.8s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-9 { --rotation: 191.25deg; animation: petalAppear 0.25s ease-out forwards 4.9s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-10 { --rotation: 213.75deg; animation: petalAppear 0.25s ease-out forwards 5.0s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-11 { --rotation: 236.25deg; animation: petalAppear 0.25s ease-out forwards 5.1s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-12 { --rotation: 258.75deg; animation: petalAppear 0.25s ease-out forwards 5.2s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-13 { --rotation: 281.25deg; animation: petalAppear 0.25s ease-out forwards 5.3s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-14 { --rotation: 303.75deg; animation: petalAppear 0.25s ease-out forwards 5.4s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-15 { --rotation: 326.25deg; animation: petalAppear 0.25s ease-out forwards 5.5s, petalGlow 3s ease-in-out infinite alternate 8s; }
+.inner-petals .petal-16 { --rotation: 348.75deg; animation: petalAppear 0.25s ease-out forwards 5.6s, petalGlow 3s ease-in-out infinite alternate 8s; }
+
+/* Centro de la flor */
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: min(30vmin, 150px);
+    height: min(30vmin, 150px);
+    background: radial-gradient(circle, 
+        #8B4513 0%, 
+        #A0522D 30%, 
+        #654321 60%, 
+        #2F1B14 100%);
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(139, 69, 19, 0.6);
+    z-index: 15;
+    opacity: 0;
+    animation: centerAppear 1s ease-out forwards 6s, centerPulse 4s ease-in-out infinite 8s;
+}
+
+/* Patrón de semillas */
+.seeds-pattern {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.seed-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+.ring-1 {
+    width: 30%;
+    height: 30%;
+}
+
+.ring-2 {
+    width: 60%;
+    height: 60%;
+}
+
+.ring-3 {
+    width: 90%;
+    height: 90%;
+}
+
+.seed {
+    position: absolute;
+    width: min(1.5vmin, 8px);
+    height: min(1.5vmin, 8px);
+    background: radial-gradient(circle, #2F1B14, #000000);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0 0;
+}
+
+/* Posicionamiento de semillas ring-1 */
+.ring-1 .seed:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-15px); }
+.ring-1 .seed:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg) translateY(-15px); }
+.ring-1 .seed:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg) translateY(-15px); }
+.ring-1 .seed:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translateY(-15px); }
+.ring-1 .seed:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translateY(-15px); }
+.ring-1 .seed:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translateY(-15px); }
+.ring-1 .seed:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translateY(-15px); }
+.ring-1 .seed:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translateY(-15px); }
+
+/* Posicionamiento de semillas ring-2 */
+.ring-2 .seed:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-30px); }
+.ring-2 .seed:nth-child(2) { transform: translate(-50%, -50%) rotate(30deg) translateY(-30px); }
+.ring-2 .seed:nth-child(3) { transform: translate(-50%, -50%) rotate(60deg) translateY(-30px); }
+.ring-2 .seed:nth-child(4) { transform: translate(-50%, -50%) rotate(90deg) translateY(-30px); }
+.ring-2 .seed:nth-child(5) { transform: translate(-50%, -50%) rotate(120deg) translateY(-30px); }
+.ring-2 .seed:nth-child(6) { transform: translate(-50%, -50%) rotate(150deg) translateY(-30px); }
+.ring-2 .seed:nth-child(7) { transform: translate(-50%, -50%) rotate(180deg) translateY(-30px); }
+.ring-2 .seed:nth-child(8) { transform: translate(-50%, -50%) rotate(210deg) translateY(-30px); }
+.ring-2 .seed:nth-child(9) { transform: translate(-50%, -50%) rotate(240deg) translateY(-30px); }
+.ring-2 .seed:nth-child(10) { transform: translate(-50%, -50%) rotate(270deg) translateY(-30px); }
+.ring-2 .seed:nth-child(11) { transform: translate(-50%, -50%) rotate(300deg) translateY(-30px); }
+.ring-2 .seed:nth-child(12) { transform: translate(-50%, -50%) rotate(330deg) translateY(-30px); }
+
+/* Posicionamiento de semillas ring-3 */
+.ring-3 .seed:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-45px); }
+.ring-3 .seed:nth-child(2) { transform: translate(-50%, -50%) rotate(22.5deg) translateY(-45px); }
+.ring-3 .seed:nth-child(3) { transform: translate(-50%, -50%) rotate(45deg) translateY(-45px); }
+.ring-3 .seed:nth-child(4) { transform: translate(-50%, -50%) rotate(67.5deg) translateY(-45px); }
+.ring-3 .seed:nth-child(5) { transform: translate(-50%, -50%) rotate(90deg) translateY(-45px); }
+.ring-3 .seed:nth-child(6) { transform: translate(-50%, -50%) rotate(112.5deg) translateY(-45px); }
+.ring-3 .seed:nth-child(7) { transform: translate(-50%, -50%) rotate(135deg) translateY(-45px); }
+.ring-3 .seed:nth-child(8) { transform: translate(-50%, -50%) rotate(157.5deg) translateY(-45px); }
+.ring-3 .seed:nth-child(9) { transform: translate(-50%, -50%) rotate(180deg) translateY(-45px); }
+.ring-3 .seed:nth-child(10) { transform: translate(-50%, -50%) rotate(202.5deg) translateY(-45px); }
+.ring-3 .seed:nth-child(11) { transform: translate(-50%, -50%) rotate(225deg) translateY(-45px); }
+.ring-3 .seed:nth-child(12) { transform: translate(-50%, -50%) rotate(247.5deg) translateY(-45px); }
+.ring-3 .seed:nth-child(13) { transform: translate(-50%, -50%) rotate(270deg) translateY(-45px); }
+.ring-3 .seed:nth-child(14) { transform: translate(-50%, -50%) rotate(292.5deg) translateY(-45px); }
+.ring-3 .seed:nth-child(15) { transform: translate(-50%, -50%) rotate(315deg) translateY(-45px); }
+.ring-3 .seed:nth-child(16) { transform: translate(-50%, -50%) rotate(337.5deg) translateY(-45px); }
+
+/* Tallo */
+.stem {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleY(0);
+    width: min(4vmin, 20px);
+    height: 45vh; /* Reducido para PC */
+    z-index: 5;
+    transform-origin: bottom center;
+    animation: stemGrow 2s ease-out forwards 0.5s;
+}
+
+.stem-line {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        #228B22 0%, 
+        #32CD32 30%, 
+        #228B22 70%, 
+        #006400 100%);
+    border-radius: min(1.5vmin, 8px);
+    box-shadow: 
+        inset 2px 0 4px rgba(255, 255, 255, 0.3),
+        inset -2px 0 4px rgba(0, 100, 0, 0.3);
+}
+
+/* Hojas */
+.leaf {
+    position: absolute;
+    width: min(10vmin, 50px);
+    height: min(20vmin, 100px);
+    background: linear-gradient(145deg, 
+        #32CD32 0%, 
+        #228B22 50%, 
+        #006400 100%);
+    border-radius: 50% 0 50% 50%;
+    box-shadow: 
+        inset 1px 1px 3px rgba(255, 255, 255, 0.4),
+        2px 2px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: scale(0);
+}
+
+.leaf-left {
+    top: 30%;
+    left: -80%;
+    transform: rotate(-45deg) scale(0);
+    animation: leafGrow 1s ease-out forwards 7s, leafDance 5s ease-in-out infinite 8s;
+}
+
+.leaf-right {
+    top: 50%;
+    right: -80%;
+    transform: rotate(45deg) scaleX(-1) scale(0);
+    animation: leafGrowRight 1s ease-out forwards 7.3s, leafDanceRight 5s ease-in-out infinite 8.3s;
+}
+
+/* Partículas flotantes */
+.floating-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20;
+    opacity: 0;
+    animation: particlesAppear 1s ease-out forwards 8s;
+}
+
+.particle {
+    position: absolute;
+    width: min(2vmin, 10px);
+    height: min(2vmin, 10px);
+    background: radial-gradient(circle, #FFD700, #FFA500);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: floatParticles 8s ease-in-out infinite;
+}
+
+.particle-1 {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.particle-2 {
+    top: 30%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.particle-3 {
+    top: 60%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+.particle-4 {
+    top: 70%;
+    right: 25%;
+    animation-delay: 6s;
+}
+
+.particle-5 {
+    top: 40%;
+    left: 80%;
+    animation-delay: 1s;
+}
+
+/* Rayos de sol */
+.sun-rays {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    animation: raysAppear 2s ease-out forwards 8.5s;
+}
+
+.ray {
+    position: absolute;
+    width: 3px;
+    height: 150px;
+    background: linear-gradient(to bottom, 
+        rgba(255, 215, 0, 0.8) 0%, 
+        rgba(255, 215, 0, 0.3) 50%, 
+        transparent 100%);
+    transform-origin: bottom center;
+    animation: rayShine 6s ease-in-out infinite;
+}
+
+.ray-1 {
+    top: 5%;
+    left: 10%;
+    transform: rotate(15deg);
+    animation-delay: 0s;
+}
+
+.ray-2 {
+    top: 10%;
+    right: 15%;
+    transform: rotate(-25deg);
+    animation-delay: 1s;
+}
+
+.ray-3 {
+    top: 15%;
+    left: 80%;
+    transform: rotate(35deg);
+    animation-delay: 2s;
+}
+
+.ray-4 {
+    top: 25%;
+    left: 5%;
+    transform: rotate(-10deg);
+    animation-delay: 3s;
+}
+
+.ray-5 {
+    top: 20%;
+    right: 5%;
+    transform: rotate(45deg);
+    animation-delay: 4s;
+}
+
+.ray-6 {
+    top: 30%;
+    left: 85%;
+    transform: rotate(-15deg);
+    animation-delay: 5s;
+}
+
+/* Animaciones */
+@keyframes buildFlower {
+    0% { 
+        opacity: 0;
+        transform: scale(0.3) rotate(-10deg);
+    }
+    100% { 
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes buildPetalsOuter {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes buildPetalsInner {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes petalAppear {
+    0% { 
+        opacity: 0;
+        transform: translate(-50%, -100%) scale(0) rotate(var(--rotation));
+    }
+    70% { 
+        transform: translate(-50%, -100%) scale(1.2) rotate(var(--rotation));
+    }
+    100% { 
+        opacity: 1;
+        transform: translate(-50%, -100%) scale(1) rotate(var(--rotation));
+    }
+}
+
+@keyframes centerAppear {
+    0% { 
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.3) rotate(180deg);
+    }
+    100% { 
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(360deg);
+    }
+}
+
+@keyframes stemGrow {
+    0% { 
+        transform: translateX(-50%) scaleY(0);
+    }
+    100% { 
+        transform: translateX(-50%) scaleY(1);
+    }
+}
+
+@keyframes leafGrow {
+    0% { 
+        opacity: 0;
+        transform: rotate(-45deg) scale(0);
+    }
+    60% { 
+        transform: rotate(-45deg) scale(1.2);
+    }
+    100% { 
+        opacity: 1;
+        transform: rotate(-45deg) scale(1);
+    }
+}
+
+/* Animación específica para hoja derecha */
+@keyframes leafGrowRight {
+    0% { 
+        opacity: 0;
+        transform: rotate(45deg) scaleX(-1) scale(0);
+    }
+    60% { 
+        transform: rotate(45deg) scaleX(-1) scale(1.2);
+    }
+    100% { 
+        opacity: 1;
+        transform: rotate(45deg) scaleX(-1) scale(1);
+    }
+}
+
+@keyframes particlesAppear {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes raysAppear {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes gentleSwing {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(3deg); }
+    75% { transform: rotate(-3deg); }
+}
+
+@keyframes petalGlow {
+    0% { 
+        box-shadow: 
+            inset 2px 2px 8px rgba(255, 255, 255, 0.6),
+            inset -2px -2px 8px rgba(255, 140, 0, 0.4),
+            0 4px 15px rgba(255, 165, 0, 0.3);
+    }
+    100% { 
+        box-shadow: 
+            inset 3px 3px 12px rgba(255, 255, 255, 0.8),
+            inset -3px -3px 12px rgba(255, 140, 0, 0.6),
+            0 6px 25px rgba(255, 215, 0, 0.5);
+    }
+}
+
+@keyframes centerPulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 
+            inset 0 0 20px rgba(0, 0, 0, 0.5),
+            0 0 30px rgba(139, 69, 19, 0.6);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.05);
+        box-shadow: 
+            inset 0 0 25px rgba(0, 0, 0, 0.6),
+            0 0 40px rgba(139, 69, 19, 0.8);
+    }
+}
+
+@keyframes leafDance {
+    0%, 100% { transform: rotate(-45deg) scale(1); }
+    50% { transform: rotate(-40deg) scale(1.1); }
+}
+
+@keyframes leafDanceRight {
+    0%, 100% { transform: rotate(45deg) scaleX(-1) scale(1); }
+    50% { transform: rotate(40deg) scaleX(-1) scale(1.1); }
+}
+
+@keyframes floatParticles {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.7;
+    }
+    25% { 
+        transform: translateY(-20px) rotate(90deg);
+        opacity: 1;
+    }
+    50% { 
+        transform: translateY(-10px) rotate(180deg);
+        opacity: 0.8;
+    }
+    75% { 
+        transform: translateY(-30px) rotate(270deg);
+        opacity: 0.9;
+    }
+}
+
+@keyframes rayShine {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.8;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes titleGlow {
+    0% { 
+        text-shadow: 
+            2px 2px 4px rgba(255, 215, 0, 0.3),
+            0 0 10px rgba(255, 215, 0, 0.2);
+    }
+    100% { 
+        text-shadow: 
+            2px 2px 8px rgba(255, 215, 0, 0.6),
+            0 0 20px rgba(255, 215, 0, 0.4);
+    }
+}
+
+/* Responsive Design */
+@media (min-width: 1024px) {
+    /* Optimización para escritorio */
+    .stem {
+        height: 35vh; /* Aún más corto en pantallas grandes */
+    }
+    
+    .sunflower {
+        transform-origin: 50% 85%; /* Punto de rotación más bajo */
+    }
+    
+    .leaf-left {
+        top: 40%; /* Ajuste para tallo más corto */
+    }
+    
+    .leaf-right {
+        top: 60%; /* Ajuste para tallo más corto */
+    }
+}
+
+@media (max-width: 768px) {
+    .love-message {
+        bottom: 10px;
+        padding: 15px;
+        margin: 0 10px;
+    }
+    
+    .love-message h1 {
+        font-size: clamp(1.2rem, 5vw, 2rem);
+    }
+    
+    .love-message p {
+        font-size: clamp(0.8rem, 3vw, 1rem);
+    }
+    
+    .sunflower {
+        width: min(70vmin, 300px);
+        height: min(70vmin, 300px);
+    }
+    
+    .stem {
+        height: 50vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .sunflower {
+        width: min(60vmin, 250px);
+        height: min(60vmin, 250px);
+    }
+    
+    .stem {
+        height: 40vh;
+    }
+    
+    .love-message {
+        bottom: 5px;
+        padding: 10px;
+    }
+}
+
+/* Mejoras para dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+    .sunflower:active {
+        animation: gentleSwing 0.5s ease-in-out;
+    }
+    
+    .petal {
+        animation: petalGlow 2s ease-in-out infinite alternate;
+    }
+}

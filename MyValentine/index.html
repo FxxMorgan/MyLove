@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My Dearest Angelica ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a2e;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            padding: 1rem;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite;
+        }
+
+        .card-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 500px;
+            z-index: 2;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: clamp(1rem, 5vw, 2rem);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .card.celebration-mode {
+            transform: scale(0.8) rotate3d(1, 1, 0, 360deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate3d(0, 1, 0, 0deg); }
+            50% { transform: translateY(-20px) rotate3d(0, 1, 0, 5deg); }
+        }
+
+        h1 {
+            color: #ff69b4;
+            margin-bottom: 1.5rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1s;
+        }
+
+        .hearts-decoration {
+            display: flex;
+            justify-content: center;
+            gap: clamp(10px, 3vw, 20px);
+            margin: 2rem 0;
+        }
+
+        .decorative-heart {
+            color: #ff69b4;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.5s;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem);
+            border: none;
+            border-radius: 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+            font-family: 'Poppins', sans-serif;
+            white-space: nowrap;
+        }
+
+        .yes-btn {
+            background: #ff69b4;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        .yes-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+        }
+
+        .no-btn {
+            background: #f8f9fa;
+            color: #666;
+        }
+
+        .plane-container {
+            position: fixed;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            z-index: 3;
+        }
+
+        .plane {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            z-index: 2;
+            transform: translateX(-50%);
+        }
+
+        .plane-message {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-family: 'Dancing Script', cursive;
+            color: #ff69b4;
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+            margin-left: -20px;
+            z-index: 1;
+        }
+
+        .floating-heart {
+            position: fixed;
+            color: #ff69b4;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            pointer-events: none;
+            opacity: 0;
+            z-index: 2;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .plane-message {
+                font-size: calc(0.8rem * 2.5); /* Increased by 150% */
+                padding: 0.5rem 1rem;
+                margin-left: -30px; /* Adjusted margin for larger text */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="card-container">
+        <div class="card">
+            <h1>My Dearest Angelica</h1>
+            <div class="hearts-decoration">
+                <div class="decorative-heart">❤️</div>
+                <div class="decorative-heart">❤️</div>
+                <div class="decorative-heart">❤️</div>
+            </div>
+            <p class="message">
+                Miles may keep us apart,<br>
+                but our hearts are always connected.<br>
+                Every day, my love for you grows stronger,<br>
+                crossing all distances to reach you.<br><br>
+                My dearest Pookie,<br>
+                Will you be my Valentine?
+            </p>
+            <div class="buttons">
+                <button class="yes-btn" onclick="celebration()">Yes, my love! 💝</button>
+                <button class="no-btn" onclick="moveButton(this)">Let me think... 🤔</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create stars background
+        function createStars() {
+            const stars = document.querySelector('.stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = star.style.height = Math.random() * 3 + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.setProperty('--duration', Math.random() * 3 + 2 + 's');
+                stars.appendChild(star);
+            }
+        }
+        createStars();
+
+        function moveButton(btn) {
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'fixed';
+            btn.style.left = `${x}px`;
+            btn.style.top = `${y}px`;
+        }
+
+        let activePlanes = 0;
+        const MAX_PLANES = 3;
+
+        function createPlaneWithMessage(message) {
+            if (activePlanes >= MAX_PLANES) return;
+            
+            activePlanes++;
+            const container = document.createElement('div');
+            container.className = 'plane-container';
+            
+            const plane = document.createElement('div');
+            plane.className = 'plane';
+            plane.textContent = '✈️';
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'plane-message';
+            messageDiv.textContent = message;
+            
+            container.appendChild(messageDiv);
+            container.appendChild(plane);
+            document.body.appendChild(container);
+
+            const startY = Math.random() * (window.innerHeight * 0.7);
+            container.style.top = `${startY}px`;
+            
+            container.animate([
+                { transform: 'translateX(-100vw)', opacity: 1 },
+                { transform: 'translateX(100vw)', opacity: 1 }
+            ], {
+                duration: 8000,
+                easing: 'linear'
+            }).onfinish = () => {
+                container.remove();
+                activePlanes--;
+            };
+        }
+
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = '❤️';
+            heart.style.left = `${Math.random() * window.innerWidth}px`;
+            heart.style.bottom = '0';
+            document.body.appendChild(heart);
+
+            heart.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                { transform: `translateY(-${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], {
+                duration: 3000 + Math.random() * 2000,
+                easing: 'ease-out'
+            }).onfinish = () => heart.remove();
+        }
+
+        function celebration() {
+            const messages = [
+                "I love you across any distance! 💕",
+                "You make my heart smile! ✨",
+                "Forever yours! 💖",
+                "Every mile is worth it! 🌟",
+                "You're my dream come true! 💫",
+                "Distance means nothing when love means everything! 💝"
+            ];
+
+            // Add celebration mode class to card for animation
+            document.querySelector('.card').classList.add('celebration-mode');
+
+            // Start celebration effects after card animation
+            setTimeout(() => {
+                // Start plane animations with messages
+                const planeInterval = setInterval(() => {
+                    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                    createPlaneWithMessage(randomMessage);
+                }, 2000);
+
+                // Create floating hearts
+                const heartInterval = setInterval(createFloatingHeart, 200);
+
+                // Optional: Clear intervals after some time (e.g., 30 seconds)
+                setTimeout(() => {
+                    clearInterval(planeInterval);
+                    clearInterval(heartInterval);
+                }, 30000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

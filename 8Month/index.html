@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: #f9f7f3;
+            font-family: 'Playfair Display', serif;
+            color: #3c3c3c;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .envelope {
+            width: 100%;
+            max-width: 450px;
+            height: 280px;
+            background: linear-gradient(145deg, #ffffff, #f2f2f2);
+            border: 1px solid #dcdcdc;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+
+        .envelope:hover {
+            transform: scale(1.1);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(145deg, #ececec, #ffffff);
+            border-bottom: 1px solid #dcdcdc;
+            border-radius: 10px 10px 0 0;
+            transform-origin: bottom;
+            transition: transform 0.5s ease;
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(-90deg);
+        }
+
+        .letter {
+            width: 90%;
+            max-width: 400px;
+            height: 240px;
+            background: #ffffff;
+            border: 1px solid #dcdcdc;
+            border-radius: 6px;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            color: #6b6b6b;
+            margin: 20px auto;
+            transform: translateY(25px);
+        }
+
+        .content {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            background: #ffffff;
+            border: 1px solid #dcdcdc;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .content.show {
+            display: block;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .close-btn {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background-color: #ff7f7f;
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background-color: #e96b6b;
+        }
+
+        @media (max-width: 768px) {
+            .envelope {
+                height: 200px;
+            }
+
+            .letter {
+                font-size: 1.2rem;
+                height: 180px;
+            }
+
+            .content {
+                padding: 15px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .letter {
+                font-size: 1rem;
+                padding: 10px;
+            }
+
+            .message {
+                font-size: 0.9rem;
+            }
+
+            .close-btn {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="envelope" onclick="openEnvelope()">
+        <div class="envelope-flap"></div>
+        <div class="letter">
+            <span>💌</span>
+            <p>For Pookie</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="message">
+            My Dearest Love,
+        </div>
+        <div class="message">
+            You are the melody in my heart, the light in my darkest days, and the dream I never want to wake from.
+            
+        </div>
+        <div class="message">
+            Every moment we share feels like a page out of the most beautiful love story.
+        </div>
+        <div class="message">
+            Though distance may separate us, my soul is forever intertwined with yours. 
+            
+        </div>
+        <div class="message">
+            I close my eyes, and it is your smile I see, your warmth I feel, your love that guides me.
+        </div>
+        <div class="message">
+            I look forward to the day we no longer count miles between us, but instead, count the stars above us as we hold each other close. 
+        </div>
+        <div class="message">
+            Thank you for being my everything, Happy Monthsary, my love.
+        </div>
+        <div class="message">
+            You are my forever and always. ❤️
+        </div>
+        <div class="message">
+            With all my love,
+        </div>
+        <div class="message">
+            Your Daby
+        </div>
+        <br>
+        <div class="message">
+            P.S. I love you more than words can say. ❤️
+        </div>
+        <br>
+        <button class="close-btn" onclick="closeCard()">
+            Close Message
+        </button>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            document.querySelector('.envelope').classList.add('open');
+            setTimeout(() => {
+                document.querySelector('.content').classList.add('show');
+            }, 600);
+        }
+
+        function closeCard() {
+            document.querySelector('.content').classList.remove('show');
+            document.querySelector('.envelope').classList.remove('open');
+        }
+    </script>
+</body>
+</html>

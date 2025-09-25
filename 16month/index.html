@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16 Months Together ✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0c0c2e 0%, #1a1a3a 50%, #2d1b69 100%);
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+        }
+
+        /* Contenedor de estrellas fugaces */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Estrellas de fondo */
+        .background-star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Estrellas fugaces */
+        .shooting-star {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            border-radius: 2px;
+            opacity: 0;
+            animation: shoot 3s linear infinite;
+        }
+
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 20px #fff, 0 0 40px #fff, 0 0 60px #fff;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(-100px) translateY(-100px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px)) translateY(calc(100vh + 100px));
+                opacity: 0;
+            }
+        }
+
+        /* Contenedor principal */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* Carta */
+        .letter-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: scale(0) rotate(180deg);
+            opacity: 0;
+            animation: letterAppear 2s ease-out 4s forwards;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes letterAppear {
+            0% {
+                transform: scale(0) rotate(180deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1) rotate(10deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .month-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b9d, #ff8a80, #ffc3a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: drop-shadow(0 0 5px rgba(255, 107, 157, 0.3)); }
+            100% { filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.6)); }
+        }
+
+        .date-subtitle {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: #666;
+            font-weight: 400;
+        }
+
+        .letter-content {
+            color: #333;
+            line-height: 2.2;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            border: 2px solid rgba(255, 107, 157, 0.2);
+            border-radius: 15px;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .letter-content p {
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: paragraphAppear 1s ease-out forwards;
+            text-align: left;
+        }
+
+        .letter-content p:nth-child(1) { animation-delay: 5s; }
+        .letter-content p:nth-child(2) { animation-delay: 5.5s; }
+        .letter-content p:nth-child(3) { animation-delay: 6s; }
+        .letter-content p:nth-child(4) { animation-delay: 6.5s; }
+        .letter-content p:nth-child(5) { animation-delay: 7s; }
+        .letter-content p:nth-child(6) { animation-delay: 7.5s; }
+
+        @keyframes paragraphAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 2rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: #ff6b9d;
+            opacity: 0;
+            animation: signatureAppear 1s ease-out 8.5s forwards;
+        }
+
+        @keyframes signatureAppear {
+            to { opacity: 1; }
+        }
+
+        /* Corazones flotantes */
+        .floating-heart {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            opacity: 0;
+            animation: floatHeart 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatHeart {
+            0%, 100% { 
+                opacity: 0; 
+                transform: translateY(0) scale(1); 
+            }
+            10%, 90% { 
+                opacity: 1; 
+            }
+            50% { 
+                transform: translateY(-20px) scale(1.2); 
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .letter-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .main-container {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .letter-container {
+                padding: 1.5rem;
+                border-radius: 15px;
+            }
+            
+            .letter-content {
+                font-size: 1rem;
+            }
+        }
+
+        /* Loading animation */
+        .loading-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            z-index: 5;
+            opacity: 1;
+            animation: loadingFade 4s ease-in-out forwards;
+        }
+
+        @keyframes loadingFade {
+            0%, 70% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor de estrellas -->
+    <div class="stars-container" id="starsContainer"></div>
+
+    <!-- Loading text -->
+    <div class="loading-text">The stars are writing our destiny... ✨</div>
+
+    <!-- Contenedor principal -->
+    <div class="main-container">
+        <div class="letter-container">
+            <div class="letter-header">
+                <h1 class="month-title">16 Months of Love</h1>
+                <p class="date-subtitle">September 2025</p>
+            </div>
+            
+            <div class="letter-content">
+                <p>My beautiful Wibe,</p>
+                
+                <p>It's been 16 incredible months since our hearts connected across the ocean.<br><br>
+                Every day with you feels like witnessing a shooting star - magical, unique, and absolutely breathtaking.</p>
+                
+                <p>Through 17,730 kilometers of distance, you've illuminated my world in ways I never imagined possible.<br><br>
+                Your smile is my favorite constellation, your laugh is the melody my heart craves to hear every single day.</p>
+                
+                <p>Like the shooting stars crossing the sky tonight, our love travels without limits, shining brighter with each passing day.<br><br>
+                You are my North Star, my guide, my beautiful destiny waiting in the Philippines.</p>
+                
+                <p>In just 2 months, I'll finally hold you in my arms, Pookie.<br><br>
+                No more screens between us, no more time zones to calculate - just us, finally together.<br><br>
+                This will be the most magical moment of our story.</p>
+                
+                <p>Until I can whisper these words in your ear instead of typing them, know that every star in the Chilean sky carries my love to you in the Philippines. ✨</p>
+            </div>
+            
+            <div class="signature">
+                Forever yours,<br>
+                Daby ❤️<br>
+                <small style="font-size: 0.8em; opacity: 0.7;">From Chile to Philippines, with all my love</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Corazones flotantes -->
+    <div class="floating-heart" style="top: 20%; left: 10%; animation-delay: 7s;">💖</div>
+    <div class="floating-heart" style="top: 70%; right: 15%; animation-delay: 8s;">💕</div>
+    <div class="floating-heart" style="top: 40%; left: 85%; animation-delay: 9s;">💗</div>
+
+    <script>
+        // Crear estrellas de fondo
+        function createBackgroundStars() {
+            const container = document.getElementById('starsContainer');
+            
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'background-star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        // Crear estrellas fugaces
+        function createShootingStars() {
+            const container = document.getElementById('starsContainer');
+            
+            function createShootingStar() {
+                const star = document.createElement('div');
+                star.className = 'shooting-star';
+                
+                // Posición aleatoria en el lado izquierdo/superior
+                const startX = Math.random() * -200 - 100;
+                const startY = Math.random() * window.innerHeight * 0.6;
+                
+                star.style.left = startX + 'px';
+                star.style.top = startY + 'px';
+                star.style.width = Math.random() * 100 + 50 + 'px';
+                star.style.height = Math.random() * 2 + 1 + 'px';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                
+                container.appendChild(star);
+                
+                // Remover la estrella después de la animación
+                setTimeout(() => {
+                    if (star.parentNode) {
+                        star.parentNode.removeChild(star);
+                    }
+                }, 6000);
+            }
+            
+            // Crear estrellas fugaces cada cierto tiempo
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createShootingStar, i * 300);
+            }
+        }
+
+        // Función para crear más estrellas fugaces periódicamente
+        function continuousShootingStars() {
+            setInterval(() => {
+                if (Math.random() < 0.3) { // 30% de probabilidad
+                    const container = document.getElementById('starsContainer');
+                    const star = document.createElement('div');
+                    star.className = 'shooting-star';
+                    
+                    const startX = Math.random() * -200 - 100;
+                    const startY = Math.random() * window.innerHeight * 0.6;
+                    
+                    star.style.left = startX + 'px';
+                    star.style.top = startY + 'px';
+                    star.style.width = Math.random() * 100 + 50 + 'px';
+                    star.style.height = Math.random() * 2 + 1 + 'px';
+                    star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    
+                    container.appendChild(star);
+                    
+                    setTimeout(() => {
+                        if (star.parentNode) {
+                            star.parentNode.removeChild(star);
+                        }
+                    }, 5000);
+                }
+            }, 2000);
+        }
+
+        // Inicializar todo
+        document.addEventListener('DOMContentLoaded', function() {
+            createBackgroundStars();
+            createShootingStars();
+            
+            // Comenzar las estrellas fugaces continuas después de que aparezca la carta
+            setTimeout(continuousShootingStars, 8000);
+        });
+
+        // Responsividad: recrear estrellas si cambia el tamaño de ventana
+        window.addEventListener('resize', function() {
+            const container = document.getElementById('starsContainer');
+            const backgroundStars = container.querySelectorAll('.background-star');
+            backgroundStars.forEach(star => star.remove());
+            createBackgroundStars();
+        });
+    </script>
+</body>
+</html>

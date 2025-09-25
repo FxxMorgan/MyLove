@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Story – 1 Year Together ✨</title>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    * { font-family: 'Poppins', sans-serif; }
+    
+    /* Actualizar el fondo gradiente para que sea más suave */
+    .gradient-bg {
+      background: linear-gradient(-45deg, #ff6b9d88, #ffc3a088, #ff9a9e88, #a8edea88, #fed6e388);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .pulse-heart {
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    
+    /* Actualizar las cards para mejor legibilidad */
+    .chapter-card {
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.35); /* Más opaco para mejor contraste */
+      border: 1px solid rgba(255, 255, 255, 0.5); /* Borde más visible */
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+    }
+    
+    .sparkle {
+      position: absolute;
+      color: #ffd700;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+    
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+    
+    .progress-bar {
+      background: linear-gradient(90deg, #ff6b9d, #ffc3a0);
+      transition: width 0.5s ease;
+    }
+    
+    .chat-bubble {
+      animation: slideInUp 0.5s ease;
+    }
+    
+    @keyframes slideInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    .gallery-item {
+      transition: all 0.3s ease;
+    }
+    
+    .gallery-item:hover {
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    
+    .typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typing 3s steps(40) 1s both;
+    }
+    
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    
+    /* Mejoras para dispositivos móviles */
+    @media (max-width: 640px) {
+      h1 { font-size: 2.5rem !important; }
+      h2 { font-size: 2rem !important; }
+      .text-6xl { font-size: 3rem !important; }
+      .p-8 { padding: 1.5rem !important; }
+      .max-w-2xl { max-width: 90vw !important; }
+      .chapter-card {
+        margin: 1rem;
+        width: calc(100% - 2rem);
+        background: rgba(255, 255, 255, 0.45); /* Aún más opaco en móviles */
+      }
+      /* Mayor contraste en textos para móviles */
+      p, .text-white {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6),
+                    0px 0px 10px rgba(0, 0, 0, 0.4);
+      }
+    }
+    
+    /* Elementos estéticos adicionales */
+    .text-shadow {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4), 
+                  0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .glass-border {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .aesthetic-shadow {
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        0 4px 12px rgba(255, 192, 203, 0.3);
+    }
+    
+    /* Mejorar la legibilidad del texto */
+    .text-enhance {
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    
+    /* Fondo más oscuro para los elementos de chat */
+    .chat-bubble .bg-white\/20 {
+      background-color: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Ocultar scrollbar pero permitir scroll */
+    .scrollbar-hide {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;  /* Chrome, Safari and Opera */
+    }
+
+    /* Nuevos estilos sugeridos */
+    .golden-text {
+      background: linear-gradient(to right, #f7d58b, #eac36e, #f7d58b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #fd6b9d;
+      opacity: 0;
+      z-index: 10;
+      animation: confetti-fall 5s ease-in-out infinite;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .heartbeat-bg {
+      animation: heartbeat-bg 3s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat-bg {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 157, 0.4); }
+      50% { box-shadow: 0 0 20px 10px rgba(255, 107, 157, 0.2); }
+    }
+
+    .photo-polaroid {
+      background: white;
+      padding: 8px;
+      padding-bottom: 20px;
+      transform: rotate(calc(var(--rotation) * 1deg));
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .photo-polaroid:hover {
+      transform: rotate(0deg) scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Mejorar el manejo de imágenes en las polaroids */
+    .photo-polaroid img {
+      transition: all 0.3s ease;
+    }
+
+    .photo-polaroid:hover img {
+      transform: scale(1.02);
+    }
+
+    /* Para imágenes verticales (como house.jpg y tu.jpg) */
+    .photo-vertical {
+      object-fit: contain;
+      object-position: center;
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    }
+
+    /* Para imágenes horizontales (como inicio.jpg) */
+    .photo-horizontal {
+      object-fit: cover;
+      object-position: center;
+    }
+  </style>
+</head>
+<body class="gradient-bg min-h-screen" 
+      :class="chapter === 6 ? 'overflow-y-auto' : 'overflow-hidden'"
+      x-data="{ 
+        chapter: 1, 
+        totalChapters: 6,
+        showSparkles: false,
+        chatMessages: [
+          { sender: 'him', text: 'Good morning beautiful ☀️', time: '8:30 AM' },
+          { sender: 'her', text: 'Morning daby! 💕', time: '8:32 AM' },
+          { sender: 'him', text: 'I was just thinking about you', time: '8:33 AM' },
+          { sender: 'her', text: 'Aww you\'re so sweet 🥰', time: '8:35 AM' },
+          { sender: 'him', text: 'Can\'t wait to hold you in November', time: '8:36 AM' },
+          { sender: 'her', text: 'Me too! mwhehehehe i love you', time: '8:37 AM' },
+          { sender: 'him', text: 'It\'ll be worth the wait, I promise, i love you pookie ❤️', time: '8:38 AM' }
+        ]
+      }"
+      x-init="setTimeout(() => showSparkles = true, 1000)">
+
+  <!-- Progress Bar -->
+  <div class="fixed top-0 left-0 w-full h-2 bg-white/20 z-50">
+    <div class="progress-bar h-full" :style="`width: ${(chapter / totalChapters) * 100}%`"></div>
+  </div>
+
+  <!-- Chapter Counter -->
+  <div class="fixed top-4 right-4 z-40 bg-white/20 backdrop-blur-md rounded-full px-3 py-1 text-white font-medium text-xs sm:text-sm border border-white/30 shadow-lg">
+    <span x-text="chapter"></span> / <span x-text="totalChapters"></span>
+  </div>
+
+  <!-- Sparkles -->
+  <div x-show="showSparkles" class="fixed inset-0 pointer-events-none z-10">
+    <div class="sparkle" style="top: 20%; left: 10%; animation-delay: 0s;">✨</div>
+    <div class="sparkle" style="top: 60%; left: 80%; animation-delay: 1s;">💫</div>
+    <div class="sparkle" style="top: 30%; left: 70%; animation-delay: 2s;">⭐</div>
+    <div class="sparkle" style="top: 80%; left: 20%; animation-delay: 1.5s;">✨</div>
+    <div class="sparkle" style="top: 15%; left: 90%; animation-delay: 2.5s;">💫</div>
+  </div>
+
+  <!-- Confetti effect para momentos especiales -->
+  <div class="fixed inset-0 pointer-events-none z-5" x-show="chapter === 6">
+    <div class="confetti" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="confetti" style="left: 20%; animation-delay: 0.5s;"></div>
+    <div class="confetti" style="left: 30%; animation-delay: 1s;"></div>
+    <div class="confetti" style="left: 40%; animation-delay: 1.5s;"></div>
+    <div class="confetti" style="left: 50%; animation-delay: 0.7s;"></div>
+    <div class="confetti" style="left: 60%; animation-delay: 2s;"></div>
+    <div class="confetti" style="left: 70%; animation-delay: 1.2s;"></div>
+    <div class="confetti" style="left: 80%; animation-delay: 0.3s;"></div>
+    <div class="confetti" style="left: 90%; animation-delay: 0.8s;"></div>
+  </div>
+
+  <!-- Chapter 1: Title Screen -->
+  <section x-show="chapter === 1" 
+           x-transition:enter="transition ease-out duration-500"
+           x-transition:enter-start="opacity-0 transform scale-95"
+           x-transition:enter-end="opacity-100 transform scale-100"
+           class="min-h-screen flex flex-col items-center justify-center p-6 text-center relative">
+    
+    <div class="floating pulse-heart text-6xl mb-8">💕</div>
+    
+    <h1 class="text-6xl font-bold text-white mb-4 typewriter">Our Love Story</h1>
+    <p class="text-2xl text-white/90 mb-8">One Year of Magic ✨</p>
+    
+    <button @click="chapter++" 
+            class="bg-white/20 hover:bg-white/30 backdrop-blur-lg text-white px-12 py-4 rounded-full text-xl font-semibold transition-all duration-300 transform hover:scale-105 border border-white/30">
+      Begin Our Journey 💫
+    </button>
+  </section>
+
+  <!-- Chapter 2: How We Met -->
+  <section x-show="chapter === 2" 
+           x-transition:enter="transition ease-out duration-500"
+           x-transition:enter-start="opacity-0 transform translate-x-full"
+           x-transition:enter-end="opacity-100 transform translate-x-0"
+           class="min-h-screen flex flex-col items-center justify-center p-6 text-center">
+    
+    <div class="chapter-card rounded-3xl p-6 md:p-8 max-w-2xl backdrop-blur-xl aesthetic-shadow">
+      <div class="text-4xl mb-6">📱💕</div>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 text-shadow">Chapter 1: How We Met</h2>
+      
+      <div class="text-white/90 text-lg leading-relaxed space-y-4">
+        <p>We met through Bottled... she didn't like me in the app 😅</p>
+        <p>At first, she thought I was gay 💀</p>
+        <p class="text-pink-200 font-semibold">But for me? Love at first sight. ✨</p>
+        <p>I saw her photo, her vibe... I even tried finding her blog!</p>
+        <p>I wanted to conquer that mysterious "black heart" she had written on her profile. 🖤➡️💘</p>
+      </div>
+      
+      <button @click="chapter++" 
+              class="mt-8 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+        Continue Our Story 💫
+      </button>
+    </div>
+  </section>
+
+  <!-- Chapter 3: Getting Closer -->
+  <section x-show="chapter === 3" 
+           x-transition:enter="transition ease-out duration-500"
+           x-transition:enter-start="opacity-0 transform translate-y-full"
+           x-transition:enter-end="opacity-100 transform translate-y-0"
+           class="min-h-screen flex flex-col items-center justify-center p-6 text-center">
+    
+    <div class="chapter-card rounded-3xl p-6 md:p-8 max-w-2xl backdrop-blur-xl aesthetic-shadow">
+      <div class="text-4xl mb-6">🌸🍱</div>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 text-shadow">Chapter 2: Getting Closer</h2>
+      
+      <div class="text-white/90 text-lg leading-relaxed space-y-4">
+        <p>I sent her flowers 🌸, met her friends, even her mom!</p>
+        <p>Sometimes I send her food, just little surprises 🍱</p>
+        <p class="text-yellow-200 font-semibold">And guess what? We both loooove Jollibee! 🍗🍔</p>
+        <p>It's the little things that made our bond stronger every day. 💪💕</p>
+      </div>
+      
+      <button @click="chapter++" 
+              class="mt-8 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+        See Our Chats 💬
+      </button>
+    </div>
+  </section>
+
+  <!-- Chapter 4: Chat Messages -->
+  <section x-show="chapter === 4" 
+         x-transition:enter="transition ease-out duration-500"
+         x-transition:enter-start="opacity-0 transform scale-95"
+         x-transition:enter-end="opacity-100 transform scale-100"
+         class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
+  
+  <div class="chapter-card rounded-3xl p-4 sm:p-6 w-full max-w-sm sm:max-w-md mx-auto backdrop-blur-xl aesthetic-shadow">
+    <div class="flex items-center justify-between mb-4 text-white">
+      <div class="flex items-center space-x-2">
+        <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-400 rounded-full"></div>
+        <span class="font-semibold text-sm sm:text-base text-shadow">My Love 💕</span>
+      </div>
+      <i class="fas fa-video text-gray-200 text-sm sm:text-base"></i>
+    </div>
+    
+    <div class="space-y-3 h-72 sm:h-80 overflow-y-auto scrollbar-hide">
+      <template x-for="(message, index) in chatMessages" :key="index">
+        <div class="chat-bubble" :class="message.sender === 'him' ? 'text-right' : 'text-left'">
+          <div class="inline-block max-w-xs">
+            <div :class="message.sender === 'him' ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white' : 'bg-white/30 text-white backdrop-blur-sm'" 
+                 class="px-3 sm:px-4 py-2 rounded-2xl text-sm">
+              <span x-text="message.text" class="text-shadow"></span>
+            </div>
+            <div class="text-xs text-white/70 mt-1" x-text="message.time"></div>
+          </div>
+        </div>
+      </template>
+    </div>
+    
+    <button @click="chapter++" 
+            class="w-full mt-4 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-300 transform hover:scale-105 font-medium text-shadow">
+      Our Memories 📸
+    </button>
+  </div>
+</section>
+
+  <!-- Chapter 5: Gallery - Versión mejorada -->
+  <section x-show="chapter === 5" 
+         x-transition:enter="transition ease-out duration-500"
+         x-transition:enter-start="opacity-0 transform rotate-3 scale-95"
+         x-transition:enter-end="opacity-100 transform rotate-0 scale-100"
+         class="min-h-screen flex flex-col items-center justify-center p-6">
+  
+  <div class="chapter-card rounded-3xl p-8 max-w-2xl backdrop-blur-xl">
+    <h2 class="text-4xl font-bold text-white mb-6 text-center">Chapter 4: Our Memories 📸</h2>
+    
+    <div class="grid grid-cols-2 gap-5 mb-6">
+      <div class="photo-polaroid gallery-item rounded-lg overflow-hidden" style="--rotation: -3">
+        <img src="flores.jpg" class="rounded-sm h-32 w-full object-cover" alt="Flores">
+        <p class="text-gray-700 text-xs text-center mt-1">First Flowers 💖 </p>
+      </div>
+      
+      <div class="photo-polaroid gallery-item rounded-lg overflow-hidden" style="--rotation: 2">
+        <img src="inicio.jpg" class="rounded-sm h-32 w-full object-contain bg-white" alt="I love you">
+        <p class="text-gray-700 text-xs text-center mt-1">First Date</p>
+      </div>
+      
+      <div class="photo-polaroid gallery-item rounded-lg overflow-hidden" style="--rotation: 3">
+        <img src="tu.jpg" class="rounded-sm h-32 w-full object-contain bg-white" alt="Comida">
+        <p class="text-gray-700 text-xs text-center mt-1">Searching food haha 💖✨</p>
+      </div>
+      
+      <div class="photo-polaroid gallery-item rounded-lg overflow-hidden" style="--rotation: -2">
+        <img src="house.jpg" class="rounded-sm h-32 w-full object-contain bg-white" alt="Momentos especiales">
+        <p class="text-gray-700 text-xs text-center mt-1">Our House mwhehe</p>
+      </div>
+    </div>
+    
+    <p class="text-white/90 text-center mb-6">Every moment with you is a treasure worth keeping forever 💎</p>
+    
+    <button @click="chapter++" 
+            class="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+      Our Future ➡️
+    </button>
+  </div>
+</section>
+
+  <!-- Chapter 6: Future - Versión mejorada -->
+  <section x-show="chapter === 6" 
+         x-transition:enter="transition ease-out duration-1000"
+         x-transition:enter-start="opacity-0 transform scale-50"
+         x-transition:enter-end="opacity-100 transform scale-100"
+         class="min-h-screen flex flex-col items-center justify-center p-6 py-10 text-center">
+  
+  <div class="chapter-card rounded-3xl p-6 sm:p-8 max-w-2xl backdrop-blur-xl heartbeat-bg mb-10">
+    <div class="pulse-heart text-6xl mb-6">💕</div>
+    <h2 class="text-4xl font-bold text-white mb-3">Chapter 5: What's Next</h2>
+    <p class="golden-text text-xl mb-6">One Year Anniversary ✨</p>
+    
+    <div class="text-white/90 text-lg leading-relaxed space-y-4 mb-8">
+      <p>One year down... and I can't wait to finally see you in person. 🥰</p>
+      <p class="text-yellow-200 font-semibold">November can't come fast enough! ✈️</p>
+      <p>I'm flying to the Philippines just to hug you tight and never let go. 🤗💕</p>
+    </div>
+    
+    <div class="bg-white/10 rounded-2xl p-4 sm:p-6 mb-8 border border-white/30">
+      <p class="golden-text text-xl">Here's to many more chapters together. 📖✨</p>
+      <p class="text-white/80 mt-2">Forever and always, my love 💖</p>
+      <p class="text-white/80 italic mt-3">May 26, 2024 - May 25, 2026</p>
+    </div>
+    
+    <button @click="chapter = 1" 
+            class="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg mb-4">
+      Relive Our Story 🔄
+    </button>
+  </div>
+  
+  <!-- Indicador de scroll para móviles -->
+  <div class="animate-bounce text-white/70 text-sm mb-4 sm:hidden">
+    <i class="fas fa-chevron-up"></i> Desliza para ver todo <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+</body>
+</html>

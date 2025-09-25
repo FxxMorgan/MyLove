@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13 Months of Love - For My Wibe</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 50%, #7c3aed 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .love-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(251, 191, 36, 0.6);
+            border-radius: 50%;
+            animation: float-particle 15s infinite linear;
+        }
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+        .magic-glow {
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+            transition: all 0.6s ease;
+        }
+        .magic-glow:hover {
+            box-shadow: 0 0 50px rgba(251, 191, 36, 0.5);
+            transform: translateY(-2px);
+        }
+        .heart-float {
+            animation: heartFloat 3s ease-in-out infinite;
+        }
+        @keyframes heartFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .text-shimmer {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706, #fbbf24);
+            background-size: 200% 200%;
+            animation: shimmer 3s ease-in-out infinite;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #fbbf24, transparent);
+            border-radius: 50%;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.5), transparent);
+        }
+        .countdown-box {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2));
+            border: 2px solid rgba(251, 191, 36, 0.4);
+        }
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <!-- Ambient particles -->
+    <div id="particles" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <div class="relative z-10 min-h-screen">
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center px-4 py-8">
+            <div class="glass-effect rounded-3xl p-8 max-w-lg w-full text-center">
+                <div class="fade-in-up">
+                    <h1 class="playfair text-4xl md:text-5xl font-semibold text-white mb-4">
+                        Thirteen Months
+                    </h1>
+                    <div class="text-gradient text-xl md:text-2xl font-medium mb-6">
+                        of loving you across the world
+                    </div>
+                    <p class="text-gray-200 text-lg leading-relaxed">
+                        From Philippines to Chile, 19,000 kilometers apart,<br>
+                        but closer than ever in our hearts
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Letter Content -->
+        <div class="px-4 pb-12 space-y-16">
+            <!-- Greeting -->
+            <section class="max-w-2xl mx-auto">
+                <div class="glass-effect magic-glow rounded-2xl p-6 md:p-8 fade-in-up relative">
+                    <div class="sparkle" style="top: 10px; right: 20px; animation-delay: 0s;"></div>
+                    <div class="sparkle" style="bottom: 15px; left: 30px; animation-delay: 1s;"></div>
+                    <h2 class="playfair text-2xl md:text-3xl text-shimmer italic mb-6">
+                        My Dearest Wibe,
+                    </h2>
+                    <p class="text-gray-100 text-lg leading-relaxed">
+                        Can you believe we've made it to thirteen incredible months together?<br><br>
+                        Every single day with you feels like a beautiful dream I never want to wake up from.
+                    </p>
+                </div>
+            </section>
+
+            <div class="section-divider max-w-md mx-auto fade-in-up"></div>
+
+            <!-- First Memory -->
+            <section class="max-w-2xl mx-auto">
+                <div class="glass-effect magic-glow rounded-2xl p-6 md:p-8 fade-in-up relative">
+                    <div class="sparkle" style="top: 20px; left: 25px; animation-delay: 0.5s;"></div>
+                    <p class="text-gray-100 text-lg leading-relaxed mb-6">
+                        I still remember our first conversation, how your laugh made my heart skip a beat 
+                        even through the screen.<br><br>
+                        Distance has never felt so meaningless until I met you.
+                    </p>
+                    <div class="text-center">
+                        <div class="inline-block glass-effect rounded-full px-6 py-3 heart-float">
+                            <span class="text-gradient font-medium">Good morning messages</span>
+                            <span class="text-gray-300 mx-2">•</span>
+                            <span class="text-gradient font-medium">Late night calls</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider max-w-md mx-auto fade-in-up"></div>
+
+            <!-- Heart of the letter -->
+            <section class="max-w-2xl mx-auto">
+                <div class="glass-effect magic-glow rounded-2xl p-6 md:p-8 fade-in-up relative">
+                    <div class="sparkle" style="top: 15px; right: 35px; animation-delay: 1.5s;"></div>
+                    <div class="sparkle" style="bottom: 25px; right: 15px; animation-delay: 0.7s;"></div>
+                    <div class="text-center mb-8">
+                        <div class="playfair text-3xl text-shimmer italic mb-4 heart-float">
+                            "You are my sunshine on cloudy days"
+                        </div>
+                    </div>
+                    <p class="text-gray-100 text-lg leading-relaxed">
+                        Every timezone difference, every missed call, every moment of longing 
+                        has been worth it because it led me to you.<br><br>
+                        You've taught me that love knows no borders, and that two hearts can beat as one across any distance.
+                    </p>
+                </div>
+            </section>
+
+            <div class="section-divider max-w-md mx-auto fade-in-up"></div>
+
+            <!-- November excitement -->
+            <section class="max-w-2xl mx-auto">
+                <div class="glass-effect magic-glow rounded-2xl p-6 md:p-8 fade-in-up relative">
+                    <div class="sparkle" style="top: 30px; left: 20px; animation-delay: 0.3s;"></div>
+                    <div class="sparkle" style="bottom: 20px; right: 25px; animation-delay: 1.2s;"></div>
+                    <h3 class="playfair text-2xl text-shimmer mb-6 text-center heart-float">
+                        November Can't Come Soon Enough
+                    </h3>
+                    <p class="text-gray-100 text-lg leading-relaxed mb-6">
+                        The thought of finally holding you, seeing your beautiful smile in person, 
+                        and walking through Chile together fills me with butterflies.<br><br>
+                        We'll create memories that will last forever.
+                    </p>
+                    
+                    <!-- Countdown -->
+                    <div class="countdown-box rounded-xl p-6 text-center magic-glow">
+                        <div class="text-sm text-gray-200 mb-3 uppercase tracking-wider">Until I arrive in Chile</div>
+                        <div id="countdown" class="countdown-number text-shimmer mb-4"></div>
+                        <div class="grid grid-cols-4 gap-2 text-center">
+                            <div>
+                                <div id="days" class="text-xl font-bold text-gradient">0</div>
+                                <div class="text-xs text-gray-300">Days</div>
+                            </div>
+                            <div>
+                                <div id="hours" class="text-xl font-bold text-gradient">0</div>
+                                <div class="text-xs text-gray-300">Hours</div>
+                            </div>
+                            <div>
+                                <div id="minutes" class="text-xl font-bold text-gradient">0</div>
+                                <div class="text-xs text-gray-300">Minutes</div>
+                            </div>
+                            <div>
+                                <div id="seconds" class="text-xl font-bold text-gradient">0</div>
+                                <div class="text-xs text-gray-300">Seconds</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider max-w-md mx-auto fade-in-up"></div>
+
+            <!-- Gratitude -->
+            <section class="max-w-2xl mx-auto">
+                <div class="glass-effect magic-glow rounded-2xl p-6 md:p-8 fade-in-up relative">
+                    <div class="sparkle" style="top: 25px; right: 30px; animation-delay: 0.8s;"></div>
+                    <div class="sparkle" style="bottom: 35px; left: 40px; animation-delay: 1.8s;"></div>
+                    <p class="text-gray-100 text-lg leading-relaxed mb-8">
+                        Thank you for choosing to love me every single day, for being patient 
+                        with our different time zones, and for never giving up on us.<br><br>
+                        You are my greatest blessing, my peace in the storm.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="text-center glass-effect rounded-xl p-4 heart-float">
+                            <div class="text-shimmer font-semibold">Your Laughter</div>
+                            <div class="text-gray-300 text-sm">lights up my world</div>
+                        </div>
+                        <div class="text-center glass-effect rounded-xl p-4 heart-float" style="animation-delay: 0.5s;">
+                            <div class="text-shimmer font-semibold">Your Love</div>
+                            <div class="text-gray-300 text-sm">completes my soul</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Closing -->
+            <section class="max-w-2xl mx-auto">
+                <div class="glass-effect magic-glow rounded-2xl p-6 md:p-8 text-center fade-in-up relative">
+                    <div class="sparkle" style="top: 20px; left: 30px; animation-delay: 0.4s;"></div>
+                    <div class="sparkle" style="bottom: 30px; right: 20px; animation-delay: 1.6s;"></div>
+                    <div class="playfair text-2xl text-shimmer italic mb-6 heart-float">
+                        Here's to forever with you
+                    </div>
+                    <p class="text-gray-100 text-lg mb-6">
+                        Thirteen months down, a lifetime to go.
+                    </p>
+                    <div class="space-y-2">
+                        <p class="text-gray-200">Forever yours, from Philippines with all my love,</p>
+                        <p class="playfair text-2xl text-shimmer font-semibold heart-float">Your Daby</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Create ambient particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'love-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            document.getElementById('particles').appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 25000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 2000);
+
+        // Optimized scroll animations - faster and more responsive
+        gsap.utils.toArray(".fade-in-up").forEach((element) => {
+            gsap.fromTo(element, 
+                {
+                    opacity: 0,
+                    y: 30
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 90%",
+                        end: "bottom 10%",
+                        toggleActions: "play none none reverse",
+                        fastScrollEnd: true
+                    }
+                }
+            );
+        });
+
+        // Enhanced countdown functionality with real-time updates
+        function updateCountdown() {
+            const targetDate = new Date('2025-11-28T00:00:00-03:00'); // Chile timezone
+            const now = new Date();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                // Update individual elements
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+                
+                // Update main countdown display
+                document.getElementById('countdown').textContent = `${days} days, ${hours} hours`;
+            } else {
+                document.getElementById('countdown').textContent = "We're together! 💕";
+                document.getElementById('days').textContent = "0";
+                document.getElementById('hours').textContent = "0";
+                document.getElementById('minutes').textContent = "0";
+                document.getElementById('seconds').textContent = "0";
+            }
+        }
+
+        // Update countdown every second for real-time effect
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Initial hero animation
+        gsap.from(".glass-effect", {
+            duration: 1.2,
+            scale: 0.9,
+            opacity: 0,
+            ease: "power3.out",
+            delay: 0.3
+        });
+
+        // Optimized magic glow effects
+        gsap.utils.toArray(".magic-glow").forEach((element) => {
+            ScrollTrigger.create({
+                trigger: element,
+                start: "top 85%",
+                end: "bottom 15%",
+                onEnter: () => {
+                    gsap.to(element, {
+                        boxShadow: "0 0 40px rgba(251, 191, 36, 0.4)",
+                        duration: 0.6,
+                        ease: "power2.out"
+                    });
+                },
+                onLeave: () => {
+                    gsap.to(element, {
+                        boxShadow: "0 0 30px rgba(251, 191, 36, 0.3)",
+                        duration: 0.4
+                    });
+                },
+                fastScrollEnd: true
+            });
+        });
+
+        // Optimized parallax effect for sparkles
+        gsap.utils.toArray(".sparkle").forEach((sparkle) => {
+            gsap.to(sparkle, {
+                y: -20,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: sparkle.parentElement,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1,
+                    fastScrollEnd: true
+                }
+            });
+        });
+
+        // Optimized text shimmer on scroll
+        ScrollTrigger.batch(".text-shimmer", {
+            onEnter: (elements) => {
+                elements.forEach(el => {
+                    gsap.fromTo(el, 
+                        { backgroundPosition: "0% 50%" },
+                        { 
+                            backgroundPosition: "200% 50%",
+                            duration: 1.5,
+                            ease: "power2.inOut"
+                        }
+                    );
+                });
+            },
+            fastScrollEnd: true
+        });
+
+        // Performance optimization
+        ScrollTrigger.config({
+            autoRefreshEvents: "visibilitychange,DOMContentLoaded,load"
+        });
+    </script>
+</body>
+</html>

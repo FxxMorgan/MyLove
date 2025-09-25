@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #ffe6e6, #fff0f5);
+            font-family: 'Arial', cursive;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .card {
+            width: 85vw; /* Responsive width */
+            max-width: 250px;
+            height: 60vh; /* Responsive height */
+            max-height: 350px;
+            background: linear-gradient(135deg, #fff, #fff5f5);
+            border: 2px solid #ff69b4;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            touch-action: manipulation; /* Better touch handling */
+        }
+
+        .card:before {
+            content: '💌';
+            font-size: min(50px, 10vw); /* Responsive font size */
+            position: absolute;
+            opacity: 0.5;
+        }
+
+        .card:hover, .card:active { /* Added active state for touch */
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.3);
+        }
+
+        .card:after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-200%); }
+            100% { transform: rotate(45deg) translateX(200%); }
+        }
+
+        .flower {
+            position: absolute;
+            width: min(40px, 10vw); /* Responsive size */
+            height: min(40px, 10vw);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .flower:before, .flower:after {
+            content: '🌸';
+            font-size: min(30px, 8vw); /* Responsive font size */
+            position: absolute;
+        }
+
+        .flower.left { left: -100px; }
+        .flower.right { right: -100px; }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #ff69b4;
+            border-radius: 20px;
+            padding: 20px;
+            width: 90vw; /* Responsive width */
+            max-width: 400px;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+            text-align: center;
+            animation: appear 0.5s ease-out;
+            z-index: 1000;
+        }
+
+        @keyframes appear {
+            from { 
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .popup h2 {
+            color: #ff69b4;
+            margin-bottom: 15px;
+            font-size: min(24px, 6vw); /* Responsive font size */
+        }
+
+        .popup p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: min(16px, 4.5vw); /* Responsive font size */
+            padding: 0 10px;
+        }
+
+        .close-btn {
+            background: linear-gradient(45deg, #ff69b4, #ff8da1);
+            border: none;
+            padding: 12px 25px;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: min(16px, 4vw); /* Responsive font size */
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+        }
+
+        .close-btn:hover, .close-btn:active {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        .hearts {
+            position: fixed; /* Changed to fixed for better mobile display */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .heart {
+            position: absolute;
+            animation: float 4s ease-in infinite;
+            opacity: 0;
+            font-size: min(20px, 5vw); /* Responsive font size */
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Media Queries for better responsiveness */
+        @media (max-width: 480px) {
+            .card {
+                width: 80vw;
+                height: 50vh;
+            }
+
+            .popup {
+                width: 85vw;
+                padding: 15px;
+            }
+
+            .flower {
+                display: none; /* Hide flowers on very small screens */
+            }
+        }
+
+        @media (max-height: 600px) {
+            .card {
+                height: 45vh;
+            }
+
+            .popup p {
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Prevent text selection */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Improved touch feedback */
+        @media (hover: none) {
+            .card:active {
+                transform: scale(0.98);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="card" onclick="showPopup()">
+        <span style="font-size: min(20px, 5vw);">Touch to open ❤️</span>
+    </div>
+
+    <div class="flower left"></div>
+    <div class="flower right"></div>
+
+    <div class="popup" id="popup">
+        <h2>✨ I Love You so muchh ✨</h2>
+        <p>Every day with you is a special gift.<br>
+           You are the most important person in my life.<br>
+           💕 I love you with all my heart wibe 💕</p>
+        <button class="close-btn" onclick="closePopup()">Close with love ❤️</button>
+    </div>
+
+    <script>
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+        let heartInterval;
+
+        function showPopup() {
+            const card = document.querySelector('.card');
+            const popup = document.getElementById('popup');
+            const flowers = document.querySelectorAll('.flower');
+
+            card.style.transform = 'scale(0.8) translateY(-100vh)';
+            card.style.opacity = '0';
+            
+            setTimeout(() => {
+                card.style.display = 'none';
+                popup.style.display = 'block';
+                
+                // Start hearts animation
+                heartInterval = setInterval(createHearts, 300);
+            }, 800);
+
+            flowers.forEach(flower => {
+                flower.style.opacity = '1';
+                if (flower.classList.contains('left')) {
+                    flower.style.transform = 'translateX(200px)';
+                } else {
+                    flower.style.transform = 'translateX(-200px)';
+                }
+            });
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('popup');
+            const card = document.querySelector('.card');
+            const flowers = document.querySelectorAll('.flower');
+
+            // Clear heart interval
+            clearInterval(heartInterval);
+            
+            // Remove existing hearts
+            const hearts = document.querySelectorAll('.heart');
+            hearts.forEach(heart => heart.remove());
+
+            popup.style.display = 'none';
+            card.style.display = 'flex';
+            card.style.opacity = '1';
+            card.style.transform = 'none';
+
+            flowers.forEach(flower => {
+                flower.style.opacity = '0';
+                flower.style.transform = 'none';
+            });
+        }
+
+        // Prevent scrolling when touching the card on mobile
+        document.querySelector('.card').addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    </script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>For My Gelly ❤️</title>
+  <style>
+    .intro-letter {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #000428, #004e92);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      transition: opacity 1s ease-in-out;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    .letter-content {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      max-width: 85%;
+      margin: 0 auto;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .continue-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid white;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .continue-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    .return-to-letter {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      z-index: 1000;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .floating-hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    @keyframes float-up {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: translateY(-100px) scale(1);
+        opacity: 0;
+      }
+    }
+
+    .floating-heart {
+      position: absolute;
+      animation: float-up 15s infinite linear;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+
+    .star.special {
+      background: #ffeb3b;
+      box-shadow: 0 0 10px #fff9c4, 0 0 20px #fff176;
+    }
+
+    .tap-instruction {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Add subtle heart animation in the background */
+    @keyframes floatingHeart {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 0.2;
+      }
+
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .floating-heart {
+      position: absolute;
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.3);
+      animation: floatingHeart 10s infinite linear;
+      pointer-events: none;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      height: 100dvh;
+      background: linear-gradient(45deg, #000428, #004e92);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .star-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      touch-action: manipulation;
+    }
+
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 1.5s infinite;
+      transform: scale(0);
+      box-shadow: 0 0 5px #fff;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .star.special {
+      background: #fff9c4;
+      box-shadow: 0 0 8px #fff9c4;
+    }
+
+    @keyframes twinkle {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      50% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
+
+    .message {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      text-align: center;
+      font-size: 1.2rem;
+      color: #004e92;
+      width: 85%;
+      max-width: 350px;
+      animation: fadeIn 0.5s;
+      z-index: 1000;
+    }
+
+    .message-content {
+      margin: 10px 0;
+      line-height: 1.4;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -45%);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .heart {
+      color: red;
+      font-size: 1.8rem;
+      animation: pulse 1s infinite;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .tap-instruction {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      animation: fadeInOut 2s infinite;
+      text-align: center;
+      width: 100%;
+      padding: 0 20px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: #004e92;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .star-zone {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="intro-letter" id="introLetter">
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <div class="letter-content">
+      <h2>Happy Valentine's Day, My Dearest Gelly! 💝</h2>
+      <br>
+      <p>On this special day, I've created something magical just for you.</p>
+      <br>
+      <p>In the night sky that follows, you'll find stars that hold secret messages of my love for you. Each one tells a
+        different story about us, about how much you mean to me, and about our beautiful journey together - from Chile
+        to Philippines.</p>
+      <br>
+      <p>Find all the special twinkling stars... each one has a message waiting just for you, mi amor!</p>
+      <br>
+      <p>With all my love,</p>
+      <p>Your daby</p>
+      <button class="continue-btn" id="continueBtn">
+        Explore Our Stars ✨
+      </button>
+    </div>
+  </div>
+
+  <button class="return-to-letter" id="returnBtn">
+    ← Read Letter
+  </button>
+
+  <div class="star-container" id="starContainer">
+    <!-- Stars will be added here by JavaScript -->
+  </div>
+  <div class="message" id="loveMessage">
+    <button class="close-btn" id="closeMessage">×</button>
+    <div class="message-content" id="messageContent">
+    </div>
+  </div>
+  <div class="tap-instruction" id="tapInstruction">
+    Find the special stars to reveal hidden messages... ✨
+  </div>
+
+  <script>
+
+    // Add floating hearts to the letter background
+    function createFloatingHearts() {
+      const hearts = document.getElementById('floatingHearts');
+      const heartSymbols = ['❤️', '💖', '💕', '💝', '💗'];
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('span');
+        heart.className = 'floating-heart';
+        heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.animationDelay = `${Math.random() * 15}s`;
+        heart.style.fontSize = `${Math.random() * 20 + 10}px`;
+        hearts.appendChild(heart);
+      }
+    }
+
+    // Initialize floating hearts
+    createFloatingHearts();
+
+    // Handle letter transition
+    const introLetter = document.getElementById('introLetter');
+    const continueBtn = document.getElementById('continueBtn');
+    const returnBtn = document.getElementById('returnBtn');
+
+    continueBtn.addEventListener('click', () => {
+      introLetter.style.opacity = '0';
+      setTimeout(() => {
+        introLetter.style.display = 'none';
+        returnBtn.style.display = 'block';
+      }, 1000);
+    });
+
+    returnBtn.addEventListener('click', () => {
+      introLetter.style.display = 'flex';
+      setTimeout(() => {
+        introLetter.style.opacity = '1';
+      }, 10);
+      returnBtn.style.display = 'none';
+    });
+
+
+    const messages = {
+      // Original 5 messages with updates
+      'zone1': {
+        text: "My dearest Pookie,\n\nFrom Chile to Philippines, every star in between reminds me of your beautiful smile.\n\n❤️",
+        position: [20, 30]
+      },
+      'zone2': {
+        text: "Mahal kita, Wibe!\nThough we're separated by oceans, our hearts beat as one.\n\n💫",
+        position: [70, 20]
+      },
+      'zone3': {
+        text: "Te amo mi Pookie!\nEvery sunrise in Chile makes me think of you watching the sunset in Philippines.\n\n🌅",
+        position: [40, 60]
+      },
+      'zone4': {
+        text: "Distance means so little when someone means so much.\nYou're worth every mile between us, Wibe!\n\n✈️💖",
+        position: [80, 70]
+      },
+      'zone5': {
+        text: "From Tomé to Manila,\nour love knows no boundaries!\n\n🇨🇱❤️🇵🇭",
+        position: [30, 80]
+      },
+      // New 5 additional messages
+      'zone6': {
+        text: "Pookie, did you know?\nEvery time I see the Southern Cross in the Chilean sky,\nI send a wish of love your way!\n\n⭐💝",
+        position: [60, 40]
+      },
+      'zone7': {
+        text: "My beautiful Wibe,\nThough we're 11,711 miles apart,\nyou're always right here in my heart!\n\n🌏💕",
+        position: [25, 50]
+      },
+      'zone8': {
+        text: "Pookie + Wibe\nTwo different time zones,\nOne amazing love story!\n\n⏰💑",
+        position: [75, 45]
+      },
+      'zone9': {
+        text: "Mahal na mahal kita, Pookie!\nFrom the Andes to the Pacific,\nmy love crosses oceans for you!\n\n🌊💝",
+        position: [45, 35]
+      },
+      'zone10': {
+        text: "Mi amor Wibe,\nYou make every moment magical,\neven from halfway around the world!\n\nSoon we'll be together!\n\n✨💫❤️",
+        position: [55, 75]
+      }
+    };
+
+    // Create stars to spell out "GELLY"
+    const nameStarPositions = [
+      // G
+      [25, 15], [20, 15], [15, 15],
+      [15, 20], [15, 25],
+      [20, 25], [25, 25],
+      [25, 20],
+      // E
+      [35, 15], [40, 15],
+      [35, 20],
+      [35, 25], [40, 25],
+      // L
+      [50, 15],
+      [50, 20],
+      [50, 25], [55, 25],
+      // L
+      [65, 15],
+      [65, 20],
+      [65, 25], [70, 25],
+      // Y
+      [80, 15],
+      [82, 20],
+      [84, 25],
+      [78, 20],
+      [76, 25]
+    ];
+
+    const container = document.getElementById('starContainer');
+    const message = document.getElementById('loveMessage');
+    const messageContent = document.getElementById('messageContent');
+    const tapInstruction = document.getElementById('tapInstruction');
+
+    // Create name stars
+    nameStarPositions.forEach(([x, y]) => {
+      createStar(x, y, false);
+    });
+
+    // Create special message zones
+    Object.entries(messages).forEach(([key, value]) => {
+      createMessageZone(value.position[0], value.position[1], value.text);
+      // Create cluster of special stars around the zone
+      for (let i = 0; i < 5; i++) {
+        const offsetX = (Math.random() - 0.5) * 10;
+        const offsetY = (Math.random() - 0.5) * 10;
+        createStar(value.position[0] + offsetX, value.position[1] + offsetY, true);
+      }
+    });
+
+    // Add random background stars
+    for (let i = 0; i < 60; i++) {
+      createStar(Math.random() * 100, Math.random() * 100, false);
+    }
+
+    function createStar(x, y, isSpecial) {
+      const star = document.createElement('div');
+      star.className = `star ${isSpecial ? 'special' : ''}`;
+      star.style.left = `${x}%`;
+      star.style.top = `${y}%`;
+      // Make special stars slightly larger for better visibility
+      star.style.width = `${Math.random() * (isSpecial ? 4 : 2) + 1}px`;
+      star.style.height = star.style.width;
+      star.style.animationDelay = `${Math.random() * 2}s`;
+      container.appendChild(star);
+    }
+
+    function createMessageZone(x, y, text) {
+      const zone = document.createElement('div');
+      zone.className = 'star-zone';
+      zone.style.left = `${x}%`;
+      zone.style.top = `${y}%`;
+      zone.addEventListener('click', () => showMessage(text));
+      zone.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        showMessage(text);
+      });
+      container.appendChild(zone);
+    }
+
+    function showMessage(text) {
+      messageContent.innerHTML = text;
+      message.style.display = 'block';
+      tapInstruction.style.display = 'none';
+    }
+
+    // Close message button
+    document.getElementById('closeMessage').addEventListener('click', (e) => {
+      e.stopPropagation();
+      message.style.display = 'none';
+      tapInstruction.style.display = 'block';
+    });
+
+    // Prevent zoom on double tap
+    document.addEventListener('dblclick', (e) => {
+      e.preventDefault();
+    });
+
+    // Prevent default touch behaviors
+    document.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+    }, { passive: false });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 11 Months, Pookie ❤️</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #e83e8c;
+      margin-bottom: 0.5rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    .subtitle {
+      font-size: 1rem;
+      color: #495057;
+      margin-bottom: 0.5rem;
+    }
+    .tagalog-subtitle {
+      font-size: 0.9rem;
+      color: #6c757d;
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+    .container {
+      max-width: 900px;
+      width: 95%;
+      margin: 1rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+    }
+    .card-title {
+      font-size: 1.3rem;
+      color: #343a40;
+      margin-bottom: 0.8rem;
+      border-bottom: 2px solid #e83e8c;
+      padding-bottom: 0.5rem;
+    }
+
+    .memory-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.memory-img:hover {
+  transform: scale(1.05);
+}
+
+    .memory-img {
+  width: 120px; /* o 100px si quieres aún más pequeñas */
+  height: auto;
+  aspect-ratio: 9 / 16; /* mantiene proporción vertical tipo celular */
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+    .countdown {
+      font-size: 1.1rem;
+      text-align: center;
+      margin: 0.8rem 0;
+      color: #343a40;
+    }
+    .heart {
+      color: #e83e8c;
+      font-size: 1.3rem;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+    .map-container {
+      position: relative;
+      height: 180px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 0.8rem 0;
+      background-color: #e8f4f8;
+    }
+    .country {
+      position: absolute;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      background-color: #e83e8c;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 3px rgba(232, 62, 140, 0.3);
+      z-index: 10;
+    }
+    .chile {
+      bottom: 68%;
+      left: 22%;
+    }
+    .philippines {
+      top: 40%;
+      right: 30%;
+    }
+    .country-label {
+      position: absolute;
+      color: #343a40;
+      font-weight: bold;
+      font-size: 0.8rem;
+      z-index: 10;
+    }
+    .chile-label {
+      bottom: 75%;
+      left: 22%;
+    }
+    .philippines-label {
+      top: 32%;
+      right: 30%;
+    }
+    .world-map {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .world-map path {
+      fill: #a8d5e5;
+      stroke: #88c1d7;
+      stroke-width: 0.5;
+    }
+    .connection {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .connection line {
+      stroke: #e83e8c;
+      stroke-width: 2;
+      stroke-dasharray: 5;
+      animation: flow 30s linear infinite;
+    }
+    @keyframes flow {
+      to { stroke-dashoffset: -1000; }
+    }
+    .love-message {
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 0.8rem 0;
+      color: #495057;
+    }
+    .highlight {
+      color: #e83e8c;
+      font-weight: bold;
+    }
+    .tagalog {
+      font-style: italic;
+      color: #6c757d;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      color: #6c757d;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.8);
+      margin-top: auto;
+      font-size: 0.9rem;
+    }
+    .button {
+      display: inline-block;
+      padding: 0.5rem 1.2rem;
+      background-color: #e83e8c;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-top: 0.8rem;
+    }
+    .button:hover {
+      background-color: #d22b7a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .flags-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 0.8rem 0;
+    }
+    .flag {
+      width: 50px;
+      height: 35px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+    }
+
+    .flag-connection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 1rem 0;
+  font-size: 2rem;
+  position: relative;
+}
+
+.line {
+  width: 100px;
+  height: 2px;
+  background-color: #999;
+  position: relative;
+}
+
+#plane {
+  font-size: 2rem;
+  position: relative;
+}
+    
+    /* Modal for letter */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      width: 90%;
+      max-width: 500px;
+      max-height: 85vh;
+      overflow-y: auto;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      padding: 1.5rem;
+      position: relative;
+      animation: fadeIn 0.5s;
+      background-image: linear-gradient(to bottom, #fff8fa 0%, #ffffff 100%);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .close-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #6c757d;
+      transition: color 0.3s;
+    }
+    .close-btn:hover {
+      color: #e83e8c;
+    }
+    .letter-header {
+      text-align: center;
+      border-bottom: 1px solid #e83e8c;
+      padding-bottom: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .letter-content {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #343a40;
+      padding: 0 0.5rem;
+    }
+    .letter-signature {
+      text-align: right;
+      margin-top: 1.5rem;
+      font-style: italic;
+      color: #e83e8c;
+    }
+    /* Extra responsive adjustments */
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      .subtitle {
+        font-size: 0.9rem;
+      }
+      .card-title {
+        font-size: 1.1rem;
+      }
+      .love-message {
+        font-size: 0.9rem;
+      }
+      .countdown {
+        font-size: 0.9rem;
+      }
+      .map-container {
+        height: 150px;
+      }
+      .memory-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      }
+      .memory-placeholder {
+        height: 80px;
+        font-size: 0.7rem;
+      }
+      .letter-content {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+    anime({
+      targets: '#plane',
+      translateX: [0, 80],
+      direction: 'alternate',
+      easing: 'easeInOutSine',
+      duration: 2000,
+      loop: true
+    });
+  </script>
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM8d7xj1z5l5c5e5e5e5e5e5e5e5e5e5e5e5" crossorigin="anonymous" />
+
+
+</head>
+<body>
+  <header>
+    <h1>Happy 11 Months, Pookie <span class="heart">❤️</span></h1>
+    <p class="subtitle">Daby & Pookie/Wibe</p>
+    <p class="subtitle">Chile ↔️ Philippines</p>
+    <p class="tagalog-subtitle">Maligayang ika-11 buwan ng ating pagmamahalan</p>
+    <div class="flags-container">
+      <div>
+        <div style="width: 50px; height: 35px; position: relative; overflow: hidden; border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+          <div style="position: absolute; width: 100%; height: 50%; background-color: #fff; top: 0;"></div>
+          <div style="position: absolute; width: 100%; height: 50%; background-color: #d52b1e; bottom: 0;"></div>
+          <div style="position: absolute; width: 33%; height: 50%; background-color: #0039a6; top: 0; left: 0;"></div>
+          <div style="position: absolute; top: 7px; left: 15px; color: white; font-size: 9px;">★</div>
+        </div>
+        <p style="text-align: center; margin-top: 3px; font-size: 0.7rem;">Chile</p>
+      </div>
+      <div>
+        <div style="width: 50px; height: 35px; position: relative; overflow: hidden; border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+          <div style="position: absolute; width: 100%; height: 50%; background-color: #0038a8; top: 0;"></div>
+          <div style="position: absolute; width: 100%; height: 50%; background-color: #ce1126; bottom: 0;"></div>
+          <div style="position: absolute; width: 0; height: 0; border-left: 25px solid #fff; border-top: 17.5px solid transparent; border-bottom: 17.5px solid transparent; left: 0;"></div>
+          <div style="position: absolute; left: 10px; top: 13px; transform: rotate(-20deg);">
+            <span style="color: #fcd116; font-size: 4px;">★</span>
+            <span style="color: #fcd116; font-size: 4px; position: relative; left: -2px; top: 3px;">★</span>
+            <span style="color: #fcd116; font-size: 4px; position: relative; left: -6px; top: 7px;">★</span>
+          </div>
+        </div>
+        <p style="text-align: center; margin-top: 3px; font-size: 0.7rem;">Philippines</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h2 class="card-title">Our Special Anniversary</h2>
+      <div class="countdown" id="countdown">Countdown: <span id="days">2</span> days, <span id="hours">0</span> hours, <span id="minutes">0</span> minutes and <span id="seconds">0</span> seconds</div>
+      <p class="love-message">
+        Despite the distance, these 11 months have been the most beautiful of my life. Every day I fall more in love with you, <span class="highlight">Pookie</span>. The distance between Chile and Philippines may be great, but our love is even greater.
+      </p>
+      <p class="tagalog">
+        Mahal kita nang buong-buo. Salamat sa pagiging espesyal ng bawat sandali natin.
+      </p>
+      <div style="text-align: center;">
+        <button class="button" id="letterButton">Click here ❤️</button>
+      </div>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">From Chile to Philippines: Our Journey</h2>
+        <div class="flag-connection">
+          🇨🇱
+          <div class="line"></div>
+          <span id="plane">✈️</span>
+          <div class="line"></div>
+          🇵🇭
+        </div>
+        <p class="love-message">
+          Although we're separated by <span class="highlight">17,644 kilometers</span>, our hearts have never been closer. Since we met, each day has been a gift. No distance can separate what we feel.
+        </p>
+        <p class="tagalog">
+          Ang layo man ng distansya, malapit pa rin ang puso natin sa isa't isa.
+        </p>
+      </div>
+      
+
+    <div class="card">
+        <h2 class="card-title">Our Special Moments</h2>
+        <div class="memory-gallery">
+          <img src="1.jpg" alt="Moment 1" class="memory-img" />
+          <img src="2.jpg" alt="Moment 2" class="memory-img" />
+          <img src="3.jpg" alt="Moment 3" class="memory-img" />
+          <img src="4.jpg" alt="Moment 4" class="memory-img" />
+        </div>
+        <p class="love-message">
+          Every call, every message, and every moment shared has made these 11 months magical, I can't wait to create more memories together, <span class="highlight">Wibe</span>.
+        </p>
+        <p class="tagalog">
+          Bawat tawag, bawat mensahe, at bawat sandaling magkasama ay gumawa ng 11 buwan na ito na mahiwagang.
+        </p>
+      </div>
+      
+
+    <div class="card">
+      <h2 class="card-title">I Love You, Pookie</h2>
+      <p class="love-message">
+        In these 11 months, I've learned that true love knows no boundaries, each passing day, my love for you grows more and more, thank you for being my partner, my confidant, and my best friend.
+      </p>
+      <p class="tagalog">
+        Mahal na mahal kita, <span class="highlight">Pookie</span>, ikaw ang mundo ko.
+      </p>
+      <p class="love-message">
+        From <span class="highlight">Daby</span> to <span class="highlight">Wibe</span> with all my love ❤️
+      </p>
+    </div>
+  </div>
+
+  <!-- Modal Letter -->
+  <div class="modal" id="letterModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeModal">&times;</button>
+      <div class="letter-header">
+        <h2 style="color: #e83e8c;">My Dearest Pookie</h2>
+        <p style="font-size: 0.9rem; color: #6c757d;">April 26, 2025</p>
+      </div>
+      <div class="letter-content">
+        <p>My beloved Pookie,</p>
+        <br>
+        <p>As we celebrate our 11 months together, I wanted to take a moment to express just how much you mean to me, 
+            despite the physical distance between us, you've never felt far from my heart.</p>
+        <br>
+        <p>These past 11 months have been the most wonderful journey of my life, 
+            Every morning I wake up with a smile knowing that somewhere across the ocean, there's someone as amazing as you thinking of me too, 
+            Every night call we share, every message we exchange, and every moment we connect makes this distance feel smaller.</p>
+        <br>
+        <p>I love the way you laugh, the way your eyes light up when you talk about things you're passionate about, and how you can make even the most ordinary days feel special,
+            I admire your strength, your kindness, and the evilness too hahahaha 😂🤣.</p>
+        <br>
+        <p>They say distance is just a test to see how far love can travel,
+            Ours has crossed oceans, spanned continents, and defied time zones,
+            I'm so proud of what we've built together, and I can't wait to see what our future holds.</p>
+        <br>
+        <p>I promise to continue being your support, your comfort, and your partner through everything life brings our way,
+            One day, the distance between us will just be a part of our beautiful story,Until then, I'll cherish every second we share, even if it's through screens.</p>
+        <br>
+        <p>Mahal kita, Pookie, with every beat of my heart and every breath I take.</p>
+        <br>
+        <div class="letter-signature">
+          <p>Forever yours,</p>
+          <p>Daby ❤️</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Created with love by Daby for Pookie | Happy 11 Months Together</p>
+    <p class="subtitle">April 26, 2025</p>
+  </footer>
+
+  <script>
+    // Countdown timer
+    function updateCountdown() {
+      const now = new Date();
+      const targetDate = new Date('April 26, 2025 00:00:00');
+      
+      const diff = targetDate - now;
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+      
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML = 'Happy 11 Month Anniversary! ❤️';
+      }
+    }
+    
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+    
+    // Modal letter functionality
+    const modal = document.getElementById('letterModal');
+    const letterBtn = document.getElementById('letterButton');
+    const closeBtn = document.getElementById('closeModal');
+    
+    letterBtn.addEventListener('click', function() {
+      modal.style.display = 'flex';
+      createHearts(15);
+    });
+    
+    closeBtn.addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+    
+    window.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+    
+    // Heart animation
+    function createHearts(num) {
+      for (let i = 0; i < num; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.style.position = 'fixed';
+        heart.style.fontSize = Math.random() * 15 + 8 + 'px';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.bottom = '0';
+        heart.style.zIndex = '9999';
+        heart.style.animation = 'flyUp ' + (Math.random() * 3 + 2) + 's linear forwards';
+        document.body.appendChild(heart);
+        
+        setTimeout(() => {
+          document.body.removeChild(heart);
+        }, 5000);
+      }
+    }
+    
+    // Add animation
+    document.head.insertAdjacentHTML('beforeend', `
+      <style>
+        @keyframes flyUp {
+          0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-100vh) rotate(${Math.random() * 360}deg);
+            opacity: 0;
+          }
+        }
+      </style>
+    `);
+  </script>
+</body>
+</html>
