@@ -1,0 +1,434 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+.font-display {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Particles Background */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Glass Morphism Effect */
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.5);
+}
+
+/* Glow Effect */
+.glow {
+    text-shadow: 0 0 20px rgba(236, 72, 153, 0.5),
+                 0 0 40px rgba(236, 72, 153, 0.3),
+                 0 0 60px rgba(236, 72, 153, 0.2);
+}
+
+/* Countdown Styles */
+.countdown-item {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.5), rgba(219, 39, 119, 0.5));
+    border-radius: 15px;
+    padding: 1.5rem 0.75rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.countdown-item:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.countdown-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(236, 72, 153, 0.8);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.05em;
+    display: block;
+    width: 100%;
+}
+
+.countdown-label {
+    font-size: 0.75rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-top: 0.25rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    display: block;
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .countdown-item {
+        padding: 1.75rem 1rem;
+        border-radius: 18px;
+        min-height: 120px;
+    }
+    
+    .countdown-value {
+        font-size: 3.5rem;
+        letter-spacing: 0.08em;
+    }
+    
+    .countdown-label {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+}
+
+@media (min-width: 768px) {
+    .countdown-item {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+        min-height: 140px;
+    }
+    
+    .countdown-value {
+        font-size: 4rem;
+        letter-spacing: 0.1em;
+    }
+    
+    .countdown-label {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        font-weight: 500;
+    }
+}
+
+/* Flight Card Styles */
+.flight-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.flight-card:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    transform: scale(1.02);
+}
+
+@media (min-width: 768px) {
+    .flight-card {
+        padding: 2rem;
+        border-radius: 20px;
+    }
+}
+
+.airline-info {
+    color: #fce7f3;
+}
+
+/* Flight Path */
+.flight-path {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.flight-path-line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #ec4899, #f472b6, #ec4899);
+    position: relative;
+    overflow: hidden;
+}
+
+.flight-path-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.layover-info {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(251, 207, 232, 0.2);
+    border-radius: 10px;
+    text-align: center;
+    color: #fce7f3;
+    font-size: 0.9rem;
+}
+
+.arrival-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(22, 163, 74, 0.3));
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #ec4899, #db2777);
+    color: white;
+    padding: 0.875rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(236, 72, 153, 0.4);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(236, 72, 153, 0.6);
+    background: linear-gradient(135deg, #db2777, #be185d);
+}
+
+@media (min-width: 768px) {
+    .btn-primary {
+        padding: 1rem 2.5rem;
+        font-size: 1.2rem;
+    }
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.875rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+    .btn-secondary {
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Animations */
+.heart-beat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    10%, 30% { transform: scale(1.1); }
+    20%, 40% { transform: scale(1); }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in-left {
+    animation: slideInLeft 1s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-in-right {
+    animation: slideInRight 1s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.zoom-in {
+    animation: zoomIn 1s ease-out;
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Hidden Class */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .glass-card {
+        border-radius: 20px;
+    }
+    
+    .glow {
+        text-shadow: 0 0 15px rgba(236, 72, 153, 0.5),
+                     0 0 30px rgba(236, 72, 153, 0.3);
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem !important;
+    }
+    
+    .glass-card {
+        border-radius: 15px;
+    }
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Floating Elements */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Sparkle Effect */
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(135deg, #ec4899, #f472b6, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #ec4899, #db2777);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #db2777, #be185d);
+}
