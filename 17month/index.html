@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17 Months & Our First Meeting 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e1e3f 0%, #2d1b4e 25%, #4a1942 50%, #6b1839 75%, #8b1538 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Partículas flotantes */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Corazones flotantes */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatHeart 10s infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Container principal */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header animado */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.8),
+                         0 0 40px rgba(255, 107, 157, 0.5);
+            margin-bottom: 1rem;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(255, 107, 157, 0.8),
+                            0 0 40px rgba(255, 107, 157, 0.5);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(255, 107, 157, 1),
+                            0 0 60px rgba(255, 107, 157, 0.7);
+            }
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            color: #ffc2d9;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Sección de countdown */
+        .countdown-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .countdown-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: #fff;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .countdown-item {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.3), rgba(255, 107, 157, 0.1));
+            border: 2px solid rgba(255, 107, 157, 0.4);
+            border-radius: 20px;
+            padding: 2rem 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 157, 0.4);
+        }
+
+        .countdown-value {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: #ff6b9d;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.6);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: #ffc2d9;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .countdown-message {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            color: #fff;
+            font-style: italic;
+        }
+
+        /* Sección de carta */
+        .letter-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-out;
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(255, 107, 157, 0.3);
+        }
+
+        .letter-header h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: #ff6b9d;
+            margin-bottom: 0.5rem;
+        }
+
+        .letter-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .letter-content {
+            color: #333;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .letter-content p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .letter-content .highlight {
+            color: #ff6b9d;
+            font-weight: 600;
+        }
+
+        .letter-signature {
+            text-align: right;
+            margin-top: 3rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #ff6b9d;
+        }
+
+        /* Galería de momentos */
+        .moments-section {
+            margin-bottom: 3rem;
+        }
+
+        .moments-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: #fff;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .moments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .moment-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .moment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 157, 0.3);
+        }
+
+        .moment-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .moment-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .moment-description {
+            color: #ffc2d9;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer romántico */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #ffc2d9;
+        }
+
+        .footer-hearts {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .header {
+                margin-bottom: 3rem;
+                padding-bottom: 2rem;
+            }
+
+            .main-title {
+                font-size: clamp(2rem, 10vw, 3.5rem);
+                margin-bottom: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: clamp(1rem, 5vw, 1.5rem);
+                margin-bottom: 1rem;
+            }
+
+            .date-badge {
+                margin-top: 1.5rem;
+            }
+
+            .countdown-section,
+            .letter-section {
+                padding: 2.5rem 2rem;
+                border-radius: 20px;
+                margin-bottom: 3rem;
+            }
+
+            .countdown-title {
+                font-size: clamp(1.3rem, 6vw, 2rem);
+                margin-bottom: 2.5rem;
+            }
+
+            .countdown-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .countdown-item {
+                padding: 2rem 0.5rem;
+            }
+
+            .countdown-value {
+                font-size: clamp(2rem, 8vw, 3rem);
+                margin-bottom: 0.75rem;
+            }
+
+            .countdown-label {
+                font-size: 0.75rem;
+                letter-spacing: 1px;
+            }
+
+            .countdown-message {
+                font-size: 1rem;
+                padding: 0 1rem;
+                margin-top: 2rem;
+                line-height: 1.6;
+            }
+
+            .letter-section {
+                padding: 2.5rem 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .letter-header {
+                margin-bottom: 2.5rem;
+                padding-bottom: 2rem;
+            }
+
+            .letter-content {
+                font-size: 1rem;
+                line-height: 2;
+            }
+
+            .letter-content p {
+                margin-bottom: 2rem;
+            }
+
+            .letter-signature {
+                font-size: 1.5rem;
+                margin-top: 3rem;
+            }
+
+            .moments-section {
+                margin-bottom: 3rem;
+            }
+
+            .moments-title {
+                margin-bottom: 2.5rem;
+            }
+
+            .moments-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .moment-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .moment-emoji {
+                margin-bottom: 1.5rem;
+            }
+
+            .footer {
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem 0.75rem;
+            }
+
+            .header {
+                padding: 1rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .main-title {
+                margin-bottom: 1.5rem;
+            }
+
+            .date-badge {
+                font-size: 0.8rem;
+                padding: 0.5rem 1.2rem;
+                margin-top: 1.5rem;
+            }
+
+            .countdown-section {
+                padding: 2rem 1.25rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .countdown-title {
+                margin-bottom: 2rem;
+            }
+
+            .countdown-grid {
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .countdown-item {
+                padding: 1.5rem 0.5rem;
+                border-radius: 15px;
+            }
+
+            .countdown-value {
+                margin-bottom: 0.5rem;
+            }
+
+            .countdown-message {
+                margin-top: 1.5rem;
+                line-height: 1.8;
+            }
+
+            .letter-section {
+                padding: 2rem 1.25rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .letter-header {
+                margin-bottom: 2rem;
+                padding-bottom: 1.5rem;
+            }
+
+            .letter-header h2 {
+                margin-bottom: 1rem;
+            }
+
+            .letter-content {
+                line-height: 2.2;
+            }
+
+            .letter-content p {
+                margin-bottom: 2.5rem;
+                text-align: left;
+            }
+
+            .letter-signature {
+                margin-top: 3rem;
+                padding-top: 2rem;
+            }
+
+            .moments-section {
+                margin-bottom: 2.5rem;
+            }
+
+            .moments-title {
+                margin-bottom: 2rem;
+            }
+
+            .moments-grid {
+                gap: 2rem;
+            }
+
+            .moment-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .moment-emoji {
+                font-size: 2.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .moment-title {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+
+            .moment-description {
+                font-size: 0.9rem;
+                line-height: 1.8;
+            }
+
+            .footer {
+                padding: 3rem 1.5rem;
+            }
+
+            .footer-hearts {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .container {
+                max-width: 1400px;
+            }
+
+            .countdown-grid {
+                max-width: 1000px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Corazones flotantes -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Container principal -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="main-title">17 Months of Love 💕</h1>
+            <p class="subtitle">Happy Monthsary, My Beautiful Pookie</p>
+            <div class="date-badge">October 25th, 2025</div>
+        </div>
+
+        <!-- Countdown -->
+        <div class="countdown-section">
+            <h2 class="countdown-title">✈️ Our First Meeting In...</h2>
+            <div class="countdown-grid">
+                <div class="countdown-item">
+                    <div class="countdown-value" id="days">30</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+            <p class="countdown-message">
+                Soon I'll finally hold you in my arms for the very first time! 🇵🇭❤️
+            </p>
+        </div>
+
+        <!-- Carta de amor -->
+        <div class="letter-section">
+            <div class="letter-header">
+                <h2>My Letter to You 💌</h2>
+                <p class="letter-date">With all my love, on our 17th month</p>
+            </div>
+            <div class="letter-content">
+                <p>
+                    My love, my precious Gelly,
+                </p>
+                <p>
+                    I know work has kept me incredibly busy , but I want you to know that <span class="highlight">I could never forget you</span>. <br> 
+                    Every day that passes, every moment we share, is engraved in my heart in a way that words can barely express.
+                </p>
+                <p>
+                    <span class="highlight">17 months</span> together already... and what's most exciting is that in just <span class="highlight">30 days</span>, I'll be flying to you, crossing half the world to see you smile, to hug you, to finally feel your warmth close to me. <br> 
+                    This trip isn't just a flight to the Philippines—it's a journey to my home, because you are my home, no matter where you are.
+                </p>
+                <p>
+                    For 17 months, we've been in a long-distance relationship. <br> 
+                    We've never met in person, yet somehow, <span class="highlight">I feel like I've known you my entire life</span>.<br> We've shared laughter through video calls, dreams through messages, and plans for the future through countless conversations across time zones, And all of that has only made me love you more deeply.
+                </p>
+                <p>
+                    <span class="highlight">This will be our first meeting</span>—the moment I've been dreaming about since the day we fell in love.<br> 
+                    The moment when I can finally look into your eyes without a screen between us, hold your hand for the first time, and hear your laughter in person. <br> 
+                    The thought of it makes my heart race with excitement and nervousness at the same time.
+                </p>
+                <p>
+                    Despite the distance, despite the time zones that separate us, despite the screens that keep us connected, our love has grown stronger every day. <br> 
+                    We've shared happiness, dreams, plans for the future, and we've also faced difficult moments together. <br>
+                     And all of that has only made our bond unbreakable.
+                </p>
+                <p>
+                    I know that sometimes work consumes me and I can't give you all the time you deserve, but I want you to know that <span class="highlight">you are my priority</span>, my reason to keep going, my motivation to be better every day. <br> 
+                    Everything I do, I do thinking about our future together—our first hug, our first kiss, our first everything.
+                </p>
+                <p>
+                    Thank you for your patience, for your unconditional love, for waiting for me, and for being the light that illuminates my darkest days. <br> 
+                    <span class="highlight">You are my sun, my moon, my stars</span>, and I can't wait to see the sparkle in your eyes when we finally meet in Manila.
+                </p>
+                <p>
+                    I love you more than words can express, more than time can measure, you are and will always be my only love, my beautiful pookie, my everything. <br>
+                     The fact that we've built this incredible relationship without ever meeting in person is proof of how special and real our love is.
+                </p>
+                <p>
+                    See you soon, my love, the countdown has begun, and every second that passes is one second closer to our first embrace, our first real moment together.
+                </p>
+                <div class="letter-signature">
+                    With all my love,<br>
+                    Your Daby 💕
+                </div>
+            </div>
+        </div>
+
+        <!-- Momentos especiales -->
+        <div class="moments-section">
+            <h2 class="moments-title">✨ Our 17 Months in Memories ✨</h2>
+            <div class="moments-grid">
+                <div class="moment-card">
+                    <div class="moment-emoji">💑</div>
+                    <h3 class="moment-title">First Month</h3>
+                    <p class="moment-description">The beginning of our beautiful story, when we knew this was something special</p>
+                </div>
+                <div class="moment-card">
+                    <div class="moment-emoji">🌙</div>
+                    <h3 class="moment-title">Late Night Talks</h3>
+                    <p class="moment-description">Countless late nights sharing dreams, laughs, and secrets across the world</p>
+                </div>
+                <div class="moment-card">
+                    <div class="moment-emoji">💪</div>
+                    <h3 class="moment-title">Overcoming Distance</h3>
+                    <p class="moment-description">The distance made us stronger, making our love more resilient</p>
+                </div>
+                <div class="moment-card">
+                    <div class="moment-emoji">🎁</div>
+                    <h3 class="moment-title">Surprises of Love</h3>
+                    <p class="moment-description">Every monthsary, every little detail that makes us smile</p>
+                </div>
+                <div class="moment-card">
+                    <div class="moment-emoji">🌟</div>
+                    <h3 class="moment-title">Future Plans</h3>
+                    <p class="moment-description">Dreaming together about our tomorrow, building our path</p>
+                </div>
+                <div class="moment-card">
+                    <div class="moment-emoji">✈️</div>
+                    <h3 class="moment-title">Our First Meeting</h3>
+                    <p class="moment-description">Finally meeting in person after 17 months—in just 30 days!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-hearts">💕 💖 💗 💕 💖 💗</div>
+            <p>For my Gelly, with all my heart</p>
+            <p style="font-size: 0.8rem; margin-top: 1rem; opacity: 0.8;">
+                17 months of love, infinite more to come
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Crear partículas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Crear corazones flotantes
+        function createFloatingHearts() {
+            const heartsContainer = document.getElementById('floatingHearts');
+            const hearts = ['💕', '💖', '💗', '💝', '❤️', '💓'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 10 + 's';
+                heart.style.animationDuration = Math.random() * 5 + 8 + 's';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Countdown timer
+        function updateCountdown() {
+            // Arrival date to Philippines (November 24th, 2025 - adjust according to your flight)
+            const arrivalDate = new Date('2025-11-24T23:59:59').getTime();
+            
+            function update() {
+                const now = new Date().getTime();
+                const distance = arrivalDate - now;
+
+                if (distance < 0) {
+                    document.querySelector('.countdown-message').textContent = "We're finally together, my love! 🎉";
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }
+
+            update();
+            setInterval(update, 1000);
+        }
+
+        // Inicializar todo
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            createFloatingHearts();
+            updateCountdown();
+
+            // Add touch interaction for mobile
+            const cards = document.querySelectorAll('.moment-card, .countdown-item');
+            cards.forEach(card => {
+                card.addEventListener('touchstart', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+        });
+
+        // Efecto de scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
