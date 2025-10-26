@@ -85,8 +85,8 @@ particlesJS('particles-js', {
     retina_detect: true
 });
 
-// Fecha del viaje
-const tripDate = new Date('2025-11-24T11:55:00-03:00'); // Hora de salida desde Santiago
+// Fecha del viaje - Llegada a Manila
+const tripDate = new Date('2025-11-26T12:50:00+08:00'); // Hora de llegada a Manila (GMT+8)
 
 // Función de cuenta regresiva
 function updateCountdown() {
