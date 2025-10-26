@@ -786,8 +786,8 @@
 
         // Countdown timer
         function updateCountdown() {
-            // Arrival date to Philippines (November 26th, 2025 at 12:50 PM Manila time)
-            const arrivalDate = new Date('2025-11-26T12:50:00').getTime();
+            // Arrival date to Philippines (November 26th, 2025 at 12:50 PM Manila time GMT+8)
+            const arrivalDate = new Date('2025-11-26T12:50:00+08:00').getTime();
             
             function update() {
                 const now = new Date().getTime();
