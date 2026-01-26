@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 Months of Love 💕 Missing You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #1a1a2e 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Estrellas de fondo */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Avión volando */
+        .airplane-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .airplane {
+            position: absolute;
+            font-size: 2rem;
+            animation: flyAcross 20s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+
+        .airplane::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0.6), transparent);
+            transform: translateY(-50%);
+        }
+
+        @keyframes flyAcross {
+            0% {
+                left: -10%;
+                top: 20%;
+                transform: rotate(-5deg);
+            }
+            25% {
+                top: 15%;
+            }
+            50% {
+                top: 25%;
+            }
+            75% {
+                top: 18%;
+            }
+            100% {
+                left: 110%;
+                top: 22%;
+                transform: rotate(-5deg);
+            }
+        }
+
+        /* Corazones flotantes */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: floatHeart 12s infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Intro Screen */
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+
+        .intro-screen.hidden {
+            opacity: 0;
+            transform: scale(1.1);
+            pointer-events: none;
+        }
+
+        .intro-content {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .intro-emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .intro-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 8vw, 4rem);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
+        }
+
+        .intro-subtitle {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: #ffc2d9;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .intro-button {
+            background: linear-gradient(135deg, #ff6b9d, #ff8a80);
+            border: none;
+            color: white;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+        }
+
+        .intro-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.6);
+        }
+
+        /* Container principal */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-top: 1rem;
+        }
+
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.8),
+                         0 0 60px rgba(255, 107, 157, 0.5);
+            margin-bottom: 0.5rem;
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(255, 107, 157, 0.8),
+                            0 0 40px rgba(255, 107, 157, 0.5);
+            }
+            to {
+                text-shadow: 0 0 40px rgba(255, 107, 157, 1),
+                            0 0 80px rgba(255, 107, 157, 0.7);
+            }
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            color: #ffc2d9;
+            margin-bottom: 0.5rem;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 107, 157, 0.4);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Distance Card */
+        .distance-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        .distance-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .distance-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .location {
+            text-align: center;
+        }
+
+        .location-emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .location-name {
+            color: #ffc2d9;
+            font-size: 0.9rem;
+        }
+
+        .distance-line {
+            flex: 1;
+            min-width: 80px;
+            max-width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b9d, #ffc2d9, #ff6b9d);
+            position: relative;
+            border-radius: 2px;
+        }
+
+        .distance-line::before {
+            content: '✈️';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: planeMove 4s linear infinite;
+            font-size: 1.2rem;
+        }
+
+        @keyframes planeMove {
+            0% { left: 0; }
+            100% { left: calc(100% - 20px); }
+        }
+
+        .distance-km {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff6b9d;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+        }
+
+        .distance-message {
+            color: #ffc2d9;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        /* Time Together Card */
+        .time-together {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(255, 138, 128, 0.1));
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 107, 157, 0.3);
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .time-together h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .time-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff6b9d;
+            display: block;
+        }
+
+        .stat-label {
+            color: #ffc2d9;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .time-memory {
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1.8;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+
+        /* Letter Section */
+        .letter-section {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out 0.7s both;
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(255, 107, 157, 0.3);
+        }
+
+        .letter-header h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: #ff6b9d;
+            margin-bottom: 0.5rem;
+        }
+
+        .letter-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .letter-content {
+            color: #333;
+            line-height: 2;
+            font-size: 1.05rem;
+        }
+
+        .letter-content p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .letter-content .highlight {
+            color: #ff6b9d;
+            font-weight: 600;
+        }
+
+        .letter-content .emphasis {
+            font-style: italic;
+            background: linear-gradient(120deg, rgba(255, 107, 157, 0.1), rgba(255, 107, 157, 0.2));
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+        }
+
+        .letter-signature {
+            text-align: right;
+            margin-top: 2rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #ff6b9d;
+        }
+
+        .letter-signature small {
+            display: block;
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
+        /* Promises Section */
+        .promises-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out 0.9s both;
+        }
+
+        .promises-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .promise-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .promise-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .promise-item:hover {
+            background: rgba(255, 107, 157, 0.2);
+            transform: translateX(10px);
+        }
+
+        .promise-emoji {
+            font-size: 1.5rem;
+        }
+
+        .promise-text {
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #ffc2d9;
+            animation: fadeIn 1s ease-out 1.1s both;
+        }
+
+        .footer-hearts {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .footer-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .letter-section {
+                padding: 1.5rem;
+            }
+
+            .distance-visual {
+                flex-direction: column;
+            }
+
+            .distance-line {
+                width: 80%;
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+
+            .time-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Music toggle */
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 107, 157, 0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .music-toggle.playing {
+            animation: musicPulse 1s infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 5px 20px rgba(255, 107, 157, 0.5); }
+            50% { box-shadow: 0 5px 30px rgba(255, 107, 157, 0.8); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Stars Background -->
+    <div class="stars" id="starsContainer"></div>
+
+    <!-- Floating Hearts -->
+    <div class="floating-hearts" id="heartsContainer"></div>
+
+    <!-- Airplane -->
+    <div class="airplane-container">
+        <div class="airplane">✈️</div>
+    </div>
+
+    <!-- Intro Screen -->
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-content">
+            <div class="intro-emoji">💕</div>
+            <h1 class="intro-title">I'm Back Home...</h1>
+            <p class="intro-subtitle">
+                But my heart stayed in the Philippines with you 🇵🇭<br>
+                2 months together felt like a beautiful dream<br>
+                Now I'm counting the days until we meet again
+            </p>
+            <button class="intro-button" onclick="startExperience()">
+                Read My Heart 💌
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" id="mainContainer">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">20 Months of Love</h1>
+            <p class="subtitle">Missing you more than words can say</p>
+            <span class="date-badge">📅 January 26, 2026</span>
+        </header>
+
+        <!-- Distance Card -->
+        <div class="distance-card">
+            <h3 class="distance-title">The Distance Between Us</h3>
+            <div class="distance-visual">
+                <div class="location">
+                    <span class="location-emoji">🇨🇱</span>
+                    <span class="location-name">Chile</span>
+                </div>
+                <div class="distance-line"></div>
+                <div class="location">
+                    <span class="location-emoji">🇵🇭</span>
+                    <span class="location-name">Philippines</span>
+                </div>
+            </div>
+            <div class="distance-km">17,730 km</div>
+            <p class="distance-message">But no distance is too far when love is this strong 💕</p>
+        </div>
+
+        <!-- Time Together -->
+        <div class="time-together">
+            <h3>✨ 2 Magical Months Together ✨</h3>
+            <div class="time-stats">
+                <div class="stat-item">
+                    <span class="stat-number">55+</span>
+                    <span class="stat-label">Days Together</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Memories Made</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Hugs & Kisses</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Perfect Days</span>
+                </div>
+            </div>
+            <p class="time-memory">
+                From waking up next to you, to falling asleep in your arms...<br>
+                Every single moment was a treasure I'll hold forever in my heart 💝
+            </p>
+        </div>
+
+        <!-- Letter Section -->
+        <div class="letter-section">
+            <div class="letter-header">
+                <h2>💌 My Heart to Yours 💌</h2>
+                <p class="letter-date">Written with tears of longing and a heart full of love</p>
+            </div>
+            
+            <div class="letter-content">
+                <p>My beautiful Wibe,</p>
+                
+                <p>It's only been <span class="highlight">4 days</span> since I left the Philippines, but it already feels like an eternity, the moment I stepped on that plane, I felt like I was leaving the best part of me behind — <span class="emphasis">you</span>.</p>
+                
+                <p>Those <span class="highlight">2 months</span> we spent together were the most beautiful of my entire life, just waking up next to you every morning, seeing your sleepy smile, holding your hand while we walked together, falling asleep with you in my arms... I never knew happiness could feel so complete until I experienced it with you.</p>
+                
+                <p>Now I'm back in Chile, and everything feels <span class="emphasis">empty</span>.... my bed feels too big without you and the mornings are too quiet without your voice, i just catch myself reaching for your hand, only to remember you're 17,730 kilometers away, my heart aches in ways I never knew were possible.</p>
+                
+                <p>But you know what? <span class="highlight">I wouldn't trade a single second of this pain</span>, because this pain means I love you, this pain means what we have is real, this pain is temporary, but our love is <span class="emphasis">forever</span>.</p>
+                
+                <p>Today marks our <span class="highlight">20th monthsary</span>, and I want you to know that my love for you has only grown stronger, every day apart makes me more certain that <span class="emphasis">you are the one I want to spend my life with</span>, i dream of the day you'll come to Chile, when we can finally be together without counting down to goodbye.</p>
+                
+                <p>I promise you, my love, this distance is just a chapter in our story — not the ending, we will be together again, we will build our future together and one day, we'll look back at this time and be proud of how strong our love was.</p>
+                
+                <p><span class="highlight">I miss you more than words could ever express</span>, i miss your laugh, your smell, your warmth, your everything.... but most of all, I miss being able to tell you "I love you" while looking into your beautiful eyes.</p>
+                
+                <p>Until we meet again, know that you carry my heart with you, always. 💕</p>
+            </div>
+            
+            <div class="letter-signature">
+                Forever and always yours,<br>
+                Daby ❤️
+                <small>From Chile with all my love 🇨🇱→🇵🇭</small>
+            </div>
+        </div>
+
+        <!-- Promises Section -->
+        <div class="promises-section">
+            <h3 class="promises-title">My Promises to You 💍</h3>
+            <div class="promise-list">
+                <div class="promise-item">
+                    <span class="promise-emoji"></span>
+                    <span class="promise-text">I promise to love you more with each passing day, no matter the distance</span>
+                </div>
+                <div class="promise-item">
+                    <span class="promise-emoji"></span>
+                    <span class="promise-text">I promise to always make time for you, because you are my priority</span>
+                </div>
+                <div class="promise-item">
+                    <span class="promise-emoji"></span>
+                    <span class="promise-text">I promise to work hard so we can be together in Chile soon</span>
+                </div>
+                <div class="promise-item">
+                    <span class="promise-emoji"></span>
+                    <span class="promise-text">I promise to stay strong during this time apart, for us, for our future</span>
+                </div>
+                <div class="promise-item">
+                    <span class="promise-emoji"></span>
+                    <span class="promise-text">I promise that one day, we will be together forever — no more goodbyes</span>
+                </div>
+                <div class="promise-item">
+                    <span class="promise-emoji"></span>
+                    <span class="promise-text">I promise to never stop showing you how much you mean to me</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-hearts">💕 🇨🇱 ✈️ 🇵🇭 💕</div>
+            <p class="footer-message">
+                I love you to the Philippines and back, forever and always 💕
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                Happy 20 Months, My Love! 🎉
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Create stars
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                container.appendChild(star);
+            }
+        }
+
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const heartEmojis = ['💕', '💗', '💖', '💝', '❤️', '💘'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 12 + 's';
+                heart.style.animationDuration = (Math.random() * 8 + 10) + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        // Start experience
+        function startExperience() {
+            const introScreen = document.getElementById('introScreen');
+            const mainContainer = document.getElementById('mainContainer');
+            
+            introScreen.classList.add('hidden');
+            
+            setTimeout(() => {
+                mainContainer.classList.add('visible');
+            }, 500);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            createHearts();
+        });
+
+        // Add continuous heart creation
+        setInterval(() => {
+            const container = document.getElementById('heartsContainer');
+            const heartEmojis = ['💕', '💗', '💖', '💝', '❤️', '💘'];
+            
+            if (container.children.length < 30) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 8 + 10) + 's';
+                container.appendChild(heart);
+                
+                // Remove heart after animation
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, 18000);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
