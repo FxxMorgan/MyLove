@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21 Months of Love 💕 Closer Every Day</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 20%, #2d1b4e 40%, #1a2d5e 60%, #0a1a3e 80%, #0a0a1a 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Aurora Effect */
+        .aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .aurora-band {
+            position: absolute;
+            width: 200%;
+            height: 40%;
+            top: -20%;
+            left: -50%;
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                rgba(157, 78, 221, 0.08) 20%, 
+                rgba(110, 69, 226, 0.12) 40%, 
+                rgba(72, 149, 239, 0.08) 60%, 
+                rgba(255, 107, 157, 0.06) 80%, 
+                transparent 100%);
+            animation: auroraMove 20s ease-in-out infinite;
+            filter: blur(40px);
+        }
+
+        .aurora-band:nth-child(2) {
+            animation-delay: -7s;
+            animation-duration: 25s;
+            opacity: 0.7;
+        }
+
+        @keyframes auroraMove {
+            0%, 100% { transform: translateX(-20%) rotate(-5deg); }
+            50% { transform: translateX(20%) rotate(5deg); }
+        }
+
+        /* Stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Shooting Stars */
+        .shooting-star {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.6);
+            animation: shootingStar 3s linear infinite;
+            opacity: 0;
+            z-index: 2;
+        }
+
+        .shooting-star::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent);
+            transform: translateY(-50%);
+        }
+
+        @keyframes shootingStar {
+            0% { transform: translateX(0) translateY(0); opacity: 0; }
+            5% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateX(400px) translateY(300px); opacity: 0; }
+        }
+
+        /* Floating Hearts */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .heart {
+            position: absolute;
+            animation: floatHeart 12s infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(360deg) scale(1); opacity: 0; }
+        }
+
+        /* Connection Line Animation */
+        .connection-dots {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 107, 157, 0.6);
+            border-radius: 50%;
+            animation: dotPulse 4s infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(2); }
+        }
+
+        /* Intro Screen */
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, #1a0a2e 0%, #0a0a1a 70%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+
+        .intro-screen.hidden {
+            opacity: 0;
+            transform: scale(1.1);
+            pointer-events: none;
+        }
+
+        .intro-content {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .intro-number {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(5rem, 20vw, 10rem);
+            color: transparent;
+            background: linear-gradient(135deg, #9d4edd, #6e45e2, #4895ef, #ff6b9d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            filter: drop-shadow(0 0 30px rgba(157, 78, 221, 0.5));
+            animation: numberPulse 3s ease-in-out infinite;
+            line-height: 1;
+        }
+
+        @keyframes numberPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .intro-subtitle-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            color: #c4a0ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .intro-detail {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: rgba(196, 160, 255, 0.7);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .intro-button {
+            background: linear-gradient(135deg, #9d4edd, #6e45e2);
+            border: none;
+            color: white;
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 40px rgba(157, 78, 221, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .intro-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(157, 78, 221, 0.6);
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s ease;
+        }
+
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 1rem;
+        }
+
+        .main-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 12vw, 6rem);
+            font-weight: 400;
+            color: #fff;
+            text-shadow: 0 0 40px rgba(157, 78, 221, 0.8),
+                         0 0 80px rgba(157, 78, 221, 0.4);
+            margin-bottom: 0.5rem;
+            animation: titleGlow 4s infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from {
+                text-shadow: 0 0 30px rgba(157, 78, 221, 0.6),
+                            0 0 60px rgba(110, 69, 226, 0.3);
+            }
+            to {
+                text-shadow: 0 0 50px rgba(157, 78, 221, 1),
+                            0 0 100px rgba(110, 69, 226, 0.6),
+                            0 0 150px rgba(72, 149, 239, 0.3);
+            }
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            color: #c4a0ff;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: rgba(157, 78, 221, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(157, 78, 221, 0.4);
+            padding: 0.5rem 2rem;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Month Counter */
+        .month-counter {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        .month-counter h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #c4a0ff;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(157, 78, 221, 0.15);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #9d4edd;
+            display: block;
+        }
+
+        .stat-label {
+            color: #c4a0ff;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Distance Card */
+        .distance-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .distance-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .location {
+            text-align: center;
+        }
+
+        .location-emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .location-name {
+            color: #c4a0ff;
+            font-size: 0.9rem;
+        }
+
+        .distance-line {
+            flex: 1;
+            min-width: 80px;
+            max-width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, #9d4edd, #6e45e2, #4895ef, #ff6b9d);
+            position: relative;
+            border-radius: 2px;
+        }
+
+        .distance-line::before {
+            content: '✈️';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: planeFly 4s linear infinite;
+            font-size: 1.2rem;
+        }
+
+        @keyframes planeFly {
+            0% { left: 0; }
+            100% { left: calc(100% - 20px); }
+        }
+
+        .distance-km {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #9d4edd;
+            text-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+        }
+
+        .distance-text {
+            color: #c4a0ff;
+            font-style: italic;
+        }
+
+        /* Days Since Section */
+        .days-apart {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.15), rgba(157, 78, 221, 0.1));
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 107, 157, 0.3);
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .days-apart h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #ff6b9d;
+            margin-bottom: 1rem;
+        }
+
+        .days-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #ff6b9d;
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+            line-height: 1;
+        }
+
+        .days-label {
+            color: #ffc2d9;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .days-message {
+            color: #ffc2d9;
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Letter Section */
+        .letter-section {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(157, 78, 221, 0.2);
+            animation: fadeIn 1s ease-out 0.7s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #9d4edd, #6e45e2, #4895ef, #ff6b9d);
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(157, 78, 221, 0.15);
+        }
+
+        .letter-header h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: #9d4edd;
+            margin-bottom: 0.5rem;
+        }
+
+        .letter-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .letter-content {
+            color: #333;
+            line-height: 2;
+            font-size: 1.05rem;
+        }
+
+        .letter-content p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .letter-content .highlight {
+            color: #9d4edd;
+            font-weight: 600;
+        }
+
+        .letter-content .emphasis {
+            font-style: italic;
+            background: linear-gradient(120deg, rgba(157, 78, 221, 0.08), rgba(110, 69, 226, 0.12));
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+        }
+
+        .letter-signature {
+            text-align: right;
+            margin-top: 2rem;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #9d4edd;
+        }
+
+        .letter-signature small {
+            display: block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
+        /* Milestones */
+        .milestones-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out 0.9s both;
+        }
+
+        .milestones-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #c4a0ff;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .milestone-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .milestone-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(157, 78, 221, 0.1);
+            padding: 1.2rem;
+            border-radius: 15px;
+            color: #fff;
+            transition: all 0.3s ease;
+            border-left: 4px solid #9d4edd;
+        }
+
+        .milestone-item:hover {
+            background: rgba(157, 78, 221, 0.25);
+            transform: translateX(10px);
+        }
+
+        .milestone-emoji {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .milestone-info {
+            flex: 1;
+        }
+
+        .milestone-label {
+            font-weight: 600;
+            color: #c4a0ff;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .milestone-text {
+            color: #fff;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-top: 0.3rem;
+        }
+
+        /* Future Dreams */
+        .dreams-section {
+            background: linear-gradient(135deg, rgba(72, 149, 239, 0.1), rgba(157, 78, 221, 0.15));
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(72, 149, 239, 0.3);
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: fadeIn 1s ease-out 1s both;
+        }
+
+        .dreams-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .dreams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .dream-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 1.5rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(72, 149, 239, 0.2);
+        }
+
+        .dream-card:hover {
+            background: rgba(72, 149, 239, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .dream-emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
+        .dream-text {
+            color: #c4a0ff;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Promises */
+        .promises-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: fadeIn 1s ease-out 1.1s both;
+        }
+
+        .promises-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .promise-list {
+            display: grid;
+            gap: 1rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .promise-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 215, 0, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .promise-item:hover {
+            background: rgba(255, 215, 0, 0.15);
+            transform: translateX(8px);
+        }
+
+        .promise-emoji {
+            font-size: 1.5rem;
+        }
+
+        .promise-text {
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #c4a0ff;
+            animation: fadeIn 1s ease-out 1.3s both;
+        }
+
+        .footer-hearts {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .footer-message {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: #fff;
+            text-shadow: 0 0 30px rgba(157, 78, 221, 0.6);
+        }
+
+        .footer-sub {
+            font-size: 0.9rem;
+            color: rgba(196, 160, 255, 0.6);
+            margin-top: 0.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .letter-section { padding: 1.5rem; }
+            .distance-visual { flex-direction: column; }
+            .distance-line {
+                width: 80%;
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .dreams-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Aurora -->
+    <div class="aurora">
+        <div class="aurora-band"></div>
+        <div class="aurora-band"></div>
+    </div>
+
+    <!-- Stars -->
+    <div class="stars" id="starsContainer"></div>
+
+    <!-- Floating Hearts -->
+    <div class="floating-hearts" id="heartsContainer"></div>
+
+    <!-- Connection dots -->
+    <div class="connection-dots" id="dotsContainer"></div>
+
+    <!-- Intro Screen -->
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-content">
+            <div class="intro-number">21</div>
+            <p class="intro-subtitle-text">Months of Infinite Love</p>
+            <p class="intro-detail">
+                35 days apart, but our love only grows stronger 🇨🇱💕🇵🇭<br>
+                Every day without you is a day closer to forever
+            </p>
+            <button class="intro-button" onclick="startExperience()">
+                Open My Heart 💜
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" id="mainContainer">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">21 Months</h1>
+            <p class="subtitle">Every month apart makes our love stronger</p>
+            <span class="date-badge">💜 February 26, 2026 💜</span>
+        </header>
+
+        <!-- Month Counter -->
+        <div class="month-counter">
+            <h3>✨ Our Love in Numbers ✨</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">21</span>
+                    <span class="stat-label">Months</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">639</span>
+                    <span class="stat-label">Days</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Love Given</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1</span>
+                    <span class="stat-label">Soulmate</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Distance -->
+        <div class="distance-card">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fff; margin-bottom: 1rem;">The Space Between Us</h3>
+            <div class="distance-visual">
+                <div class="location">
+                    <span class="location-emoji">🇨🇱</span>
+                    <span class="location-name">Chile</span>
+                </div>
+                <div class="distance-line"></div>
+                <div class="location">
+                    <span class="location-emoji">🇵🇭</span>
+                    <span class="location-name">Philippines</span>
+                </div>
+            </div>
+            <div class="distance-km">17,730 km</div>
+            <p class="distance-text">But love knows no distance — and ours proves it every single day 💜</p>
+        </div>
+
+        <!-- Days Apart -->
+        <div class="days-apart">
+            <h3>Since We Said "See You Soon"</h3>
+            <div class="days-number" id="daysApart">35</div>
+            <div class="days-label">days since January 22</div>
+            <p class="days-message">
+                35 days of missing your warmth, your voice, your touch...<br>
+                But each day that passes is one day closer to holding you again 💕
+            </p>
+        </div>
+
+        <!-- Letter -->
+        <div class="letter-section">
+            <div class="letter-header">
+                <h2>My Dearest Love</h2>
+                <p class="letter-date">21 months — and I love you more than ever</p>
+            </div>
+
+            <div class="letter-content">
+                <p>My beautiful Wibe,</p>
+
+                <p>Happy <span class="highlight">21 months</span>, my love. Can you believe it? 21 months since our lives intertwined, 21 months of laughing, loving, dreaming, fighting the distance, and choosing each other every single day. And honestly? <span class="emphasis">I would choose you again, a thousand times over, without a second of hesitation.</span></p>
+
+                <p>It's been <span class="highlight">35 days</span> since I left the Philippines, and I still feel the ghost of your hand in mine. I still wake up reaching for you, still catch the scent of you in my dreams. The apartment feels quiet. Chile feels colder. But then you call me, and your voice fills every empty corner of my heart, and suddenly... <span class="emphasis">everything is okay again.</span></p>
+
+                <p>You know what amazes me? How our love doesn't shrink with distance — <span class="highlight">it expands.</span> Every video call makes me fall deeper. Every "goodnight, I love you" across time zones reminds me that what we have is something rare, something precious, something most people search their whole lives for. And we found it — <span class="emphasis">we found each other.</span></p>
+
+                <p>I think about our time together in the Philippines constantly. The way you'd curl up next to me on the couch. The way we'd cook together (and make a mess). The way your sleepy eyes would flutter open in the morning and the <span class="highlight">first thing you'd do was smile at me.</span> God, I miss that smile. I miss your warmth. I miss everything.</p>
+
+                <p>But here's what I want you to know today, on our 21st month:  <span class="highlight">This distance has an expiration date.</span> Every day I work, I'm working toward us. Every plan I make has you at the center. Our future isn't just a dream anymore — it's a destination, and we're getting closer with every passing day.</p>
+
+                <p>Thank you for being <span class="emphasis">the strongest, most patient, most loving person</span> I've ever known. Thank you for staying when it's hard. Thank you for loving me from 17,730 km away like I'm right there next to you. Thank you for being my best friend, my partner, my home.</p>
+
+                <p><span class="highlight">I love you beyond words, beyond distance, beyond time.</span> Happy 21 months, my forever. 💜</p>
+            </div>
+
+            <div class="letter-signature">
+                Yours completely and forever,<br>
+                Daby 💜
+                <small>From Chile, counting the days until we're together again 🇨🇱✈️🇵🇭</small>
+            </div>
+        </div>
+
+        <!-- Milestones -->
+        <div class="milestones-section">
+            <h3 class="milestones-title">21 Months of Us ✨</h3>
+            <div class="milestone-list">
+                <div class="milestone-item">
+                    <span class="milestone-emoji">💫</span>
+                    <div class="milestone-info">
+                        <div class="milestone-label">Where It All Began</div>
+                        <div class="milestone-text">Two people from opposite ends of the world connected and everything changed forever</div>
+                    </div>
+                </div>
+                <div class="milestone-item">
+                    <span class="milestone-emoji">💬</span>
+                    <div class="milestone-info">
+                        <div class="milestone-label">Months of Calls & Messages</div>
+                        <div class="milestone-text">Building our love through screens, falling deeper with every late-night conversation</div>
+                    </div>
+                </div>
+                <div class="milestone-item">
+                    <span class="milestone-emoji">✈️</span>
+                    <div class="milestone-info">
+                        <div class="milestone-label">The Journey to the Philippines</div>
+                        <div class="milestone-text">Crossing the world to finally hold you — the longest flight became the shortest because you were at the end of it</div>
+                    </div>
+                </div>
+                <div class="milestone-item">
+                    <span class="milestone-emoji">🏝️</span>
+                    <div class="milestone-info">
+                        <div class="milestone-label">2 Months of Magic</div>
+                        <div class="milestone-text">55+ days of waking up together, adventures, inside jokes, and falling asleep in each other's arms</div>
+                    </div>
+                </div>
+                <div class="milestone-item">
+                    <span class="milestone-emoji">💔</span>
+                    <div class="milestone-info">
+                        <div class="milestone-label">The Hardest Goodbye — Jan 22</div>
+                        <div class="milestone-text">Leaving you was the most painful thing I've ever done. But it's not goodbye — it's "see you soon"</div>
+                    </div>
+                </div>
+                <div class="milestone-item">
+                    <span class="milestone-emoji">💪</span>
+                    <div class="milestone-info">
+                        <div class="milestone-label">Right Now — Stronger Than Ever</div>
+                        <div class="milestone-text">35 days apart and our love is only growing. Distance can't break what we've built together</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dreams for the Future -->
+        <div class="dreams-section">
+            <h3 class="dreams-title">Dreams for Our Future Together 🌟</h3>
+            <div class="dreams-grid">
+                <div class="dream-card">
+                    <span class="dream-emoji">🏡</span>
+                    <div class="dream-text">Building our own home together — where we both belong</div>
+                </div>
+                <div class="dream-card">
+                    <span class="dream-emoji">🌅</span>
+                    <div class="dream-text">Waking up next to you every morning, never having to say goodbye</div>
+                </div>
+                <div class="dream-card">
+                    <span class="dream-emoji">🗺️</span>
+                    <div class="dream-text">Traveling the world together — creating adventures everywhere we go</div>
+                </div>
+                <div class="dream-card">
+                    <span class="dream-emoji">🎄</span>
+                    <div class="dream-text">Spending every holiday, every birthday, every ordinary day side by side</div>
+                </div>
+                <div class="dream-card">
+                    <span class="dream-emoji">👶</span>
+                    <div class="dream-text">Building a family filled with love, laughter, and happiness</div>
+                </div>
+                <div class="dream-card">
+                    <span class="dream-emoji">👴👵</span>
+                    <div class="dream-text">Growing old together — still holding hands, still in love, still choosing each other</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promises -->
+        <div class="promises-section">
+            <h3 class="promises-title">My Promises for the Next 21 Months and Beyond 💍</h3>
+            <div class="promise-list">
+                <div class="promise-item">
+                    <span class="promise-emoji">💜</span>
+                    <span class="promise-text">I promise to love you louder on the days when the silence of distance feels deafening</span>
+                </div>
+                <div class="promise-item">
+                    <span class="promise-emoji">💜</span>
+                    <span class="promise-text">I promise to work every single day toward our future together — because you are worth it</span>
+                </div>
+                <div class="promise-item">
+                    <span class="promise-emoji">💜</span>
+                    <span class="promise-text">I promise to never take a single second together for granted when we're finally reunited</span>
+                </div>
+                <div class="promise-item">
+                    <span class="promise-emoji">💜</span>
+                    <span class="promise-text">I promise to be patient, to be strong, and to be the man you deserve — always</span>
+                </div>
+                <div class="promise-item">
+                    <span class="promise-emoji">💜</span>
+                    <span class="promise-text">I promise that this distance will end — and when it does, I'm never letting you go again</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-hearts">💜 🇨🇱 ✈️ 🇵🇭 💜</div>
+            <p class="footer-message">21 Months Down, Forever To Go</p>
+            <p class="footer-sub">Happy 21 Months, My Love! • February 26, 2026</p>
+            <p style="margin-top: 1rem; font-size: 1rem; color: rgba(196, 160, 255, 0.7);">
+                Every month with you is a gift, and I'll never stop being grateful 💜
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Create stars
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            for (let i = 0; i < 180; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                container.appendChild(star);
+            }
+        }
+
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const heartEmojis = ['💕', '💗', '💖', '💝', '💜', '🤍', '💞'];
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.fontSize = (Math.random() * 18 + 14) + 'px';
+                heart.style.animationDelay = Math.random() * 12 + 's';
+                heart.style.animationDuration = (Math.random() * 8 + 10) + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        // Create shooting stars
+        function createShootingStars() {
+            setInterval(() => {
+                const star = document.createElement('div');
+                star.className = 'shooting-star';
+                star.style.left = Math.random() * 60 + '%';
+                star.style.top = Math.random() * 40 + '%';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(star);
+                setTimeout(() => star.remove(), 4000);
+            }, 5000);
+        }
+
+        // Create connection dots
+        function createDots() {
+            const container = document.getElementById('dotsContainer');
+            for (let i = 0; i < 15; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.style.left = Math.random() * 100 + '%';
+                dot.style.top = Math.random() * 100 + '%';
+                dot.style.animationDelay = Math.random() * 4 + 's';
+                container.appendChild(dot);
+            }
+        }
+
+        // Update days apart counter dynamically
+        function updateDaysApart() {
+            const departure = new Date(2026, 0, 22);
+            const now = new Date();
+            const days = Math.floor((now - departure) / (1000 * 60 * 60 * 24));
+            const el = document.getElementById('daysApart');
+            if (el) el.textContent = days;
+        }
+
+        // Start experience
+        function startExperience() {
+            const introScreen = document.getElementById('introScreen');
+            const mainContainer = document.getElementById('mainContainer');
+            introScreen.classList.add('hidden');
+            setTimeout(() => {
+                mainContainer.classList.add('visible');
+            }, 500);
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            createHearts();
+            createShootingStars();
+            createDots();
+            updateDaysApart();
+        });
+
+        // Continuous hearts
+        setInterval(() => {
+            const container = document.getElementById('heartsContainer');
+            const heartEmojis = ['💕', '💗', '💖', '💝', '💜', '🤍'];
+            if (container.children.length < 30) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.fontSize = (Math.random() * 16 + 12) + 'px';
+                heart.style.animationDuration = (Math.random() * 8 + 10) + 's';
+                container.appendChild(heart);
+                setTimeout(() => {
+                    if (heart.parentNode) heart.parentNode.removeChild(heart);
+                }, 18000);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
