@@ -1,0 +1,265 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide scrollbars for full screen effect */
+    position: relative;
+}
+
+/* Floating background hearts */
+.background-hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.heart-bg {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #ff758c;
+    transform: rotate(-45deg);
+    animation: float var(--duration) ease-in infinite;
+    opacity: 0.4;
+    bottom: -50px;
+}
+
+.heart-bg::before, .heart-bg::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #ff758c;
+}
+
+.heart-bg::before { top: -7.5px; left: 0; }
+.heart-bg::after { top: 0; left: 7.5px; }
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(-45deg) scale(1); opacity: 1; }
+    100% { transform: translateY(-120vh) rotate(-45deg) scale(0.5); opacity: 0; }
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(20px);
+}
+
+.instruction {
+    font-size: 1.2rem;
+    color: #e53935;
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(255,255,255,0.6);
+    animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Envelope Container */
+.env-wrapper {
+    position: relative;
+    width: 320px;
+    height: 220px;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.envelope-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #d15167;
+    border-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    z-index: 1;
+}
+
+.envelope-front {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 160px solid #f26f84;
+    border-right: 160px solid #f26f84;
+    border-bottom: 110px solid #ec6379;
+    border-top: 110px solid transparent;
+    z-index: 3;
+    pointer-events: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-top: 130px solid #ff7b92;
+    border-bottom: 90px solid transparent;
+    z-index: 4;
+    transform-origin: top;
+    transition: transform 0.6s ease, z-index 0s 0.6s;
+}
+
+/* The Letter inside */
+.letter {
+    position: absolute;
+    bottom: 15px;
+    left: 5%;
+    width: 90%;
+    height: 190px;
+    background: #fffdf5; /* Old paper color */
+    z-index: 2;
+    padding: 20px 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.8s ease 0.6s, height 0.8s ease 0.6s, z-index 0s 0.6s, top 0.8s ease 0.6s;
+    border-radius: 4px;
+    overflow: hidden;
+    /* Paper Texture effect */
+    background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 100% 1.8em;
+    border-left: 2px solid #e0c8b6;
+}
+
+/* Open State Animations */
+.env-wrapper.open {
+    cursor: default;
+}
+
+.env-wrapper.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1; /* Move behind after rotation */
+    transition: transform 0.6s ease, z-index 0s 0s;
+}
+
+.env-wrapper.open .letter {
+    transform: translateY(-50px); /* Pulled up */
+    height: 520px; /* Height expands greatly to show text */
+    z-index: 5; /* Comes to the front to overlap the front flaps of the envelope */
+    overflow-y: auto; /* Enable scrolling for the content */
+    transition: transform 0.8s ease 0.5s, height 0.8s ease 0.5s, z-index 0s ease 0.5s;
+}
+
+/* Let the envelope shift slightly down when letter is open for a better view */
+.env-wrapper.open .envelope-back,
+.env-wrapper.open .envelope-front {
+    transform: translateY(80px);
+    transition: transform 0.8s ease 0.5s;
+}
+.env-wrapper.open .envelope-flap {
+    transform: translateY(80px) rotateX(180deg);
+    transition: transform 0.8s ease; 
+}
+
+
+/* Letter internal content styling */
+.letter-content {
+    font-family: 'Caveat', cursive; /* Beautiful handwritten font */
+    color: #3b3a36;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.letter-content h1 {
+    font-size: 26px;
+    color: #d15167;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 1px dashed #d15167;
+    padding-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.letter-content p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.signature {
+    margin-top: 25px;
+    text-align: right;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.photo-container {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.photo-container img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 4px;
+    transform: rotate(-3deg);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    border: 5px solid white;
+}
+
+/* Custom Scrollbar for letter */
+.letter::-webkit-scrollbar {
+    width: 6px;
+}
+.letter::-webkit-scrollbar-track {
+    background: transparent;
+}
+.letter::-webkit-scrollbar-thumb {
+    background-color: #d15167;
+    border-radius: 10px;
+}
+
+/* Responsive adjustments for phones */
+@media (max-width: 400px) {
+    .env-wrapper {
+        width: 280px;
+        height: 190px;
+    }
+    .envelope-front {
+        border-left-width: 140px;
+        border-right-width: 140px;
+        border-bottom-width: 95px;
+        border-top-width: 95px;
+    }
+    .envelope-flap {
+        border-left-width: 140px;
+        border-right-width: 140px;
+        border-top-width: 110px;
+        border-bottom-width: 80px;
+    }
+    .env-wrapper.open .letter {
+        height: 600px; /* even bigger for smaller screen text */
+        transform: translateY(-30px);
+    }
+}
