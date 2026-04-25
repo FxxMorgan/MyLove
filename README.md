@@ -14,6 +14,7 @@ Una colección especial de proyectos web creados con amor para Gelly. Cada proye
 - **14 Meses** - Catorce meses de amor verdadero
 - **15 Meses** - Quince meses de momentos mágicos
 - **16 Meses** - Dieciséis meses hacia el infinito
+- **23 Meses** - Veintitrés meses celebrando todo lo que somos
 
 ### Proyectos Especiales
 - **🌸 Gelly Flower** - Un jardín digital de flores interactivas
@@ -23,6 +24,7 @@ Una colección especial de proyectos web creados con amor para Gelly. Cada proye
 - **🎂 Septiembre 21** - Una fecha especial para recordar
 - **⭐ Estrellas** - Como las estrellas en el cielo nocturno
 - **💳 Card 4 You** - Una tarjeta especial creada para ti
+- **💌 23 Month** - Una carta visual con nuestras fotos y recuerdos
 
 ## 🚀 Cómo usar
 
@@ -50,7 +52,7 @@ Una colección especial de proyectos web creados con amor para Gelly. Cada proye
 
 ## 💕 Mensaje Especial
 
-Cada línea de código en estos proyectos fue escrita con amor y dedicación. Representan momentos únicos, recuerdos especiales y la evolución de nuestra historia juntos. Cada proyecto es un pedacito de nuestro amor digitalizado.
+Cada línea de código en estos proyectos fue escrita con amor y dedicación. Representan momentos únicos, recuerdos especiales y la evolución de nuestra historia juntos. Cada proyecto es un pedacito de nuestro amor digitalizado, desde los primeros meses hasta nuestras celebraciones más recientes.
 
 ## 📱 Vista Previa
 
