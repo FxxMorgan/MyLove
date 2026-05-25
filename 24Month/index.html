@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary - 2 Years Together ❤️</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts for premium appearance -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Alex+Brush&family=Outfit:wght@100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Canvas Confetti Library for celebration effects -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- FontAwesome for gorgeous icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Background rose petals canvas -->
+    <canvas id="canvas-petals"></canvas>
+    <div class="light-beams"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="glass-nav">
+        <div class="nav-logo">F & A</div>
+        <div class="nav-links">
+            <a href="#" class="nav-item active" data-section="story"><i class="fa-solid fa-heart"></i> Counter</a>
+            <a href="#" class="nav-item" data-section="letter"><i class="fa-solid fa-envelope"></i> Letter</a>
+            <a href="#" class="nav-item" data-section="memories"><i class="fa-solid fa-images"></i> Memories</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="main-container">
+
+        <!-- SECTION 1: RELATIONSHIP CLOCK & MUSIC -->
+        <section id="section-story" class="app-section active">
+            <div class="story-header">
+                <h2>Our Love Story</h2>
+                <p class="subtitle">Every single second by your side is a beautiful gift</p>
+            </div>
+
+            <!-- Beautiful ticking love timer -->
+            <div class="timer-container glass-card">
+                <div class="timer-title">We've been together for...</div>
+                <div class="timer-grid">
+                    <div class="timer-box">
+                        <span id="years" class="timer-num">00</span>
+                        <span class="timer-label">Years</span>
+                    </div>
+                    <div class="timer-box">
+                        <span id="months" class="timer-num">00</span>
+                        <span class="timer-label">Months</span>
+                    </div>
+                    <div class="timer-box">
+                        <span id="days" class="timer-num">00</span>
+                        <span class="timer-label">Days</span>
+                    </div>
+                    <div class="timer-box">
+                        <span id="hours" class="timer-num">00</span>
+                        <span class="timer-label">Hours</span>
+                    </div>
+                    <div class="timer-box">
+                        <span id="minutes" class="timer-num">00</span>
+                        <span class="timer-label">Min</span>
+                    </div>
+                    <div class="timer-box">
+                        <span id="seconds" class="timer-num">00</span>
+                        <span class="timer-label">Sec</span>
+                    </div>
+                </div>
+                <div class="timer-footer">Since May 25th, 2024 ✨</div>
+            </div>
+
+            <!-- Premium Music Player Widget -->
+            <div class="music-player glass-card">
+                <div class="vinyl-container">
+                    <div class="vinyl-disc" id="vinyl-disc">
+                        <div class="vinyl-center" style="background-image: url('Inicio.jpg');">
+                        </div>
+                    </div>
+                </div>
+                <div class="song-info">
+                    <div class="song-title">Daby & Angelica</div>
+                    <div class="song-artist">Our Melody</div>
+                </div>
+                <div class="player-controls">
+                    <button class="control-btn" id="play-btn"><i class="fa-solid fa-play"></i></button>
+                </div>
+                <!-- Romantic background track provided by the user -->
+                <audio id="love-song" loop src="Daby and Angelica.mp3"></audio>
+            </div>
+        </section>
+
+        <!-- SECTION 2: THE 3D ENVELOPE & LETTER -->
+        <section id="section-letter" class="app-section">
+            <div class="instruction" id="instruction">
+                Tap the wax seal to open your letter 💌
+            </div>
+
+            <div class="env-wrapper" id="envelope-wrapper">
+                <div class="envelope-back"></div>
+
+                <!-- Expanded Letter scrollable page -->
+                <div class="letter">
+                    <div class="letter-border">
+                        <div class="letter-content">
+                            <h1>Happy 2 Years, My Love! ❤️</h1>
+                            <p class="letter-salutation">My dearest love,</p>
+
+                            <p>I can't believe it has already been 24 beautiful months—two whole years—since we decided
+                                to intertwine our paths, two years of shared smiles, late-night talks, and a love that
+                                has only grown stronger with every single passing day.</p>
+
+                            <p>I know that being in a long-distance relationship puts us to the test, the miles between
+                                us can feel long and heavy, but every video call, every sweet text, and every
+                                heartbeat reminds me that distance is absolutely nothing when two hearts are as deeply
+                                connected as ours, you are worth every mile, every second of waiting, and every single
+                                dream of the day we'll finally be together for good.</p>
+
+                            <p>Thank you for being my safe haven, my constant joy, and the absolute love of my life, you
+                                make me incredibly happy, even from thousands of miles away, you are my favorite present
+                                and the only future I want to build.</p>
+
+                            <p>I look forward to all the years, memories, and adventures that we have yet to experience
+                                side-by-side.</p>
+
+                            <p>I love you with all my heart, today, tomorrow, and forever.</p>
+
+                            <!-- User's photo inside the letter, styled as Polaroid -->
+                            <div class="polaroid-frame letter-photo">
+                                <img src="letter.jpg" alt="Us">
+                                <div class="polaroid-caption">You and me, against the distance. ❤️</div>
+                            </div>
+
+                            <p class="signature">With all my heart,<br>Forever Yours,<br>Daby 💖</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="envelope-front"></div>
+                <div class="envelope-flap"></div>
+
+                <!-- Gold Wax Seal -->
+                <div class="wax-seal" id="wax-seal">
+                    <div class="seal-inner">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PHOTO CAROUSEL / MEMORY LANE -->
+        <section id="section-memories" class="app-section">
+            <div class="story-header">
+                <h2>Our Gallery of Moments</h2>
+                <p class="subtitle">Swipe to explore some of our favorite memories together</p>
+            </div>
+
+            <!-- Polaroid Grid/Carousel -->
+            <div class="carousel-container">
+                <div class="polaroid-grid">
+
+                    <!-- Polaroid 1: First photo -->
+                    <div class="polaroid-card">
+                        <div class="polaroid-img-wrapper">
+                            <img src="Inicio.jpg" alt="Our Journey">
+                        </div>
+                        <div class="polaroid-text">
+                            <span class="date">May 2024</span>
+                            <span class="caption">Where it all began... The start of the most beautiful journey of my
+                                life. </span>
+                        </div>
+                    </div>
+
+                    <!-- Polaroid 2: Second photo -->
+                    <div class="polaroid-card">
+                        <div class="polaroid-img-wrapper">
+                            <img src="Despertarjuntosporfin.jpg" alt="Our Mornings">
+                        </div>
+                        <div class="polaroid-text">
+                            <span class="date">Our Mornings</span>
+                            <span class="caption">Counting stars, dreaming awake, and sharing our daily lives. </span>
+                        </div>
+                    </div>
+
+                    <!-- Polaroid 3: Third photo -->
+                    <div class="polaroid-card">
+                        <div class="polaroid-img-wrapper">
+                            <img src="Nosvolveremosaencontrar.jpg" alt="Our Journeys">
+                        </div>
+                        <div class="polaroid-text">
+                            <span class="date">Our Journeys</span>
+                            <span class="caption">Holding you close soon... because every day brings us one step closer.
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Polaroid 4: Customizable Future Frame -->
+                    <div class="polaroid-card future-card">
+                        <div class="polaroid-img-wrapper future-placeholder">
+                            <div class="future-inner">
+                                <i class="fa-solid fa-circle-plus"></i>
+                                <span>Our next memory here</span>
+                            </div>
+                        </div>
+                        <div class="polaroid-text">
+                            <span class="date">The Future</span>
+                            <span class="caption">Because two years is only the beginning of our beautiful eternity.
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
