@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25 Months, Two Countries, One Heart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blush: #f5e6e0;
+            --rose: #d4a5a5;
+            --deep-rose: #b07a7a;
+            --charcoal: #2c2c2c;
+            --cream: #faf7f5;
+            --gold: #c9a96e;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        /* --- HERO --- */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .hero-label {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--deep-rose);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+        }
+
+        .hero-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(6rem, 20vw, 16rem);
+            font-weight: 300;
+            line-height: 0.85;
+            color: var(--charcoal);
+            opacity: 0;
+        }
+
+        .hero-number span {
+            font-style: italic;
+            color: var(--deep-rose);
+        }
+
+        .hero-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--deep-rose);
+            margin-top: 1.5rem;
+            opacity: 0;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+        }
+
+        .scroll-hint span {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--rose);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--rose), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { transform: scaleY(1); opacity: 0.6; }
+            50% { transform: scaleY(0.5); opacity: 1; }
+        }
+
+        /* --- CONTENT --- */
+        .content {
+            position: relative;
+            z-index: 2;
+            background: var(--cream);
+        }
+
+        section {
+            padding: clamp(4rem, 10vh, 8rem) clamp(1.5rem, 5vw, 4rem);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.15;
+            margin-bottom: 2rem;
+            color: var(--charcoal);
+        }
+
+        .section-body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
+            line-height: 1.9;
+            color: #555;
+        }
+
+        .section-body p + p {
+            margin-top: 1.5rem;
+        }
+
+        /* --- THE LETTER --- */
+        .letter-section {
+            padding: clamp(4rem, 10vh, 8rem) clamp(1.5rem, 5vw, 4rem);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .letter-card {
+            background: white;
+            padding: clamp(2.5rem, 6vw, 5rem);
+            border-radius: 2px;
+            box-shadow: 0 8px 50px rgba(0,0,0,0.06);
+            position: relative;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .letter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blush), var(--rose), var(--gold));
+            opacity: 0.4;
+        }
+
+        .letter-salutation {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 300;
+            color: var(--deep-rose);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .letter-body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: clamp(1rem, 1.4vw, 1.1rem);
+            line-height: 2.2;
+            color: #444;
+        }
+
+        .letter-body p {
+            margin-bottom: 1.8rem;
+            text-indent: 0;
+        }
+
+        .letter-body p:last-of-type {
+            margin-bottom: 3rem;
+        }
+
+        .letter-closing {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--deep-rose);
+            margin-bottom: 0.5rem;
+        }
+
+        .letter-signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--charcoal);
+            margin-top: 0.5rem;
+        }
+
+        /* --- DISTANCE STATS --- */
+        .distance-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .distance-unit {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .distance-unit:hover {
+            transform: translateY(-5px) scale(1);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+
+        .distance-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--charcoal);
+            line-height: 1;
+        }
+
+        .distance-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-top: 0.75rem;
+        }
+
+        .distance-sub {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: #888;
+            margin-top: 0.3rem;
+        }
+
+        /* --- QUOTE --- */
+        .quote-section {
+            text-align: center;
+            padding: clamp(5rem, 15vh, 10rem) 2rem;
+            position: relative;
+        }
+
+        .quote-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 8rem;
+            line-height: 0;
+            color: var(--blush);
+            position: relative;
+            top: 2rem;
+            user-select: none;
+        }
+
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--charcoal);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-top: 2rem;
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            text-align: center;
+            padding: 4rem 2rem 6rem;
+            background: var(--cream);
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-heart {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .footer-heart::before,
+        .footer-heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 32px;
+            background: var(--deep-rose);
+            border-radius: 20px 20px 0 0;
+            transform-origin: bottom center;
+        }
+
+        .footer-heart::before {
+            left: 20px;
+            transform: rotate(-45deg);
+        }
+
+        .footer-heart::after {
+            left: 0;
+            transform: rotate(45deg);
+        }
+
+        .footer-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--deep-rose);
+        }
+
+        .footer-date {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-top: 1rem;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            margin: 3rem auto;
+            opacity: 0.5;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 600px) {
+            .distance-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .letter-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <header class="hero">
+        <div class="hero-label">25 Months Apart, Never Apart</div>
+        <h1 class="hero-number">2<span>5</span></h1>
+        <p class="hero-sub">from Manila to Santiago and back again</p>
+        <div class="scroll-hint">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+    <main class="content">
+
+        <section class="reveal-section">
+            <span class="section-label">Our Distance</span>
+            <h2 class="section-title">Two years taught us that miles are just numbers.</h2>
+            <div class="section-body">
+                <p>Last month we closed our second year together.<br>Most couples count their anniversaries in dinners shared.<br>We count ours in time zones crossed, video calls that lasted until sunrise, and the quiet courage of loving someone who sleeps while you're awake.</p>
+                <p>I've stood on your streets in the Philippines once.<br>Felt the heat you always complain about.<br>Saw the jeepneys you described.<br>And now we're building the bridge for you to stand on mine, here in Chile, where the Andes meet the sky and I want you to see it all.</p>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section class="letter-section">
+            <div class="letter-card" id="letterCard">
+                <div class="letter-salutation">For my Wibe,</div>
+                <div class="letter-body">
+                    <p>25 months ago I didn't know that a screen could hold so much love.<br>I didn't know that missing someone could become a kind of daily prayer, or that "good morning" and "good night" could exist in the same sentence when we're 17,000 kilometers apart.</p>
+                    
+                    <p>I still remember landing in Manila.<br>The humidity hit me like a wall, but nothing hit me harder than seeing you walk toward me at the airport.<br>For a few days, the distance didn't exist.<br>We were just two people in one place, finally.<br>Eating at midnight, getting lost in the city, falling asleep without setting an alarm for a call.</p>
+                    
+                    <p>Now we're saving.<br>Every peso, every skipped coffee, it all goes into the same dream.<br>You, here.<br>In Chile.<br>Where I can show you the Pacific from my window, where we can finally share a winter instead of swapping seasons, where I don't have to calculate what time it is in Manila before I text you "I love you."</p>
+                    
+                    <p>They say long distance is hard.<br>They're right.<br>But they never tell you that it's also proof.<br>Proof that we choose this.<br>Every single day.<br>Proof that what we have is worth plane tickets, worth time zones, worth waiting for.</p>
+                    
+                    <p>Month 25 isn't just a number.<br>It's 25 months of choosing each other despite the map between us.<br>And soon, Wibe, that map gets smaller.<br>Until it disappears completely.</p>
+                </div>
+                <div class="letter-closing">Yours, always,</div>
+                <div class="letter-signature">Daby</div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section>
+            <span class="section-label">The Space Between Us</span>
+            <h2 class="section-title">Every kilometer brings us closer.</h2>
+            <div class="section-body">
+                <p>Numbers can't measure what we feel, but they remind us how far love can travel.</p>
+            </div>
+            <div class="distance-grid" id="distanceGrid">
+                <div class="distance-unit">
+                    <div class="distance-value" data-target="17000">0</div>
+                    <div class="distance-label">Kilometers</div>
+                    <div class="distance-sub">Manila — Santiago</div>
+                </div>
+                <div class="distance-unit">
+                    <div class="distance-value" data-target="1">0</div>
+                    <div class="distance-label">Visit So Far</div>
+                    <div class="distance-sub">Philippines, 2025</div>
+                </div>
+                <div class="distance-unit">
+                    <div class="distance-value" data-target="25">0</div>
+                    <div class="distance-label">Months Strong</div>
+                    <div class="distance-sub">And counting</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section class="quote-section reveal-section">
+            <div class="quote-mark">"</div>
+            <p class="quote-text">I don't count the days until I see you again.<br>I count the days I've been lucky enough to love you from across the world.</p>
+            <div class="quote-author">— Daby, for Wibe</div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section class="reveal-section">
+            <span class="section-label">To What's Next</span>
+            <h2 class="section-title">The next flight won't be one-way.<br>It'll be you, coming home to me.</h2>
+            <div class="section-body">
+                <p>Thank you for 25 months of being my favorite notification, my 3 AM voice note, and the reason I check flight prices more than my bank account.<br>Here's to the day we close the distance for good.<br>Chile is waiting for you, Wibe.<br>And so am I.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-heart"></div>
+        <p class="footer-text">See you soon, mi amor.</p>
+        <p class="footer-date">Happy 25th Monthsary — Daby</p>
+    </footer>
+
+    <script>
+        // ============================================
+        // THREE.JS PARTICLE FIELD
+        // ============================================
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        const particleCount = 300;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const originalPositions = new Float32Array(particleCount * 3);
+        const sizes = new Float32Array(particleCount);
+        
+        for (let i = 0; i < particleCount; i++) {
+            const t = Math.random() * Math.PI * 2;
+            
+            const heartScale = 1.5;
+            const x = heartScale * 16 * Math.pow(Math.sin(t), 3) * (0.3 + Math.random() * 0.7);
+            const y = heartScale * (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t)) * (0.3 + Math.random() * 0.7);
+            const z = (Math.random() - 0.5) * 4;
+            
+            positions[i * 3] = x * 0.15 + (Math.random() - 0.5) * 8;
+            positions[i * 3 + 1] = y * 0.15 + (Math.random() - 0.5) * 8;
+            positions[i * 3 + 2] = z;
+            
+            originalPositions[i * 3] = positions[i * 3];
+            originalPositions[i * 3 + 1] = positions[i * 3 + 1];
+            originalPositions[i * 3 + 2] = positions[i * 3 + 2];
+            
+            sizes[i] = Math.random() * 2 + 0.5;
+        }
+        
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+        
+        const material = new THREE.PointsMaterial({
+            color: 0xd4a5a5,
+            size: 0.05,
+            transparent: true,
+            opacity: 0.6,
+            sizeAttenuation: true
+        });
+        
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+        
+        camera.position.z = 6;
+
+        let mouseX = 0, mouseY = 0;
+        let targetX = 0, targetY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        let time = 0;
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.005;
+            
+            targetX += (mouseX * 0.5 - targetX) * 0.02;
+            targetY += (mouseY * 0.5 - targetY) * 0.02;
+            
+            particles.rotation.y = time * 0.3 + targetX;
+            particles.rotation.x = targetY * 0.3;
+            
+            const posArray = geometry.attributes.position.array;
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                const breathe = 1 + Math.sin(time * 2 + i * 0.1) * 0.03;
+                posArray[i3] = originalPositions[i3] * breathe;
+                posArray[i3 + 1] = originalPositions[i3 + 1] * breathe;
+            }
+            geometry.attributes.position.needsUpdate = true;
+            
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ============================================
+        // GSAP ANIMATIONS
+        // ============================================
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero entrance
+        const heroTl = gsap.timeline({ delay: 0.3 });
+        heroTl.to('.hero-label', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
+              .to('.hero-number', { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }, '-=0.6')
+              .to('.hero-sub', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.7')
+              .to('.scroll-hint', { opacity: 1, duration: 1, ease: 'power2.out' }, '-=0.3');
+
+        gsap.set('.hero-label, .hero-number, .hero-sub', { y: 30 });
+
+        // Section reveals
+        gsap.utils.toArray('.reveal-section').forEach(section => {
+            gsap.from(section.querySelectorAll('.section-label, .section-title, .section-body'), {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                y: 40,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.15,
+                ease: 'power3.out'
+            });
+        });
+
+        // Letter card reveal
+        gsap.to('#letterCard', {
+            scrollTrigger: {
+                trigger: '#letterCard',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power3.out'
+        });
+
+        // Letter paragraphs stagger
+        gsap.from('.letter-body p', {
+            scrollTrigger: {
+                trigger: '.letter-card',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            },
+            y: 25,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: 'power2.out',
+            delay: 0.3
+        });
+
+        gsap.from('.letter-closing, .letter-signature', {
+            scrollTrigger: {
+                trigger: '.letter-closing',
+                start: 'top 90%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 0,
+            x: -20,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out'
+        });
+
+        // Quote reveal
+        gsap.from('.quote-text', {
+            scrollTrigger: {
+                trigger: '.quote-section',
+                start: 'top 75%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 1.2,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.quote-author', {
+            scrollTrigger: {
+                trigger: '.quote-section',
+                start: 'top 75%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 0,
+            duration: 1,
+            delay: 0.5,
+            ease: 'power2.out'
+        });
+
+        // Distance stats
+        const distanceUnits = document.querySelectorAll('.distance-unit');
+        const distanceValues = document.querySelectorAll('.distance-value');
+        
+        gsap.to(distanceUnits, {
+            scrollTrigger: {
+                trigger: '#distanceGrid',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: 'back.out(1.7)'
+        });
+
+        distanceValues.forEach(val => {
+            const target = parseInt(val.dataset.target);
+            ScrollTrigger.create({
+                trigger: val,
+                start: 'top 85%',
+                onEnter: () => {
+                    gsap.to(val, {
+                        innerHTML: target,
+                        duration: 2.5,
+                        snap: { innerHTML: 1 },
+                        ease: 'power2.out'
+                    });
+                },
+                once: true
+            });
+        });
+
+        // Footer heart beat
+        gsap.to('.footer-heart', {
+            scale: 1.15,
+            duration: 0.8,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+        });
+
+        // Parallax for particles
+        gsap.to(particles.position, {
+            scrollTrigger: {
+                trigger: 'body',
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 1
+            },
+            y: -2,
+            ease: 'none'
+        });
+    </script>
+</body>
+</html>
