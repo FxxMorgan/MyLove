@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Month 26 - Gelly & Feer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #0b0716;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --accent-pink: #ff6584;
+            --accent-rose: #ff8fa3;
+            --accent-purple: #9d4edd;
+            --accent-gold: #ffb703;
+            --text-light: #ffffff;
+            --text-sub: #c8b6ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Canvas Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* App Container */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 2.5rem 1.25rem 5rem 1.25rem;
+        }
+
+        /* Header / Hero */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 1.2s ease-out;
+        }
+
+        .badge-month {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.45rem 1.25rem;
+            background: linear-gradient(135deg, rgba(255, 101, 132, 0.2), rgba(157, 78, 221, 0.2));
+            border: 1px solid rgba(255, 101, 132, 0.4);
+            border-radius: 50px;
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-rose);
+            margin-bottom: 1.2rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(255, 101, 132, 0.15);
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 8vw, 5.5rem);
+            font-weight: 600;
+            line-height: 1.05;
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-rose) 70%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 40px rgba(255, 101, 132, 0.25);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+            color: var(--text-sub);
+            font-weight: 300;
+            max-width: 650px;
+            margin: 0 auto 2rem auto;
+            line-height: 1.6;
+        }
+
+        /* LDR Journey Badge */
+        .ldr-route-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 183, 3, 0.3);
+            border-radius: 50px;
+            padding: 0.6rem 1.4rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+        }
+
+        .ldr-flag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .ldr-arrow {
+            color: var(--accent-gold);
+            animation: pulse-plane 2s infinite ease-in-out;
+        }
+
+        .ldr-target {
+            color: var(--accent-rose);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Stat Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 1rem 0.8rem;
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 101, 132, 0.4);
+            box-shadow: 0 8px 25px rgba(255, 101, 132, 0.15);
+        }
+
+        .stat-num {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-weight: 700;
+            color: var(--accent-rose);
+        }
+
+        .stat-label {
+            font-size: 0.72rem;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 0.3rem;
+        }
+
+        /* Main Grid Section */
+        .section-title-box {
+            text-align: center;
+            margin: 4rem 0 2rem 0;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .section-desc {
+            color: var(--text-sub);
+            font-size: clamp(0.88rem, 2vw, 0.95rem);
+            margin-top: 0.4rem;
+        }
+
+        /* Progress Counter Bar */
+        .progress-bar-container {
+            max-width: 480px;
+            margin: 1.2rem auto 2.5rem auto;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+            border-radius: 30px;
+            padding: 0.4rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .progress-fill-bg {
+            flex: 1;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple), var(--accent-gold));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-rose);
+            padding-right: 0.8rem;
+            white-space: nowrap;
+        }
+
+        /* 26 Spark Cards Grid */
+        .sparks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 1rem;
+        }
+
+        .spark-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            min-height: 110px;
+        }
+
+        .spark-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 101, 132, 0.25), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .spark-card:hover, .spark-card:active {
+            transform: translateY(-5px) scale(1.03);
+            border-color: var(--accent-rose);
+            box-shadow: 0 10px 30px rgba(255, 101, 132, 0.25);
+        }
+
+        .spark-card:hover::before {
+            opacity: 1;
+        }
+
+        .spark-card.opened {
+            background: rgba(255, 101, 132, 0.15);
+            border-color: rgba(255, 101, 132, 0.5);
+            box-shadow: 0 0 20px rgba(255, 101, 132, 0.2);
+        }
+
+        .spark-card.opened .spark-icon {
+            color: var(--accent-gold);
+            transform: scale(1.15);
+        }
+
+        .spark-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.4rem;
+        }
+
+        .spark-icon {
+            font-size: 1.7rem;
+            color: var(--accent-rose);
+            transition: all 0.3s ease;
+        }
+
+        .spark-check {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+
+        .spark-card.opened .spark-check {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Interactive Widgets Section */
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-top: 4rem;
+        }
+
+        .widget-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            backdrop-filter: blur(15px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .widget-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .widget-desc {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        /* Hug Hold Button */
+        .hug-btn-wrapper {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .hug-svg-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .hug-svg-ring circle {
+            fill: none;
+            stroke-width: 6;
+        }
+
+        .hug-svg-bg {
+            stroke: rgba(255, 255, 255, 0.1);
+        }
+
+        .hug-svg-progress {
+            stroke: var(--accent-pink);
+            stroke-dasharray: 400;
+            stroke-dashoffset: 400;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.1s linear;
+        }
+
+        .hug-heart-btn {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6584, #9d4edd);
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(255, 101, 132, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            outline: none;
+        }
+
+        .hug-heart-btn:active {
+            transform: scale(0.92);
+        }
+
+        .hug-status {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--accent-rose);
+            min-height: 1.4rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        /* Make a Wish Button */
+        .wish-btn {
+            background: linear-gradient(135deg, rgba(255, 183, 3, 0.2), rgba(255, 101, 132, 0.2));
+            border: 1px solid var(--accent-gold);
+            color: #ffe599;
+            padding: 0.9rem 1.8rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .wish-btn:hover, .wish-btn:active {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(255, 183, 3, 0.35), rgba(255, 101, 132, 0.35));
+            box-shadow: 0 10px 30px rgba(255, 183, 3, 0.3);
+        }
+
+        .wish-display {
+            margin-top: 1.2rem;
+            padding: 1.2rem 1rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px dashed rgba(255, 183, 3, 0.3);
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-style: italic;
+            font-size: 0.95rem;
+            width: 100%;
+            line-height: 1.5;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Modal Overlay for Sparks */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(8, 4, 15, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.25rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: linear-gradient(145deg, rgba(28, 16, 42, 0.96), rgba(16, 8, 26, 0.96));
+            border: 1px solid rgba(255, 101, 132, 0.4);
+            border-radius: 28px;
+            padding: 2.2rem 1.8rem;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.85);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 101, 132, 0.25);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-sub);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 101, 132, 0.3);
+            color: #fff;
+        }
+
+        .modal-number {
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-icon {
+            font-size: 3rem;
+            color: var(--accent-rose);
+            margin-bottom: 1rem;
+            animation: pulse-heart 2s infinite ease-in-out;
+        }
+
+        .modal-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 1.4;
+            margin-bottom: 1.6rem;
+        }
+
+        .modal-btn {
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            border: none;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255, 101, 132, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 101, 132, 0.5);
+        }
+
+        /* Sleek Toast Celebration Component (No JS Alert) */
+        .toast-overlay {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 200;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 90%;
+            width: 440px;
+        }
+
+        .toast-overlay.active {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .toast-card {
+            background: linear-gradient(145deg, rgba(28, 16, 42, 0.96), rgba(157, 78, 221, 0.35));
+            border: 1px solid var(--accent-rose);
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 101, 132, 0.35);
+            text-align: center;
+        }
+
+        .toast-icon {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.6rem;
+            animation: pulse-heart 1.5s infinite ease-in-out;
+        }
+
+        .toast-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .toast-body {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+            margin-bottom: 1.2rem;
+        }
+
+        .toast-btn {
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            border: none;
+            color: white;
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(255, 101, 132, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .toast-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 101, 132, 0.5);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer i {
+            color: var(--accent-pink);
+            margin: 0 0.3rem;
+        }
+
+        /* Keyframes */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse-heart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+        }
+
+        @keyframes pulse-plane {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(4px); }
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 640px) {
+            .app-container {
+                padding: 1.8rem 0.9rem 3rem 0.9rem;
+            }
+            .sparks-grid {
+                grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+                gap: 0.75rem;
+            }
+            .spark-card {
+                border-radius: 16px;
+                min-height: 98px;
+            }
+            .spark-icon {
+                font-size: 1.5rem;
+            }
+            .ldr-route-box {
+                flex-direction: row;
+                gap: 0.5rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="app-container">
+        
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="badge-month">
+                <i class="fas fa-sparkles"></i> Month 26 • Two Countries, One Heart <i class="fas fa-sparkles"></i>
+            </div>
+            
+            <h1 class="hero-title">26 Months Together</h1>
+            <p class="hero-subtitle">No long letters, just 26 little sparks of love. Bridging distance until we meet again!</p>
+
+            <!-- LDR Destination Banner -->
+            <div class="ldr-route-box">
+                <span class="ldr-flag"><i class="fas fa-globe-asia"></i> Manila</span>
+                <i class="fas fa-plane ldr-arrow"></i>
+                <span class="ldr-flag">Chile <i class="fas fa-mountain"></i></span>
+                <span class="ldr-target">• Goal: Chile 2027 <i class="fas fa-plane-arrival"></i> <i class="fas fa-heart"></i></span>
+            </div>
+
+            <!-- Stat Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-num">26</div>
+                    <div class="stat-label">Months</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">791</div>
+                    <div class="stat-label">Days of Love</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">17,316</div>
+                    <div class="stat-label">KM Bridged</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">2027 <i class="fas fa-plane"></i></div>
+                    <div class="stat-label">Chile Reunion</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sparks Section -->
+        <section>
+            <div class="section-title-box">
+                <h2 class="section-title">26 Love Sparks for You <i class="fas fa-sparkles"></i></h2>
+                <p class="section-desc">Tap each spark to unlock a reason why you mean the world to me.</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div class="progress-fill-bg">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-text" id="progress-text">0 / 26 Unlocked</div>
+            </div>
+
+            <!-- Grid of 26 Sparks -->
+            <div class="sparks-grid" id="sparks-container"></div>
+        </section>
+
+        <!-- Interactive Widgets -->
+        <section class="interactive-grid">
+            
+            <!-- Virtual Hug Widget -->
+            <div class="widget-card">
+                <div>
+                    <h3 class="widget-title">Virtual Hug <i class="fas fa-globe-americas"></i> <i class="fas fa-heart"></i></h3>
+                    <p class="widget-desc">Hold down the heart to send a warm, tight hug across the ocean.</p>
+                </div>
+                <div class="hug-btn-wrapper">
+                    <svg class="hug-svg-ring" viewBox="0 0 140 140">
+                        <circle class="hug-svg-bg" cx="70" cy="70" r="62"></circle>
+                        <circle class="hug-svg-progress" id="hug-progress-ring" cx="70" cy="70" r="62"></circle>
+                    </svg>
+                    <button class="hug-heart-btn" id="hug-btn" aria-label="Hold for Virtual Hug">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="hug-status" id="hug-status">Press and hold <i class="fas fa-heart"></i></div>
+            </div>
+
+            <!-- Wish Widget -->
+            <div class="widget-card">
+                <div>
+                    <h3 class="widget-title">Make a Wish for 2027 <i class="fas fa-star"></i></h3>
+                    <p class="widget-desc">Shoot a star across the night sky and make a wish for our next reunion in Chile.</p>
+                </div>
+                <button class="wish-btn" id="wish-btn">
+                    <i class="fas fa-star"></i> Launch Shooting Star
+                </button>
+                <div class="wish-display" id="wish-display">
+                    Tap the button above to catch a star... <i class="fas fa-sparkles"></i>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with endless love for <strong>Gelly</strong> <i class="fas fa-heart"></i> Month 26</p>
+            <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.3rem;">From Chile to Philippines • Stepping closer to 2027 <i class="fas fa-plane-arrival"></i></p>
+        </footer>
+
+    </div>
+
+    <!-- Modal for Spark Card Details -->
+    <div class="modal-overlay" id="spark-modal">
+        <div class="modal-card">
+            <button class="modal-close" id="modal-close" aria-label="Close"><i class="fas fa-times"></i></button>
+            <div class="modal-number" id="modal-number">SPARK #01</div>
+            <div class="modal-icon" id="modal-icon"><i class="fas fa-heart"></i></div>
+            <div class="modal-text" id="modal-text">Your sweet voice across the screen every morning.</div>
+            <button class="modal-btn" id="modal-btn">So Cute! <i class="fas fa-heart"></i></button>
+        </div>
+    </div>
+
+    <!-- Toast Celebration Component -->
+    <div class="toast-overlay" id="toast-celebration">
+        <div class="toast-card">
+            <div class="toast-icon"><i class="fas fa-trophy"></i></div>
+            <h3 class="toast-title">All Sparks Unlocked!</h3>
+            <p class="toast-body">Yay my love! You've unlocked all 26 sparks of Month 26! I love you so much, getting closer to 2027! <i class="fas fa-heart"></i></p>
+            <button class="toast-btn" id="toast-close-btn">Yay! <i class="fas fa-heart"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // --- 26 SWEET MICRO-MESSAGES (English, LDR, Manila & Chile 2027 Context) ---
+        const sparkMessages = [
+            { icon: "fa-sun", text: "Your sweet smile lighting up my screen every single day." },
+            { icon: "fa-comments", text: "Our late night video calls where time simply flies away." },
+            { icon: "fa-map-marked-alt", text: "Remembering our unforgettable days together in Manila." },
+            { icon: "fa-plane-arrival", text: "Counting down to when you land in Chile in 2027!" },
+            { icon: "fa-heart", text: "Every sincere 'I love you' that bridges the 17,000 km between us." },
+            { icon: "fa-laugh-wink", text: "Our cute inside jokes that only you and I understand." },
+            { icon: "fa-hand-holding-heart", text: "How wonderfully sweet and caring you are with me." },
+            { icon: "fa-cloud-sun", text: "Dreaming about showing you around Chile when you come!" },
+            { icon: "fa-shield-heart", text: "Knowing we are the ultimate team, no matter the distance." },
+            { icon: "fa-music", text: "Songs that instantly bring you right next to my side." },
+            { icon: "fa-mobile-alt", text: "The instant burst of joy whenever I get a text from you." },
+            { icon: "fa-star", text: "Your bright eyes that make my whole universe shine." },
+            { icon: "fa-feather-alt", text: "The deep peace and calm you give me in tough moments." },
+            { icon: "fa-infinity", text: "Our special bond that grows stronger every passing day." },
+            { icon: "fa-grin-squint", text: "Your adorable laugh that turns my grayest days into sunshine." },
+            { icon: "fa-paper-plane", text: "Every tight virtual hug sent across the Pacific Ocean." },
+            { icon: "fa-palette", text: "How much brighter the world is simply because you exist." },
+            { icon: "fa-fire", text: "The warmth of your sweet messages that comfort my heart." },
+            { icon: "fa-crown", text: "How immensely proud I am of you every single day." },
+            { icon: "fa-ghost", text: "How effortlessly you make me feel like the luckiest guy." },
+            { icon: "fa-seedling", text: "Growing together side by side through every step." },
+            { icon: "fa-spa", text: "How natural, pure, and beautiful everything feels with you." },
+            { icon: "fa-compass", text: "No matter how many miles apart, my heart always points to you." },
+            { icon: "fa-clover", text: "How insanely lucky I am to have found you in this life." },
+            { icon: "fa-gift", text: "All 25 amazing months we've built step by step..." },
+            { icon: "fa-sparkles", text: "And Month 26 as we get one month closer to Chile 2027!" }
+        ];
+
+        // --- WISHES FOR MONTH 26 & 2027 ---
+        const wishes = [
+            "Wish: Counting down the days until you land in Chile 2027!",
+            "Wish: Endless smiles, sweet laughs, and warm calls every day.",
+            "Wish: To hold your hand in person once again very soon.",
+            "Wish: That every dream you have comes true with my total support.",
+            "Wish: That time flies fast until our next big hug in person!",
+            "Wish: That our Month 26 brings us countless happy moments."
+        ];
+
+        // --- WEB AUDIO API SYNTHESIZER FOR SOUND EFFECTS ---
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function playChime(freq = 523.25, type = 'sine', duration = 0.4) {
+            try {
+                if (!audioCtx) audioCtx = new AudioCtx();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                // Silence fallback
+            }
+        }
+
+        function playHeartbeatSound() {
+            playChime(120, 'triangle', 0.25);
+            setTimeout(() => playChime(90, 'triangle', 0.25), 180);
+        }
+
+        // --- DOM ELEMENTS ---
+        const sparksContainer = document.getElementById('sparks-container');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        
+        const modalOverlay = document.getElementById('spark-modal');
+        const modalClose = document.getElementById('modal-close');
+        const modalNumber = document.getElementById('modal-number');
+        const modalIcon = document.getElementById('modal-icon');
+        const modalText = document.getElementById('modal-text');
+        const modalBtn = document.getElementById('modal-btn');
+
+        const toastCelebration = document.getElementById('toast-celebration');
+        const toastCloseBtn = document.getElementById('toast-close-btn');
+
+        let openedCount = 0;
+        const openedSet = new Set();
+
+        // --- RENDER SPARKS ---
+        sparkMessages.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'spark-card';
+            card.dataset.index = index;
+
+            card.innerHTML = `
+                <i class="fas fa-check-circle spark-check"></i>
+                <div class="spark-number">#${String(index + 1).padStart(2, '0')}</div>
+                <i class="fas ${item.icon} spark-icon"></i>
+            `;
+
+            card.addEventListener('click', () => openSpark(index));
+            sparksContainer.appendChild(card);
+        });
+
+        // --- OPEN SPARK MODAL ---
+        function openSpark(index) {
+            const item = sparkMessages[index];
+            const cards = document.querySelectorAll('.spark-card');
+            const targetCard = cards[index];
+
+            if (!openedSet.has(index)) {
+                openedSet.add(index);
+                targetCard.classList.add('opened');
+                openedCount++;
+                updateProgress();
+                playChime(440 + index * 20, 'sine', 0.5);
+            } else {
+                playChime(600, 'sine', 0.2);
+            }
+
+            modalNumber.textContent = `SPARK #${String(index + 1).padStart(2, '0')}`;
+            modalIcon.innerHTML = `<i class="fas ${item.icon}"></i>`;
+            modalText.textContent = item.text;
+            
+            modalOverlay.classList.add('active');
+            createHeartExplosion();
+        }
+
+        function updateProgress() {
+            const percent = (openedCount / 26) * 100;
+            progressFill.style.width = `${percent}%`;
+            progressText.textContent = `${openedCount} / 26 Unlocked`;
+
+            if (openedCount === 26) {
+                setTimeout(() => {
+                    showCelebrationToast();
+                }, 600);
+            }
+        }
+
+        // Celebration Toast Handler
+        function showCelebrationToast() {
+            toastCelebration.classList.add('active');
+            playChime(880, 'sine', 0.8);
+            createHeartExplosion();
+        }
+
+        toastCloseBtn.addEventListener('click', () => {
+            toastCelebration.classList.remove('active');
+        });
+
+        // Close Modal
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        // --- VIRTUAL HUG HOLD MECHANISM ---
+        const hugBtn = document.getElementById('hug-btn');
+        const hugProgressRing = document.getElementById('hug-progress-ring');
+        const hugStatus = document.getElementById('hug-status');
+        
+        let hugTimer = null;
+        let hugProgress = 0;
+        const totalHugOffset = 400; // Stroke circumference approx
+
+        function startHug(e) {
+            e.preventDefault();
+            hugProgress = 0;
+            hugStatus.innerHTML = 'Sending virtual hug... <i class="fas fa-heart"></i>';
+            playHeartbeatSound();
+
+            hugTimer = setInterval(() => {
+                hugProgress += 4;
+                const offset = totalHugOffset - (totalHugOffset * hugProgress / 100);
+                hugProgressRing.style.strokeDashoffset = offset;
+
+                if (hugProgress % 20 === 0) playHeartbeatSound();
+
+                if (hugProgress >= 100) {
+                    clearInterval(hugTimer);
+                    hugStatus.innerHTML = 'Hug delivered across 17,000 km! <i class="fas fa-heart"></i>';
+                    hugProgressRing.style.strokeDashoffset = 0;
+                    playChime(880, 'sine', 0.6);
+                    createHeartExplosion();
+                }
+            }, 50);
+        }
+
+        function endHug() {
+            if (hugProgress < 100) {
+                clearInterval(hugTimer);
+                hugProgress = 0;
+                hugProgressRing.style.strokeDashoffset = totalHugOffset;
+                hugStatus.innerHTML = 'Press and hold <i class="fas fa-heart"></i>';
+            }
+        }
+
+        hugBtn.addEventListener('mousedown', startHug);
+        hugBtn.addEventListener('mouseup', endHug);
+        hugBtn.addEventListener('mouseleave', endHug);
+
+        hugBtn.addEventListener('touchstart', startHug, { passive: false });
+        hugBtn.addEventListener('touchend', endHug);
+
+        // --- WISH GENERATOR ---
+        const wishBtn = document.getElementById('wish-btn');
+        const wishDisplay = document.getElementById('wish-display');
+
+        wishBtn.addEventListener('click', () => {
+            playChime(987.77, 'triangle', 0.6);
+            createShootingStar();
+            
+            wishDisplay.style.opacity = 0;
+            setTimeout(() => {
+                const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+                wishDisplay.innerHTML = `<i class="fas fa-star" style="color:var(--accent-gold); margin-right:6px;"></i> ${randomWish}`;
+                wishDisplay.style.opacity = 1;
+            }, 300);
+        });
+
+        // --- CANVAS PARTICLE BACKGROUND & EFFECTS ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+        let shootingStars = [];
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = -Math.random() * 0.5 - 0.2;
+                this.alpha = Math.random() * 0.6 + 0.2;
+                this.color = ['#ff6584', '#9d4edd', '#ffb703', '#ffffff'][Math.floor(Math.random() * 4)];
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.y < -10 || this.x < -10 || this.x > width + 10) {
+                    this.reset();
+                    this.y = height + 10;
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Initialize Background Particles
+        for (let i = 0; i < 70; i++) {
+            particles.push(new Particle());
+        }
+
+        // Shooting Star
+        function createShootingStar() {
+            shootingStars.push({
+                x: Math.random() * width * 0.7,
+                y: Math.random() * height * 0.3,
+                length: Math.random() * 120 + 80,
+                speed: Math.random() * 12 + 10,
+                alpha: 1
+            });
+        }
+
+        // Heart Explosion Effect
+        let explosionParticles = [];
+        function createHeartExplosion() {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            for (let i = 0; i < 30; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 6 + 2;
+                explosionParticles.push({
+                    x: centerX,
+                    y: centerY,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    size: Math.random() * 4 + 2,
+                    alpha: 1,
+                    color: ['#ff6584', '#ff8fa3', '#ffb703'][Math.floor(Math.random() * 3)]
+                });
+            }
+        }
+
+        // Main Animation Loop
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw floating particles
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            // Draw shooting stars
+            for (let i = shootingStars.length - 1; i >= 0; i--) {
+                const s = shootingStars[i];
+                ctx.save();
+                ctx.strokeStyle = `rgba(255, 229, 153, ${s.alpha})`;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(s.x, s.y);
+                ctx.lineTo(s.x + s.length, s.y + s.length * 0.5);
+                ctx.stroke();
+                ctx.restore();
+
+                s.x += s.speed;
+                s.y += s.speed * 0.5;
+                s.alpha -= 0.02;
+
+                if (s.alpha <= 0) shootingStars.splice(i, 1);
+            }
+
+            // Draw explosion particles
+            for (let i = explosionParticles.length - 1; i >= 0; i--) {
+                const ep = explosionParticles[i];
+                ctx.save();
+                ctx.globalAlpha = ep.alpha;
+                ctx.fillStyle = ep.color;
+                ctx.beginPath();
+                ctx.arc(ep.x, ep.y, ep.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                ep.x += ep.vx;
+                ep.y += ep.vy;
+                ep.alpha -= 0.025;
+
+                if (ep.alpha <= 0) explosionParticles.splice(i, 1);
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
