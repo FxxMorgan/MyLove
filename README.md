@@ -15,6 +15,8 @@ Una colección especial de proyectos web creados con amor para Gelly. Cada proye
 - **15 Meses** - Quince meses de momentos mágicos
 - **16 Meses** - Dieciséis meses hacia el infinito
 - **23 Meses** - Veintitrés meses celebrando todo lo que somos
+- **27 Meses** - Mini-juegos interactivos y carta de amor
+- **28 Meses** - Carta de amor íntima y minimalista con música y sello de cera
 
 ### Proyectos Especiales
 - **🌸 Gelly Flower** - Un jardín digital de flores interactivas
