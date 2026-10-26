@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>29 Months Together • Gelly & Daby 💕</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            /* Luxury Light Palette: Porcelain, Clean White, Soft Rose & Slate */
+            --bg-porcelain: #faf8f5;
+            --bg-surface: #ffffff;
+            --bg-subtle: #f8fafc;
+            --border-soft: #eedbd5;
+            --border-crisp: #e2e8f0;
+            
+            --rose-primary: #f4728f;
+            --rose-soft: #fdf2f4;
+            --rose-deep: #c04d67;
+            --rose-accent: #e57373;
+            --gold-accent: #d4a373;
+            --gold-soft: #fcf4ec;
+            
+            --text-dark: #1e293b;
+            --text-medium: #475569;
+            --text-muted: #8e7a83;
+            
+            --shadow-subtle: 0 4px 15px rgba(0, 0, 0, 0.04);
+            --shadow-card: 0 20px 45px rgba(220, 160, 175, 0.16), 0 6px 18px rgba(0, 0, 0, 0.03);
+            --shadow-seal: 0 14px 35px rgba(192, 77, 103, 0.35);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-porcelain);
+            color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Ambient Petals Canvas */
+        #ambient-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ========================================================
+           STAGE 1: BI-FOLD LUXURY GATE WITH WAX SEAL
+           ======================================================== */
+        .gate-curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            display: flex;
+            pointer-events: auto;
+            transition: visibility 1.4s ease;
+        }
+
+        .gate-curtain.opened {
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .door-panel {
+            flex: 1;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #fdfbf7 50%, #faf5f0 100%);
+            box-shadow: inset 0 0 40px rgba(244, 165, 194, 0.15);
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .door-left {
+            transform-origin: left center;
+            border-right: 1.5px solid var(--border-soft);
+            justify-content: flex-end;
+        }
+
+        .door-right {
+            transform-origin: right center;
+            border-left: 1.5px solid var(--border-soft);
+            justify-content: flex-start;
+        }
+
+        .gate-curtain.opened .door-left {
+            transform: translateX(-100%);
+        }
+
+        .gate-curtain.opened .door-right {
+            transform: translateX(100%);
+        }
+
+        /* Subtle decorative panel borders */
+        .door-emboss {
+            position: absolute;
+            top: 2rem;
+            bottom: 2rem;
+            width: calc(100% - 3rem);
+            border: 1px dashed rgba(212, 163, 115, 0.4);
+            border-radius: 16px;
+            pointer-events: none;
+        }
+        .door-left .door-emboss { right: 1.5rem; }
+        .door-right .door-emboss { left: 1.5rem; }
+
+        /* Center Wax Seal */
+        .seal-anchor {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1005;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+        }
+
+        .seal-anchor:hover {
+            transform: translate(-50%, -50%) scale(1.06);
+        }
+
+        .seal-anchor:active {
+            transform: translate(-50%, -50%) scale(0.96);
+        }
+
+        .wax-seal {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #f4728f 0%, #d84a6c 55%, #ad3450 100%);
+            box-shadow: var(--shadow-seal), inset 0 3px 6px rgba(255, 255, 255, 0.4), inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            border: 2px dashed rgba(255, 255, 255, 0.45);
+            position: relative;
+            animation: softPulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes softPulse {
+            0%, 100% { box-shadow: 0 14px 35px rgba(192, 77, 103, 0.35); }
+            50% { box-shadow: 0 18px 45px rgba(244, 114, 143, 0.55); }
+        }
+
+        .wax-seal-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .wax-seal-number {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .seal-hint {
+            margin-top: 1.2rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--rose-deep);
+            letter-spacing: 0.05em;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Floating Audio Control */
+        .audio-pill {
+            position: fixed;
+            top: 1.2rem;
+            right: 1.2rem;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-crisp);
+            box-shadow: var(--shadow-subtle);
+            padding: 0.45rem 0.95rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-10px);
+        }
+
+        .audio-pill.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .audio-pill:hover {
+            transform: translateY(-2px);
+            border-color: var(--rose-primary);
+            box-shadow: 0 6px 18px rgba(244, 114, 143, 0.2);
+        }
+
+        .audio-disc {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--rose-primary), #ffd1dc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.72rem;
+            animation: spinDisc 4s linear infinite paused;
+        }
+
+        .audio-disc.playing {
+            animation-play-state: running;
+        }
+
+        @keyframes spinDisc {
+            100% { transform: rotate(360deg); }
+        }
+
+        .audio-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        /* ========================================================
+           MAIN APP CONTAINER
+           ======================================================== */
+        .main-container {
+            width: 100%;
+            max-width: 780px;
+            padding: 2rem 1.2rem 4rem 1.2rem;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Top Milestone Badge */
+        .badge-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #ffffff;
+            border: 1px solid var(--border-soft);
+            padding: 0.35rem 1.1rem;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--rose-deep);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            box-shadow: 0 4px 14px rgba(244, 114, 143, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ========================================================
+           STAGE 2: DEFEAT THE DRAGON MINI-GAME
+           ======================================================== */
+        .game-arena {
+            width: 100%;
+            max-width: 580px;
+            background: var(--bg-surface);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 28px;
+            padding: 2.2rem 1.8rem;
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .game-arena.hidden {
+            display: none;
+        }
+
+        .arena-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--gold-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--gold-soft);
+            padding: 0.25rem 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 0.6rem;
+        }
+
+        .arena-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .arena-desc {
+            font-size: 0.92rem;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        /* Dragon Stage Visuals */
+        .dragon-stage {
+            position: relative;
+            width: 220px;
+            height: 200px;
+            margin: 0 auto 1.2rem auto;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .dragon-svg-wrap {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s ease;
+            animation: dragonHover 3s ease-in-out infinite;
+        }
+
+        @keyframes dragonHover {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .dragon-svg-wrap.hit {
+            animation: dragonShake 0.35s ease;
+            filter: drop-shadow(0 0 14px rgba(244, 114, 143, 0.7));
+        }
+
+        @keyframes dragonShake {
+            0%, 100% { transform: translateX(0) scale(1); }
+            25% { transform: translateX(-8px) scale(0.96); }
+            50% { transform: translateX(8px) scale(1.04); }
+            75% { transform: translateX(-4px) scale(0.98); }
+        }
+
+        /* Dragon Speech Bubble */
+        .dragon-bubble {
+            position: absolute;
+            top: -15px;
+            right: -20px;
+            background: #ffffff;
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--rose-deep);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            white-space: nowrap;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+
+        .dragon-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 20px;
+            width: 10px;
+            height: 10px;
+            background: #ffffff;
+            border-right: 1px solid var(--border-soft);
+            border-bottom: 1px solid var(--border-soft);
+            transform: rotate(45deg);
+        }
+
+        /* Health Bar */
+        .hp-bar-wrap {
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto 1.4rem auto;
+        }
+
+        .hp-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-medium);
+            margin-bottom: 0.4rem;
+        }
+
+        .hp-track {
+            width: 100%;
+            height: 14px;
+            background: #f1f5f9;
+            border-radius: 50px;
+            overflow: hidden;
+            border: 1px solid var(--border-crisp);
+            position: relative;
+        }
+
+        .hp-fill {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #f4728f, #e57373);
+            border-radius: 50px;
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Attack Buttons */
+        .attack-btn {
+            background: linear-gradient(135deg, var(--rose-primary), #e57373);
+            border: none;
+            color: white;
+            padding: 0.9rem 2.4rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(244, 114, 143, 0.35);
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .attack-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(244, 114, 143, 0.45);
+        }
+
+        .attack-btn:active {
+            transform: translateY(1px) scale(0.96);
+        }
+
+        /* Floating Damage Text */
+        .damage-number {
+            position: absolute;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--rose-deep);
+            pointer-events: none;
+            animation: floatUpFade 0.7s forwards;
+            z-index: 20;
+        }
+
+        @keyframes floatUpFade {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-40px) scale(1.3); }
+        }
+
+        /* ========================================================
+           STAGE 3: VICTORY BANNER & THE LOVE LETTER
+           ======================================================== */
+        .victory-section {
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .victory-section.active {
+            display: flex;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Quote Banner */
+        .quote-banner {
+            width: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #fff7f9 100%);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .quote-icon {
+            font-size: 1.6rem;
+            color: var(--rose-primary);
+            margin-bottom: 0.6rem;
+        }
+
+        .quote-main {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.35;
+            margin-bottom: 0.6rem;
+        }
+
+        .quote-sub {
+            font-size: 0.88rem;
+            color: var(--rose-deep);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* The Full Long Letter Sheet */
+        .letter-sheet {
+            width: 100%;
+            background: #ffffff;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 30px;
+            padding: clamp(2.2rem, 5vw, 4rem) clamp(1.6rem, 5vw, 3.5rem);
+            box-shadow: 0 25px 60px rgba(190, 140, 155, 0.16), 0 6px 20px rgba(0, 0, 0, 0.03);
+            text-align: left;
+            position: relative;
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 2.2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed rgba(244, 165, 194, 0.5);
+        }
+
+        .letter-date {
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--rose-deep);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .letter-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.15;
+            margin-bottom: 0.4rem;
+        }
+
+        .letter-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+
+        /* Stats Strip */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-crisp);
+            border-radius: 18px;
+            padding: 1rem;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .stat-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--rose-deep);
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Letter Body Prose */
+        .letter-content {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.05rem, 2.3vw, 1.22rem);
+            line-height: 1.85;
+            color: var(--text-dark);
+        }
+
+        .letter-content p {
+            margin-bottom: 1.5rem;
+            text-indent: 1.4rem;
+        }
+
+        .letter-salutation {
+            text-indent: 0 !important;
+            font-size: 1.35rem;
+            font-style: italic;
+            color: var(--rose-deep);
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .letter-highlight {
+            color: var(--rose-deep);
+            font-weight: 600;
+            background: rgba(244, 114, 143, 0.08);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+        }
+
+        /* Signature */
+        .letter-signature {
+            text-align: right;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed rgba(244, 165, 194, 0.4);
+        }
+
+        .sig-closing {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 0.2rem;
+        }
+
+        .sig-name {
+            font-family: 'Alex Brush', cursive;
+            font-size: 2.8rem;
+            color: var(--rose-deep);
+            line-height: 1.1;
+        }
+
+        /* Distance Hug Interactive Box */
+        .hug-box {
+            background: linear-gradient(135deg, #fff7fa 0%, #f7f0ff 100%);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 24px;
+            padding: 2rem 1.6rem;
+            margin-top: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .hug-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .hug-desc {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-bottom: 1.2rem;
+        }
+
+        .btn-hug {
+            background: linear-gradient(135deg, var(--rose-primary), #e57373);
+            border: none;
+            color: white;
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            font-size: 0.98rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(244, 114, 143, 0.3);
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-hug:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(244, 114, 143, 0.4);
+        }
+
+        .btn-hug:active {
+            transform: scale(0.95);
+        }
+
+        .hug-counter {
+            margin-top: 0.8rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--rose-deep);
+            min-height: 1.4rem;
+        }
+
+        /* Return to Hub Button */
+        .back-link {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .back-link a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.6rem 1.4rem;
+            background: #ffffff;
+            border: 1px solid var(--border-crisp);
+            border-radius: 50px;
+            transition: all 0.2s ease;
+        }
+
+        .back-link a:hover {
+            color: var(--rose-deep);
+            border-color: var(--rose-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 3.5rem;
+            text-align: center;
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 560px) {
+            .main-container {
+                padding: 1.2rem 0.9rem 3rem 0.9rem;
+            }
+            .game-arena {
+                padding: 1.8rem 1.2rem;
+            }
+            .letter-sheet {
+                padding: 2rem 1.2rem;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .door-emboss {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Floating Petals Canvas -->
+    <canvas id="ambient-canvas"></canvas>
+
+    <!-- Discreet Audio Pill (Visible once gate opens) -->
+    <div class="audio-pill" id="audioPill" onclick="toggleAudio()" title="Pause/Play Our Song">
+        <div class="audio-disc" id="audioDisc">
+            <i class="fas fa-heart"></i>
+        </div>
+        <span class="audio-label">Daby and Angelica 🎵</span>
+    </div>
+
+    <!-- ========================================================
+         STAGE 1: BI-FOLD LUXURY GATE WITH WAX SEAL
+         ======================================================== -->
+    <div class="gate-curtain" id="gateCurtain">
+        <div class="door-panel door-left">
+            <div class="door-emboss"></div>
+        </div>
+        <div class="door-panel door-right">
+            <div class="door-emboss"></div>
+        </div>
+
+        <div class="seal-anchor" id="sealAnchor" onclick="breakWaxSeal()">
+            <div class="wax-seal">
+                <i class="fas fa-crown wax-seal-icon"></i>
+                <span class="wax-seal-number">29TH</span>
+            </div>
+            <div class="seal-hint">
+                <i class="fas fa-fingerprint"></i> Tap to open our month
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================
+         MAIN STAGE: GAME ARENA & LETTER
+         ======================================================== -->
+    <main class="main-container">
+
+        <div class="badge-top">
+            <i class="fas fa-sparkles"></i> Month 29 • October 26, 2026 • Santiago ➔ Manila <i class="fas fa-sparkles"></i>
+        </div>
+
+        <!-- STAGE 2: DEFEAT THE DISTANCE DRAGON -->
+        <section class="game-arena" id="gameArena">
+            <span class="arena-tag">Interactive Challenge</span>
+            <h2 class="arena-title">Defeat the Distance Dragon 🐉</h2>
+            <p class="arena-desc">
+                A mischievous dragon is guarding your 29th-month letter! <br>
+                Cast powerful love spells to melt away the 17,000 km barrier!
+            </p>
+
+            <div class="dragon-stage" id="dragonStage" onclick="attackDragon(event)">
+                <div class="dragon-bubble" id="dragonBubble">Roar! No letter for you! 😤</div>
+                <div class="dragon-svg-wrap" id="dragonSvgWrap">
+                    <!-- Clean Stylized Cute Dragon SVG -->
+                    <svg viewBox="0 0 200 180" width="180" height="160">
+                        <defs>
+                            <linearGradient id="dragonSkin" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#f8a5c2"/>
+                                <stop offset="100%" stop-color="#f4728f"/>
+                            </linearGradient>
+                            <linearGradient id="dragonBelly" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#fff0f3"/>
+                                <stop offset="100%" stop-color="#ffd1dc"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Wings -->
+                        <path d="M 50 70 C 15 30 10 90 45 100 Z" fill="#eed5df" stroke="#d65a75" stroke-width="2"/>
+                        <path d="M 150 70 C 185 30 190 90 155 100 Z" fill="#eed5df" stroke="#d65a75" stroke-width="2"/>
+                        <!-- Tail -->
+                        <path d="M 60 140 C 30 150 20 120 15 130 C 10 140 30 165 70 150 Z" fill="url(#dragonSkin)"/>
+                        <polygon points="12,128 22,126 18,136" fill="#f4728f"/>
+                        <!-- Body -->
+                        <ellipse cx="100" cy="115" rx="42" ry="40" fill="url(#dragonSkin)"/>
+                        <!-- Belly -->
+                        <ellipse cx="100" cy="120" rx="26" ry="26" fill="url(#dragonBelly)"/>
+                        <!-- Feet -->
+                        <circle cx="75" cy="150" r="10" fill="#f4728f"/>
+                        <circle cx="125" cy="150" r="10" fill="#f4728f"/>
+                        <!-- Head -->
+                        <circle cx="100" cy="65" r="34" fill="url(#dragonSkin)"/>
+                        <!-- Horns -->
+                        <polygon points="85,35 90,20 95,34" fill="#ffd166"/>
+                        <polygon points="105,34 110,20 115,35" fill="#ffd166"/>
+                        <!-- Cheeks -->
+                        <circle cx="82" cy="74" r="5" fill="#ffb4a2" opacity="0.8"/>
+                        <circle cx="118" cy="74" r="5" fill="#ffb4a2" opacity="0.8"/>
+                        <!-- Eyes -->
+                        <ellipse cx="88" cy="62" rx="4.5" ry="6" fill="#1e293b"/>
+                        <circle cx="86" cy="60" r="1.5" fill="#ffffff"/>
+                        <ellipse cx="112" cy="62" rx="4.5" ry="6" fill="#1e293b"/>
+                        <circle cx="110" cy="60" r="1.5" fill="#ffffff"/>
+                        <!-- Snout & Smile -->
+                        <ellipse cx="100" cy="74" rx="14" ry="9" fill="url(#dragonBelly)"/>
+                        <circle cx="97" cy="72" r="1.2" fill="#7a6676"/>
+                        <circle cx="103" cy="72" r="1.2" fill="#7a6676"/>
+                        <path d="M 96 77 Q 100 81 104 77" stroke="#7a6676" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                        <!-- Cute Crown -->
+                        <polygon points="92,30 96,24 100,28 104,24 108,30" fill="#ffd166"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Health Points -->
+            <div class="hp-bar-wrap">
+                <div class="hp-header">
+                    <span>Dragon's Barrier</span>
+                    <span id="hpLabel">100 / 100 HP</span>
+                </div>
+                <div class="hp-track">
+                    <div class="hp-fill" id="hpFill"></div>
+                </div>
+            </div>
+
+            <button class="attack-btn" id="attackBtn" onclick="attackDragon(event)">
+                <i class="fas fa-wand-magic-sparkles"></i> Cast Love Spell ✨
+            </button>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.7rem;">
+                Tap the button or click the dragon directly!
+            </p>
+        </section>
+
+        <!-- STAGE 3: VICTORY & LONG LOVE LETTER -->
+        <section class="victory-section" id="victorySection">
+
+            <!-- The Special Quote Banner requested by user -->
+            <div class="quote-banner">
+                <div class="quote-icon"><i class="fas fa-sparkles"></i></div>
+                <h3 class="quote-main">“You always manage to solve everything you set your mind to, I love you.”</h3>
+                <div class="quote-sub">My brilliant, unstoppable girl 💕</div>
+            </div>
+
+            <!-- The Full Love Letter Paper -->
+            <article class="letter-sheet">
+                <header class="letter-header">
+                    <div class="letter-date">
+                        <i class="fas fa-calendar-heart"></i> October 26, 2026 • 29 Months Together
+                    </div>
+                    <h1 class="letter-title">Happy 29th Monthsary, My Gelly 💕</h1>
+                    <p class="letter-subtitle">Two years and five months of choosing, admiring, and loving you unconditionally</p>
+                </header>
+
+                <!-- Milestone Numbers -->
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-value">29</div>
+                        <div class="stat-label">Months Together</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">883</div>
+                        <div class="stat-label">Days of Love</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">17,316</div>
+                        <div class="stat-label">KM Bridged</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">2027 ✈️</div>
+                        <div class="stat-label">Chile Reunion</div>
+                    </div>
+                </div>
+
+                <!-- Letter Body -->
+                <div class="letter-content">
+                    <p class="letter-salutation">My Dearest Gelly,</p>
+
+                    <p>
+                        Happy <strong>29th month anniversary</strong>, my love! Today marks 2 whole years and 5 months since we began this beautiful journey together. That is <strong>883 consecutive days</strong> of waking up with you in my heart, laughing together through video calls, sharing our dreams, and proving day after day that genuine love knows no borders or time zones.
+                    </p>
+
+                    <p>
+                        Defeating that little dragon is just a sweet metaphor for something I witness in you every single day: <span class="letter-highlight">you always manage to solve everything you set your mind to</span>. Whenever life throws a challenge, an obstacle, or a busy week your way, you tackle it with poise, intelligence, and grace. Your resilience and determination are qualities that continuously leave me in awe. Having you as my partner is the greatest blessing I could ever ask for.
+                    </p>
+
+                    <p>
+                        Even with 17,316 kilometers between Santiago and Manila, and the hours of difference between our clocks, not a single mile has ever diminished what I feel for you. In fact, every conversation, every sweet good-morning text, and every inside joke we share only deepens my admiration for the extraordinary woman you are. The unforgettable memories we created when we were together in Manila are forever etched in my mind, and they serve as our compass forward.
+                    </p>
+
+                    <p>
+                        We are steadily walking toward our biggest dream: <span class="letter-highlight">Chile 2027 🇨🇱✈️🇵🇭</span>. Every month that we celebrate is one month closer to waiting for you at the airport arrivals gate, wrapping my arms around you in the tightest hug, and never having to say goodbye through a screen again.
+                    </p>
+
+                    <p>
+                        Thank you for your warmth, your patience, your sweet laugh, and the unconditional love you give me. I am endlessly proud of you, I believe in you with all my heart, and I will always be right here by your side cheering for you.
+                    </p>
+
+                    <div class="letter-signature">
+                        <div class="sig-closing">Forever and completely yours,</div>
+                        <div class="sig-name">Your Daby ❤️</div>
+                    </div>
+                </div>
+
+                <!-- Distance Hug Widget -->
+                <div class="hug-box">
+                    <h4 class="hug-title">Send a Warm Hug to Chile <i class="fas fa-heart" style="color: var(--rose-primary);"></i></h4>
+                    <p class="hug-desc">Tap the button to send a real-time virtual heartbeat across the Pacific Ocean!</p>
+                    <button class="btn-hug" id="hugBtn" onclick="sendWarmHug()">
+                        <i class="fas fa-heart"></i> Send a Warm Hug
+                    </button>
+                    <div class="hug-counter" id="hugCounter"></div>
+                </div>
+
+                <!-- Return to Hub -->
+                <div class="back-link">
+                    <a href="../index.html"><i class="fas fa-arrow-left"></i> Return to Our Love Hub</a>
+                </div>
+            </article>
+
+        </section>
+
+        <footer class="footer">
+            <p>Made with all my heart for <strong>Gelly</strong> <i class="fas fa-heart" style="color: var(--rose-primary);"></i></p>
+            <p>Month 29 • October 26, 2026 • Chile 🇨🇱 & Philippines 🇵🇭</p>
+        </footer>
+
+    </main>
+
+    <!-- Background Music Audio Element -->
+    <audio id="loveSong" src="music.mp3" preload="auto" loop></audio>
+
+    <script>
+        /* ==========================================================
+           AUDIO SYNTHESIZER (Web Audio API for interactive SFX)
+        ========================================================== */
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) audioCtx = new AudioContextClass();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            return audioCtx;
+        }
+
+        function playSound(freq, type = 'sine', duration = 0.25, volume = 0.12) {
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                gain.gain.setValueAtTime(volume, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + duration);
+            } catch (e) {}
+        }
+
+        function playVictoryFanfare() {
+            const chord = [523.25, 659.25, 783.99, 1046.50];
+            chord.forEach((freq, idx) => {
+                setTimeout(() => playSound(freq, 'sine', 0.5, 0.15), idx * 110);
+            });
+        }
+
+        /* ==========================================================
+           AMBIENT CANVAS PETALS
+        ========================================================== */
+        const canvas = document.getElementById('ambient-canvas');
+        const ctx = canvas.getContext('2d');
+        let petals = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Petal {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = -20;
+                this.size = Math.random() * 4 + 2;
+                this.speedY = Math.random() * 0.7 + 0.4;
+                this.speedX = Math.sin(Math.random() * Math.PI) * 0.4;
+                this.opacity = Math.random() * 0.35 + 0.15;
+                this.color = ['#f8a5c2', '#f4728f', '#ffd1dc', '#ffffff'][Math.floor(Math.random() * 4)];
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                if (this.y > canvas.height + 20) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 40; i++) petals.push(new Petal());
+
+        function animatePetals() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            petals.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animatePetals);
+        }
+        animatePetals();
+
+        /* ==========================================================
+           STAGE 1: BI-FOLD GATE & WAX SEAL
+           ========================================================= */
+        const gateCurtain = document.getElementById('gateCurtain');
+        const sealAnchor = document.getElementById('sealAnchor');
+        const loveSong = document.getElementById('loveSong');
+        const audioPill = document.getElementById('audioPill');
+        const audioDisc = document.getElementById('audioDisc');
+        let isMusicPlaying = false;
+
+        function breakWaxSeal() {
+            playSound(784, 'sine', 0.35);
+            confetti({
+                particleCount: 50,
+                spread: 60,
+                origin: { y: 0.5 },
+                colors: ['#f4728f', '#ffd166', '#ffffff']
+            });
+
+            sealAnchor.style.opacity = '0';
+            sealAnchor.style.pointerEvents = 'none';
+
+            setTimeout(() => {
+                gateCurtain.classList.add('opened');
+                audioPill.classList.add('visible');
+                playSong();
+            }, 300);
+        }
+
+        function playSong() {
+            loveSong.play().then(() => {
+                isMusicPlaying = true;
+                audioDisc.classList.add('playing');
+            }).catch(() => {});
+        }
+
+        function toggleAudio() {
+            if (isMusicPlaying) {
+                loveSong.pause();
+                isMusicPlaying = false;
+                audioDisc.classList.remove('playing');
+            } else {
+                playSong();
+            }
+        }
+
+        /* ==========================================================
+           STAGE 2: DEFEAT THE DRAGON MINI-GAME
+           ========================================================= */
+        let dragonHp = 100;
+        const hpFill = document.getElementById('hpFill');
+        const hpLabel = document.getElementById('hpLabel');
+        const dragonSvgWrap = document.getElementById('dragonSvgWrap');
+        const dragonBubble = document.getElementById('dragonBubble');
+        const dragonStage = document.getElementById('dragonStage');
+        const gameArena = document.getElementById('gameArena');
+        const victorySection = document.getElementById('victorySection');
+
+        const dragonDialogues = [
+            "Roar! The distance is too vast! 😤",
+            "Wait! That love spell is ticklish! ⚡",
+            "17,000 kilometers can't stop you?! 😲",
+            "My distance shields are crumbling! 🥺",
+            "I surrender to true love! Take your letter! 🏳️❤️"
+        ];
+
+        function attackDragon(e) {
+            if (dragonHp <= 0) return;
+
+            // Reduce HP by 25 points each tap
+            dragonHp = Math.max(0, dragonHp - 25);
+            hpFill.style.width = dragonHp + '%';
+            hpLabel.textContent = `${dragonHp} / 100 HP`;
+
+            // Audio & animation
+            playSound(440 + (100 - dragonHp) * 4, 'sine', 0.2, 0.15);
+            dragonSvgWrap.classList.add('hit');
+            setTimeout(() => dragonSvgWrap.classList.remove('hit'), 350);
+
+            // Spawn floating damage text
+            const rect = dragonStage.getBoundingClientRect();
+            const dmg = document.createElement('div');
+            dmg.className = 'damage-number';
+            dmg.textContent = '-25 💖';
+            dmg.style.left = (e.clientX ? e.clientX - rect.left : 100) + 'px';
+            dmg.style.top = (e.clientY ? e.clientY - rect.top : 70) + 'px';
+            dragonStage.appendChild(dmg);
+            setTimeout(() => dmg.remove(), 700);
+
+            // Update dialogue
+            const dialogueIndex = Math.min(4, Math.floor((100 - dragonHp) / 25));
+            dragonBubble.textContent = dragonDialogues[dialogueIndex];
+
+            // Defeated!
+            if (dragonHp === 0) {
+                playVictoryFanfare();
+                confetti({
+                    particleCount: 100,
+                    spread: 80,
+                    origin: { y: 0.6 },
+                    colors: ['#f4728f', '#f8a5c2', '#ffd166', '#57cc99']
+                });
+
+                setTimeout(() => {
+                    gameArena.style.opacity = '0';
+                    setTimeout(() => {
+                        gameArena.classList.add('hidden');
+                        victorySection.classList.add('active');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }, 400);
+                }, 900);
+            }
+        }
+
+        /* ==========================================================
+           STAGE 3: VIRTUAL HUG COUNTER
+           ========================================================= */
+        let hugCount = 0;
+        const hugCounter = document.getElementById('hugCounter');
+
+        function sendWarmHug() {
+            hugCount++;
+            playSound(659.25, 'sine', 0.35, 0.15);
+            confetti({
+                particleCount: 30,
+                spread: 50,
+                origin: { y: 0.8 },
+                colors: ['#f4728f', '#ffd1dc']
+            });
+
+            if (hugCount === 1) {
+                hugCounter.innerHTML = `<i class="fas fa-heart"></i> Warm hug received in Santiago! Daby is smiling right now 💕`;
+            } else {
+                hugCounter.innerHTML = `<i class="fas fa-heart"></i> <strong>${hugCount}</strong> sweet hugs delivered straight to Daby's heart! ❤️`;
+            }
+        }
+    </script>
+</body>
+</html>
